@@ -14,8 +14,9 @@ async function handleSubmit() {
     if (result?.ok) {
       ui.notify(result.demo ? t('notifications.demoSent') : t('notifications.sent'), 'success')
     }
-  } catch {
-    ui.notify(t('notifications.sendError'), 'error')
+  } catch (error) {
+    const details = error instanceof Error ? error.message : ''
+    ui.notify(details ? `${t('notifications.sendError')} ${details}` : t('notifications.sendError'), 'error')
   }
 }
 </script>
