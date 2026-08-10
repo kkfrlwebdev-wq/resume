@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Footprints, LockKeyhole, Orbit, Search, Sparkles, TerminalSquare, Trophy } from '@lucide/vue'
 import InteractiveWindow from './InteractiveWindow.vue'
 import { useAchievementsStore } from '@/stores/achievementsStore'
@@ -7,38 +8,35 @@ import { useAchievementsStore } from '@/stores/achievementsStore'
 defineEmits(['close'])
 
 const store = useAchievementsStore()
+const { t } = useI18n()
 
 const copy = {
   'first-step': {
-    title: 'Перший крок',
-    description: 'Відвідати головну сторінку',
+    key: 'firstStep',
     icon: Footprints,
   },
   curious: {
-    title: 'Допитливий',
-    description: 'Переглянути всі основні розділи',
+    key: 'curious',
     icon: Sparkles,
   },
   terminal: {
-    title: 'Термінатор',
-    description: 'Відкрити інтерактивний термінал',
+    key: 'terminal',
     icon: TerminalSquare,
   },
   'zero-gravity': {
-    title: 'Нульова гравітація',
-    description: 'Активувати режим невагомості',
+    key: 'gravity',
     icon: Orbit,
   },
   hunter: {
-    title: 'Шукач',
-    description: 'Знайти приховану пасхалку',
+    key: 'hunter',
     icon: Search,
   },
 }
 
 const achievements = computed(() => store.achievements.map((item) => ({
   ...item,
-  ...(copy[item.id] || {}),
+  title: t(`achievements.items.${copy[item.id]?.key}.0`),
+  description: t(`achievements.items.${copy[item.id]?.key}.1`),
   icon: copy[item.id]?.icon || Trophy,
 })))
 
@@ -47,7 +45,7 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
 </script>
 
 <template>
-  <InteractiveWindow title="Досягнення" size="medium" @close="$emit('close')">
+  <InteractiveWindow :title="t('achievements.title')" size="medium" @close="$emit('close')">
     <template #icon>
       <Trophy aria-hidden="true" />
     </template>
@@ -55,7 +53,7 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
     <div class="achievements-panel">
       <header class="achievements-panel__header">
         <div>
-          <span>Ваш прогрес</span>
+          <span>{{ t('achievements.progress') }}</span>
           <strong>{{ unlockedCount }} / {{ achievements.length }}</strong>
         </div>
         <span class="achievements-panel__percent">{{ progress }}%</span>
@@ -64,7 +62,7 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
       <div
         class="progress-track"
         role="progressbar"
-        aria-label="Прогрес досягнень"
+        :aria-label="t('achievements.progressLabel')"
         :aria-valuenow="progress"
         aria-valuemin="0"
         aria-valuemax="100"
@@ -86,13 +84,13 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
             <small>{{ achievement.description }}</small>
           </span>
           <span class="achievement__status">
-            {{ achievement.unlocked ? 'Відкрито' : 'Заблоковано' }}
+            {{ achievement.unlocked ? t('achievements.unlocked') : t('achievements.locked') }}
           </span>
         </li>
       </ul>
 
       <p class="achievements-panel__hint">
-        Підказка: досліджуйте портфоліо та спробуйте команди в терміналі.
+        {{ t('achievements.hint') }}
       </p>
     </div>
   </InteractiveWindow>

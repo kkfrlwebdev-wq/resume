@@ -20,10 +20,11 @@
     "lint": "eslint . --max-warnings=0"
   },
   "dependencies": {
-    "@vueuse/core": "latest",
     "@lucide/vue": "latest",
+    "@vueuse/core": "latest",
     "pinia": "latest",
     "vue": "latest",
+    "vue-i18n": "^11.4.8",
     "vue-router": "latest"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@ import SocialIcon from './SocialIcon.vue'
 </script>
 
 <template>
-  <ul class="social-links" aria-label="Соціальні мережі">
+  <ul class="social-links" :aria-label="$t('accessibility.social')">
     <li v-for="item in profile.social" :key="item.label">
       <a :href="item.href" target="_blank" rel="noreferrer" :aria-label="item.label">
         <SocialIcon :name="item.label" aria-hidden="true" />

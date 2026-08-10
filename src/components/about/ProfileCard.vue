@@ -7,28 +7,28 @@ import { profile } from '@/data/profile'
 <template>
   <article class="profile-card">
     <div class="profile-card__photo">
-      <img :src="portraitUrl" :alt="`Портрет: ${profile.name}`" width="720" height="1080" />
+      <img :src="portraitUrl" :alt="$t('about.portraitAlt', { name: $t('profile.name') })" width="720" height="1080" />
     </div>
     <dl>
       <div>
-        <dt><UserRound aria-hidden="true" /> Ім’я</dt>
-        <dd>{{ profile.name }}</dd>
+        <dt><UserRound aria-hidden="true" /> {{ $t('common.name') }}</dt>
+        <dd>{{ $t('profile.name') }}</dd>
       </div>
       <div>
         <dt><Mail aria-hidden="true" /> Email</dt>
         <dd><a :href="`mailto:${profile.email}`">{{ profile.email }}</a></dd>
       </div>
       <div>
-        <dt><Phone aria-hidden="true" /> Телефон</dt>
+        <dt><Phone aria-hidden="true" /> {{ $t('common.phone') }}</dt>
         <dd><a :href="`tel:${profile.phone.replace(/[^+\d]/g, '')}`">{{ profile.phone }}</a></dd>
       </div>
       <div>
-        <dt><MapPin aria-hidden="true" /> Місцезнаходження</dt>
-        <dd>{{ profile.location }}</dd>
+        <dt><MapPin aria-hidden="true" /> {{ $t('common.location') }}</dt>
+        <dd>{{ $t('profile.location') }}</dd>
       </div>
       <div>
-        <dt><Languages aria-hidden="true" /> Мови</dt>
-        <dd>{{ profile.languages }}</dd>
+        <dt><Languages aria-hidden="true" /> {{ $t('common.languages') }}</dt>
+        <dd>{{ $t('profile.languages') }}</dd>
       </div>
     </dl>
   </article>

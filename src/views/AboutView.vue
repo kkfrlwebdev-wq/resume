@@ -3,22 +3,18 @@ import { ArrowRight, Download } from '@lucide/vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import ProfileCard from '@/components/about/ProfileCard.vue'
 import StatisticsList from '@/components/about/StatisticsList.vue'
-import { profile } from '@/data/profile'
 </script>
 
 <template>
   <div class="about-view page-container">
     <div class="about-grid">
       <section class="about-copy">
-        <span class="eyebrow">Про мене</span>
-        <h1>Хто я?</h1>
+        <span class="eyebrow">{{ $t('about.eyebrow') }}</span>
+        <h1>{{ $t('about.title') }}</h1>
         <p class="lead">
-          {{ profile.about }}
+          {{ $t('profile.about') }}
         </p>
-        <p>
-          Працюю з HTML, CSS, JavaScript і SCSS. Забезпечую адаптивність, кросбраузерність та можливість
-          вносити зміни як під час створення, так і після здачі проєкту.
-        </p>
+        <p>{{ $t('profile.aboutExtra') }}</p>
 
         <StatisticsList />
 
@@ -27,10 +23,10 @@ import { profile } from '@/data/profile'
             <template #icon>
               <Download aria-hidden="true" />
             </template>
-            Відкрити резюме
+            {{ $t('home.openResume') }}
           </BaseButton>
           <BaseButton to="/contact" variant="ghost">
-            Обговорити проєкт
+            {{ $t('about.discuss') }}
             <template #trailing>
               <ArrowRight aria-hidden="true" />
             </template>

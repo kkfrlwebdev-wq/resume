@@ -3,10 +3,10 @@ import { navigation } from '@/data/navigation'
 </script>
 
 <template>
-  <nav class="mobile-nav" aria-label="Мобільна навігація">
+  <nav class="mobile-nav" :aria-label="$t('nav.mobile')">
     <RouterLink v-for="item in navigation" :key="item.to" :to="item.to">
       <component :is="item.icon" aria-hidden="true" />
-      <span>{{ item.label }}</span>
+      <span>{{ $t(item.labelKey) }}</span>
     </RouterLink>
   </nav>
 </template>

@@ -44,7 +44,7 @@ function closeApp() {
 <template>
   <div class="desktop-view">
     <h1 class="sr-only">
-      Інтерактивний робочий стіл портфоліо
+      {{ $t('desktop.title') }}
     </h1>
     <DesktopPanel :active-app="activeApp" @open-app="openApp" />
 

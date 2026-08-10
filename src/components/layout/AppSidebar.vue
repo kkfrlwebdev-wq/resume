@@ -5,16 +5,16 @@ import { navigation } from '@/data/navigation'
 </script>
 
 <template>
-  <aside class="app-sidebar" aria-label="Бічна навігація">
+  <aside class="app-sidebar" :aria-label="$t('nav.sidebar')">
     <nav>
       <RouterLink v-for="item in navigation" :key="item.to" :to="item.to" :aria-label="item.label">
         <component :is="item.icon" aria-hidden="true" />
         <span>{{ item.label }}</span>
       </RouterLink>
     </nav>
-    <RouterLink class="settings-link" to="/desktop" aria-label="Інтерактивний простір">
+    <RouterLink class="settings-link" to="/desktop" :aria-label="$t('nav.interactiveSpace')">
       <Settings aria-hidden="true" />
-      <span>Простір</span>
+      <span>{{ $t('nav.space') }}</span>
     </RouterLink>
   </aside>
 </template>

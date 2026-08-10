@@ -1,4 +1,5 @@
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useAchievementsStore } from '@/stores/achievementsStore'
 import { useUiStore } from '@/stores/uiStore'
 import { profile } from '@/data/profile'
@@ -14,12 +15,13 @@ function createEntry(type, content) {
 }
 
 export function useTerminal() {
+  const { t, tm } = useI18n()
   const ui = useUiStore()
   const achievements = useAchievementsStore()
   const input = ref('')
   const history = ref([
-    createEntry('success', 'Ласкаво просимо до термінала портфоліо.'),
-    createEntry('muted', 'Введіть help, щоб переглянути доступні команди.'),
+    createEntry('success', t('terminal.welcome')),
+    createEntry('muted', t('terminal.prompt')),
   ])
 
   const hasHistory = computed(() => history.value.length > 0)
@@ -39,66 +41,53 @@ export function useTerminal() {
 
     switch (command) {
       case 'help':
-        print('output', [
-          'help — список команд',
-          'about — коротко про мене',
-          'skills — технології та інструменти',
-          'projects — вибрані проєкти',
-          'contact — контактна інформація',
-          'coffee — невелика пасхалка',
-          'gravity — увімкнути або вимкнути режим невагомості',
-          'clear — очистити термінал',
-        ])
+        print('output', tm('terminal.help'))
         break
       case 'about':
-        print('output', [
-          `Я — ${profile.name}, frontend-розробник із досвідом створення сайтів під ключ.`,
-          'Створюю виразні, інтуїтивні та адаптивні вебсайти для бізнесу.',
-        ])
+        print('output', [t('terminal.about.0', { name: t('profile.name') }), t('terminal.about.1')])
         break
       case 'skills':
-        print('output', [
-          'Frontend: HTML5, CSS3, JavaScript, SCSS (Sass).',
-          'Верстка: адаптивність, кросбраузерність, Flexbox і CSS Grid.',
-          'Workflow: Git, чистий підтримуваний код та підготовка до інтеграції з CMS.',
-        ])
+        print('output', tm('terminal.skills'))
         break
       case 'projects':
-        print('output', projects.map((project) => `${project.title} — ${project.categoryLabel}.`))
+        print('output', projects.map((project) => t('terminal.projectLine', {
+          title: project.title,
+          category: t(`portfolio.projects.${project.translationKey}.category`),
+        })))
         break
       case 'contact':
         print('output', [
           `Email: ${profile.email}`,
-          `Телефон: ${profile.phone}`,
-          `Місцезнаходження: ${profile.location}`,
-          'Сторінка контактів: /contact',
+          t('terminal.phone', { value: profile.phone }),
+          t('terminal.location', { value: t('profile.location') }),
+          t('terminal.contactPage'),
         ])
         break
       case 'coffee': {
-        print('success', ['( (', ' ) )', '........', '|      |]  Кава готова. Час створювати щось класне!', '\\      /', ' `----\''])
+        print('success', ['( (', ' ) )', '........', t('terminal.coffee'), '\\      /', ' `----\''])
         const unlocked = achievements.unlock('hunter')
-        if (unlocked) ui.notify('Досягнення «Шукач» розблоковано', 'success')
+        if (unlocked) ui.notify(t('terminal.hunterUnlocked'), 'success')
         break
       }
       case 'gravity': {
         ui.toggleZeroGravity()
         const unlocked = achievements.unlock('zero-gravity')
-        if (unlocked) ui.notify('Досягнення «Нульова гравітація» розблоковано', 'success')
-        print('success', ui.zeroGravityMode ? 'Режим невагомості активовано.' : 'Режим невагомості вимкнено.')
+        if (unlocked) ui.notify(t('terminal.gravityUnlocked'), 'success')
+        print('success', t(ui.zeroGravityMode ? 'terminal.gravityOn' : 'terminal.gravityOff'))
         break
       }
       case 'clear':
         history.value = []
         break
       default:
-        print('error', `Команду «${command}» не знайдено. Введіть help для підказки.`)
+        print('error', t('terminal.unknown', { command }))
     }
   }
 
   function reset() {
     history.value = [
-      createEntry('success', 'Термінал перезапущено.'),
-      createEntry('muted', 'Введіть help, щоб переглянути доступні команди.'),
+      createEntry('success', t('terminal.restarted')),
+      createEntry('muted', t('terminal.prompt')),
     ]
   }
 

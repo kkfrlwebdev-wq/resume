@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import {
   BatteryMedium,
   BriefcaseBusiness,
@@ -22,29 +23,33 @@ defineProps({
 })
 
 const emit = defineEmits(['open-app'])
+const { locale, t } = useI18n()
 const search = ref('')
 const now = ref(new Date())
 let clockId = null
 
 const shortcuts = [
-  { id: 'about', label: 'Про мене', kind: 'route', to: '/about', icon: UserRound, tone: 'blue' },
-  { id: 'portfolio', label: 'Портфоліо', kind: 'route', to: '/portfolio', icon: FolderKanban, tone: 'yellow' },
-  { id: 'services', label: 'Послуги', kind: 'route', to: '/services', icon: Wrench, tone: 'orange' },
-  { id: 'contact', label: 'Контакти', kind: 'route', to: '/contact', icon: Mail, tone: 'cyan' },
-  { id: 'terminal', label: 'Термінал', kind: 'app', icon: TerminalSquare, tone: 'dark' },
-  { id: 'achievements', label: 'Досягнення', kind: 'app', icon: Trophy, tone: 'gold' },
-  { id: 'game', label: 'Мінігра', kind: 'app', icon: Gamepad2, tone: 'purple' },
-  { id: 'home', label: 'На головну', kind: 'route', to: '/', icon: BriefcaseBusiness, tone: 'blue' },
+  { id: 'about', labelKey: 'desktop.shortcuts.about', kind: 'route', to: '/about', icon: UserRound, tone: 'blue' },
+  { id: 'portfolio', labelKey: 'desktop.shortcuts.portfolio', kind: 'route', to: '/portfolio', icon: FolderKanban, tone: 'yellow' },
+  { id: 'services', labelKey: 'desktop.shortcuts.services', kind: 'route', to: '/services', icon: Wrench, tone: 'orange' },
+  { id: 'contact', labelKey: 'desktop.shortcuts.contact', kind: 'route', to: '/contact', icon: Mail, tone: 'cyan' },
+  { id: 'terminal', labelKey: 'desktop.shortcuts.terminal', kind: 'app', icon: TerminalSquare, tone: 'dark' },
+  { id: 'achievements', labelKey: 'desktop.shortcuts.achievements', kind: 'app', icon: Trophy, tone: 'gold' },
+  { id: 'game', labelKey: 'desktop.shortcuts.game', kind: 'app', icon: Gamepad2, tone: 'purple' },
+  { id: 'home', labelKey: 'desktop.shortcuts.home', kind: 'route', to: '/', icon: BriefcaseBusiness, tone: 'blue' },
 ]
 
+const localizedShortcuts = computed(() => shortcuts.map((shortcut) => ({ ...shortcut, label: t(shortcut.labelKey) })))
+
 const visibleShortcuts = computed(() => {
-  const query = search.value.trim().toLocaleLowerCase('uk')
-  if (!query) return shortcuts
-  return shortcuts.filter((shortcut) => shortcut.label.toLocaleLowerCase('uk').includes(query))
+  const query = search.value.trim().toLocaleLowerCase(locale.value)
+  if (!query) return localizedShortcuts.value
+  return localizedShortcuts.value.filter((shortcut) => shortcut.label.toLocaleLowerCase(locale.value).includes(query))
 })
 
-const time = computed(() => now.value.toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }))
-const date = computed(() => now.value.toLocaleDateString('uk-UA', { day: '2-digit', month: '2-digit', year: 'numeric' }))
+const browserLocale = computed(() => locale.value === 'en' ? 'en-US' : 'uk-UA')
+const time = computed(() => now.value.toLocaleTimeString(browserLocale.value, { hour: '2-digit', minute: '2-digit' }))
+const date = computed(() => now.value.toLocaleDateString(browserLocale.value, { day: '2-digit', month: '2-digit', year: 'numeric' }))
 
 onMounted(() => {
   clockId = window.setInterval(() => {
@@ -56,20 +61,20 @@ onUnmounted(() => window.clearInterval(clockId))
 </script>
 
 <template>
-  <section class="desktop" aria-label="Інтерактивний робочий стіл">
+  <section class="desktop" :aria-label="t('desktop.aria')">
     <div class="desktop__glow desktop__glow--one" aria-hidden="true"></div>
     <div class="desktop__glow desktop__glow--two" aria-hidden="true"></div>
 
     <div class="start-menu">
       <label class="search-box">
         <Search aria-hidden="true" />
-        <span class="sr-only">Пошук ярликів</span>
-        <input v-model="search" type="search" placeholder="Пошук" autocomplete="off" />
+        <span class="sr-only">{{ t('desktop.searchLabel') }}</span>
+        <input v-model="search" type="search" :placeholder="t('desktop.search')" autocomplete="off" />
       </label>
 
       <div class="start-menu__heading">
-        <h2>Закріплено</h2>
-        <span>{{ visibleShortcuts.length }} застосунків</span>
+        <h2>{{ t('desktop.pinned') }}</h2>
+        <span>{{ t('desktop.apps', { count: visibleShortcuts.length }) }}</span>
       </div>
 
       <div v-if="visibleShortcuts.length" class="shortcut-grid">
@@ -78,7 +83,7 @@ onUnmounted(() => window.clearInterval(clockId))
             v-if="shortcut.kind === 'route'"
             class="shortcut"
             :to="shortcut.to"
-            :aria-label="`Відкрити: ${shortcut.label}`"
+            :aria-label="t('desktop.open', { name: shortcut.label })"
           >
             <span :class="['shortcut__icon', `shortcut__icon--${shortcut.tone}`]">
               <component :is="shortcut.icon" aria-hidden="true" />
@@ -90,7 +95,7 @@ onUnmounted(() => window.clearInterval(clockId))
             v-else
             class="shortcut"
             type="button"
-            :aria-label="`Відкрити: ${shortcut.label}`"
+            :aria-label="t('desktop.open', { name: shortcut.label })"
             @click="emit('open-app', shortcut.id)"
           >
             <span :class="['shortcut__icon', `shortcut__icon--${shortcut.tone}`]">
@@ -102,35 +107,35 @@ onUnmounted(() => window.clearInterval(clockId))
       </div>
 
       <p v-else class="start-menu__empty">
-        Нічого не знайдено. Спробуйте інший запит.
+        {{ t('desktop.empty') }}
       </p>
 
       <footer class="start-menu__footer">
         <div class="profile-chip">
           <span class="profile-chip__avatar" aria-hidden="true">МК</span>
           <span>
-            <strong>Микола Кольченко</strong>
-            <small>Веброзробник</small>
+            <strong>{{ t('profile.name') }}</strong>
+            <small>{{ t('desktop.developer') }}</small>
           </span>
         </div>
-        <RouterLink to="/" aria-label="Повернутися на головну">
+        <RouterLink to="/" :aria-label="t('desktop.backHome')">
           <Power aria-hidden="true" />
         </RouterLink>
       </footer>
     </div>
 
-    <footer class="taskbar" aria-label="Панель завдань">
-      <button class="windows-button" type="button" aria-label="Меню вже відкрите">
+    <footer class="taskbar" :aria-label="t('desktop.taskbar')">
+      <button class="windows-button" type="button" :aria-label="t('desktop.menuOpen')">
         <span aria-hidden="true"></span><span aria-hidden="true"></span>
         <span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
 
       <button
-        v-for="app in shortcuts.filter((item) => item.kind === 'app')"
+        v-for="app in localizedShortcuts.filter((item) => item.kind === 'app')"
         :key="app.id"
         :class="['taskbar__app', { 'taskbar__app--active': activeApp === app.id }]"
         type="button"
-        :aria-label="`Відкрити ${app.label}`"
+        :aria-label="t('desktop.open', { name: app.label })"
         @click="emit('open-app', app.id)"
       >
         <component :is="app.icon" aria-hidden="true" />
@@ -138,7 +143,7 @@ onUnmounted(() => window.clearInterval(clockId))
 
       <div class="taskbar__spacer"></div>
 
-      <div class="system-tray" aria-label="Стан системи">
+      <div class="system-tray" :aria-label="t('desktop.system')">
         <span class="system-tray__icons" aria-hidden="true">
           <Wifi /><Volume2 /><BatteryMedium />
         </span>

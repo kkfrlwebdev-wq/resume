@@ -2,6 +2,8 @@
 
 Адаптивне SPA-портфоліо у темній cyan-естетиці. Проєкт створено на Vue 3 без TypeScript, із Composition API, Vite, Pinia та SCSS.
 
+Докладна інструкція з оновлення особистих даних, проєктів, зображень і резюме: [DATA_CUSTOMIZATION.md](DATA_CUSTOMIZATION.md).
+
 ## Можливості
 
 - шість lazy-loaded маршрутів і сторінка 404;

@@ -1,31 +1,33 @@
 <script setup>
 import { Send } from '@lucide/vue'
+import { useI18n } from 'vue-i18n'
 import { useContactForm } from '@/composables/useContactForm'
 import { useUiStore } from '@/stores/uiStore'
 
 const { form, errors, isSubmitting, submit } = useContactForm()
 const ui = useUiStore()
+const { t } = useI18n()
 
 async function handleSubmit() {
   try {
     const result = await submit()
     if (result?.ok) {
-      ui.notify(result.demo ? 'Демо: повідомлення перевірено та підготовлено' : 'Повідомлення успішно надіслано', 'success')
+      ui.notify(result.demo ? t('notifications.demoSent') : t('notifications.sent'), 'success')
     }
   } catch {
-    ui.notify('Не вдалося надіслати повідомлення. Спробуйте ще раз.', 'error')
+    ui.notify(t('notifications.sendError'), 'error')
   }
 }
 </script>
 
 <template>
   <form class="contact-form" novalidate @submit.prevent="handleSubmit">
-    <h2>Напишіть мені</h2>
-    <p>Зазвичай відповідаю протягом одного робочого дня.</p>
+    <h2>{{ t('contact.formTitle') }}</h2>
+    <p>{{ t('contact.responseTime') }}</p>
 
     <div class="form-field">
-      <label for="name">Ваше ім’я</label>
-      <input id="name" v-model="form.name" name="name" autocomplete="name" :aria-invalid="Boolean(errors.name)" :aria-describedby="errors.name ? 'name-error' : undefined" placeholder="Як до вас звертатися?" />
+      <label for="name">{{ t('contact.yourName') }}</label>
+      <input id="name" v-model="form.name" name="name" autocomplete="name" :aria-invalid="Boolean(errors.name)" :aria-describedby="errors.name ? 'name-error' : undefined" :placeholder="t('contact.namePlaceholder')" />
       <small v-if="errors.name" id="name-error" role="alert">{{ errors.name }}</small>
     </div>
 
@@ -36,18 +38,18 @@ async function handleSubmit() {
     </div>
 
     <div class="form-field">
-      <label for="message">Повідомлення</label>
-      <textarea id="message" v-model="form.message" name="message" rows="6" :aria-invalid="Boolean(errors.message)" :aria-describedby="errors.message ? 'message-error' : undefined" placeholder="Коротко опишіть задачу, строки та очікуваний результат"></textarea>
+      <label for="message">{{ t('contact.message') }}</label>
+      <textarea id="message" v-model="form.message" name="message" rows="6" :aria-invalid="Boolean(errors.message)" :aria-describedby="errors.message ? 'message-error' : undefined" :placeholder="t('contact.messagePlaceholder')"></textarea>
       <small v-if="errors.message" id="message-error" role="alert">{{ errors.message }}</small>
     </div>
 
     <div class="honeypot" aria-hidden="true">
-      <label for="company">Компанія</label>
+      <label for="company">{{ t('contact.company') }}</label>
       <input id="company" v-model="form.company" name="company" tabindex="-1" autocomplete="off" />
     </div>
 
     <button type="submit" :disabled="isSubmitting">
-      <span>{{ isSubmitting ? 'Надсилаємо…' : 'Надіслати повідомлення' }}</span>
+      <span>{{ isSubmitting ? t('contact.sending') : t('contact.submit') }}</span>
       <Send aria-hidden="true" />
     </button>
   </form>

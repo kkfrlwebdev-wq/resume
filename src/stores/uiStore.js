@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { i18n } from '@/i18n'
 
 export const useUiStore = defineStore('ui', () => {
   const zeroGravityMode = ref(localStorage.getItem('portfolio-zero-gravity') === 'true')
@@ -8,7 +9,7 @@ export const useUiStore = defineStore('ui', () => {
   function toggleZeroGravity() {
     zeroGravityMode.value = !zeroGravityMode.value
     localStorage.setItem('portfolio-zero-gravity', String(zeroGravityMode.value))
-    notify(zeroGravityMode.value ? 'Режим невагомості активовано' : 'Режим невагомості вимкнено', 'success')
+    notify(i18n.global.t(zeroGravityMode.value ? 'notifications.gravityOn' : 'notifications.gravityOff'), 'success')
   }
 
   function notify(message, type = 'info') {

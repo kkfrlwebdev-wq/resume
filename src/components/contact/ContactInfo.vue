@@ -1,24 +1,27 @@
 <script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Mail, MapPin, Phone, Radio } from '@lucide/vue'
 import { profile } from '@/data/profile'
 
-const details = [
-  { label: 'Email', value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
-  { label: 'Телефон', value: profile.phone, href: `tel:${profile.phone.replace(/[^+\d]/g, '')}`, icon: Phone },
-  { label: 'Місцезнаходження', value: profile.location, icon: MapPin },
-]
+const { t } = useI18n()
+const details = computed(() => [
+  { label: t('common.email'), value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
+  { label: t('common.phone'), value: profile.phone, href: `tel:${profile.phone.replace(/[^+\d]/g, '')}`, icon: Phone },
+  { label: t('common.location'), value: t('profile.location'), icon: MapPin },
+])
 </script>
 
 <template>
   <section class="contact-info" aria-labelledby="contact-info-title">
-    <span>Контакти</span>
+    <span>{{ t('contact.eyebrow') }}</span>
     <h1 id="contact-info-title">
-      Зв’яжімося
+      {{ t('contact.title') }}
     </h1>
-    <p>Є проєкт, ідея або пропозиція? Розкажіть про задачу — я відповім і запропоную наступний крок.</p>
+    <p>{{ t('contact.description') }}</p>
 
     <div class="availability">
-      <Radio aria-hidden="true" /> {{ profile.availability }}
+      <Radio aria-hidden="true" /> {{ t('profile.availability') }}
     </div>
 
     <dl>

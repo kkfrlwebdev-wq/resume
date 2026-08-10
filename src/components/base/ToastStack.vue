@@ -12,7 +12,7 @@ const ui = useUiStore()
         <CircleCheck v-if="toast.type === 'success'" aria-hidden="true" />
         <Info v-else aria-hidden="true" />
         <span>{{ toast.message }}</span>
-        <button type="button" aria-label="Закрити повідомлення" @click="ui.removeToast(toast.id)">
+        <button type="button" :aria-label="$t('accessibility.closeToast')" @click="ui.removeToast(toast.id)">
           <X aria-hidden="true" />
         </button>
       </div>

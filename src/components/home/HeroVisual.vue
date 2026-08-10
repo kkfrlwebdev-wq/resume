@@ -2,23 +2,23 @@
 import { Braces, CodeXml, Globe2, Smartphone } from '@lucide/vue'
 
 const capabilities = [
-  { label: 'Розробка', icon: Braces },
-  { label: 'Кросбраузерність', icon: Globe2, yellow: true },
-  { label: 'Адаптивність', icon: Smartphone },
-  { label: 'Чистий код', icon: CodeXml },
+  { labelKey: 'home.capabilities.development', icon: Braces },
+  { labelKey: 'home.capabilities.crossBrowser', icon: Globe2, yellow: true },
+  { labelKey: 'home.capabilities.responsive', icon: Smartphone },
+  { labelKey: 'home.capabilities.cleanCode', icon: CodeXml },
 ]
 </script>
 
 <template>
-  <div class="hero-visual" aria-label="Ключові компетенції">
+  <div class="hero-visual" :aria-label="$t('home.competencies')">
     <div class="wave-orb" aria-hidden="true">
       <i v-for="index in 9" :key="index" :style="{ '--index': index }"></i>
     </div>
 
     <div class="capability-grid">
-      <div v-for="item in capabilities" :key="item.label" class="capability">
+      <div v-for="item in capabilities" :key="item.labelKey" class="capability">
         <component :is="item.icon" :class="{ yellow: item.yellow }" aria-hidden="true" />
-        <span>{{ item.label }}</span>
+        <span>{{ $t(item.labelKey) }}</span>
       </div>
     </div>
   </div>

@@ -6,7 +6,7 @@ import { profile } from '@/data/profile'
   <dl class="statistics-list">
     <div v-for="item in profile.stats" :key="item.label">
       <dt>{{ item.value }}</dt>
-      <dd>{{ item.label }}</dd>
+      <dd>{{ $t(item.labelKey) }}</dd>
     </div>
   </dl>
 </template>

@@ -1,39 +1,45 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { Gamepad2 } from '@lucide/vue'
+import { useI18n } from 'vue-i18n'
 import CodeLogo from './CodeLogo.vue'
 import { navigation } from '@/data/navigation'
 import { useAchievementsStore } from '@/stores/achievementsStore'
 import { useUiStore } from '@/stores/uiStore'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const achievements = useAchievementsStore()
 const ui = useUiStore()
+const { t } = useI18n()
 let logoClicks = 0
 
 function handleLogoClick() {
   logoClicks += 1
   if (logoClicks === 5 && achievements.unlock('hunter')) {
-    ui.notify('Пасхалку знайдено: досягнення «Шукач»', 'success')
+    ui.notify(t('notifications.hunter'), 'success')
   }
 }
 </script>
 
 <template>
   <header class="app-header">
-    <RouterLink class="brand" to="/" aria-label="Микола Кольченко — головна" @click="handleLogoClick">
+    <RouterLink class="brand" to="/" :aria-label="`${$t('profile.name')} — ${$t('nav.home')}`" @click="handleLogoClick">
       <CodeLogo />
       <span>Kolya Kolchenko</span>
     </RouterLink>
 
-    <nav class="top-nav" aria-label="Головна навігація">
+    <nav class="top-nav" :aria-label="$t('nav.main')">
       <RouterLink v-for="item in navigation" :key="item.to" :to="item.to">
-        {{ item.label }}
+        {{ $t(item.labelKey) }}
       </RouterLink>
     </nav>
 
-    <RouterLink class="game-link" to="/desktop?app=game" aria-label="Відкрити мінігру">
+    <div class="header-actions">
+      <LanguageSwitcher />
+      <RouterLink class="game-link" to="/desktop?app=game" :aria-label="$t('nav.openGame')">
       <Gamepad2 />
-    </RouterLink>
+      </RouterLink>
+    </div>
   </header>
 </template>
 
@@ -90,7 +96,6 @@ function handleLogoClick() {
 }
 
 .game-link {
-  justify-self: end;
   display: grid;
   width: 38px;
   height: 38px;
@@ -103,6 +108,8 @@ function handleLogoClick() {
   svg { width: 18px; }
   &:hover { border-color: var(--color-border-bright); }
 }
+
+.header-actions { justify-self: end; display: flex; align-items: center; gap: 14px; }
 
 @media (max-width: 900px) {
   .app-header { grid-template-columns: 1fr auto; }

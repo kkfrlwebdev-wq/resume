@@ -1,47 +1,48 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { i18n } from '@/i18n'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: () => import('@/views/HomeView.vue'),
-    meta: { title: 'Головна' },
+    meta: { titleKey: 'routes.home' },
   },
   {
     path: '/about',
     name: 'about',
     component: () => import('@/views/AboutView.vue'),
-    meta: { title: 'Про мене' },
+    meta: { titleKey: 'routes.about' },
   },
   {
     path: '/services',
     name: 'services',
     component: () => import('@/views/ServicesView.vue'),
-    meta: { title: 'Послуги' },
+    meta: { titleKey: 'routes.services' },
   },
   {
     path: '/portfolio',
     name: 'portfolio',
     component: () => import('@/views/PortfolioView.vue'),
-    meta: { title: 'Портфоліо' },
+    meta: { titleKey: 'routes.portfolio' },
   },
   {
     path: '/contact',
     name: 'contact',
     component: () => import('@/views/ContactView.vue'),
-    meta: { title: 'Контакти' },
+    meta: { titleKey: 'routes.contact' },
   },
   {
     path: '/desktop',
     name: 'desktop',
     component: () => import('@/views/DesktopView.vue'),
-    meta: { title: 'Інтерактивний простір' },
+    meta: { titleKey: 'routes.desktop' },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/views/NotFoundView.vue'),
-    meta: { title: 'Сторінку не знайдено' },
+    meta: { titleKey: 'routes.notFound' },
   },
 ]
 
@@ -54,7 +55,7 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
-  document.title = `${to.meta.title} — Микола Кольченко`
+  document.title = `${i18n.global.t(to.meta.titleKey)} — ${i18n.global.t('profile.name')}`
   requestAnimationFrame(() => document.querySelector('#main-content')?.focus({ preventScroll: true }))
 })
 

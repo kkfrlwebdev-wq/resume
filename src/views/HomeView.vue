@@ -3,23 +3,22 @@ import { ArrowRight, Download, LayoutGrid } from '@lucide/vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import HeroVisual from '@/components/home/HeroVisual.vue'
 import SocialLinks from '@/components/home/SocialLinks.vue'
-import { profile } from '@/data/profile'
 </script>
 
 <template>
   <div class="home-view page-container">
     <section class="hero">
       <div class="hero__copy">
-        <span class="hero__eyebrow">Привіт, я</span>
-        <h1>{{ profile.role }}</h1>
-        <p>{{ profile.intro }}</p>
+        <span class="hero__eyebrow">{{ $t('home.hello') }}</span>
+        <h1>{{ $t('profile.role') }}</h1>
+        <p>{{ $t('profile.intro') }}</p>
 
         <div class="hero__actions">
           <BaseButton to="/portfolio">
             <template #icon>
               <LayoutGrid aria-hidden="true" />
             </template>
-            Переглянути роботи
+            {{ $t('home.viewWork') }}
             <template #trailing>
               <ArrowRight aria-hidden="true" />
             </template>
@@ -28,7 +27,7 @@ import { profile } from '@/data/profile'
             <template #icon>
               <Download aria-hidden="true" />
             </template>
-            Відкрити резюме
+            {{ $t('home.openResume') }}
           </BaseButton>
         </div>
 
@@ -38,8 +37,8 @@ import { profile } from '@/data/profile'
       <HeroVisual />
     </section>
 
-    <aside class="shortcut-hint" aria-label="Підказка">
-      <span>Порада: активуйте режим невагомості</span>
+    <aside class="shortcut-hint" :aria-label="$t('home.hintLabel')">
+      <span>{{ $t('home.hint') }}</span>
       <kbd>Ctrl</kbd><b>+</b><kbd>Shift</kbd><b>+</b><kbd>D</kbd>
     </aside>
   </div>

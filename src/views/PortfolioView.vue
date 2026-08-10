@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import SectionHeading from '@/components/base/SectionHeading.vue'
 import ProjectCard from '@/components/portfolio/ProjectCard.vue'
 import ProjectModal from '@/components/portfolio/ProjectModal.vue'
@@ -7,18 +8,25 @@ import { projectCategories, projects } from '@/data/projects'
 
 const activeCategory = ref('all')
 const selectedProject = ref(null)
+const { t } = useI18n()
+const localizedCategories = computed(() => projectCategories.map((category) => ({ ...category, label: t(category.labelKey) })))
+const localizedProjects = computed(() => projects.map((project) => ({
+  ...project,
+  categoryLabel: t(`portfolio.projects.${project.translationKey}.category`),
+  description: t(`portfolio.projects.${project.translationKey}.description`),
+})))
 const visibleProjects = computed(() =>
-  activeCategory.value === 'all' ? projects : projects.filter((project) => project.category === activeCategory.value),
+  activeCategory.value === 'all' ? localizedProjects.value : localizedProjects.value.filter((project) => project.category === activeCategory.value),
 )
 </script>
 
 <template>
   <div class="portfolio-view page-container">
     <div class="portfolio-top">
-      <SectionHeading eyebrow="Портфоліо" title="Мої роботи" description="Добірка комерційних і концептуальних проєктів із фокусом на результат, швидкість та зрозумілий інтерфейс." />
-      <div class="filters" role="group" aria-label="Фільтр проєктів">
+      <SectionHeading :eyebrow="t('portfolio.eyebrow')" :title="t('portfolio.title')" :description="t('portfolio.description')" />
+      <div class="filters" role="group" :aria-label="t('portfolio.filterLabel')">
         <button
-          v-for="category in projectCategories"
+          v-for="category in localizedCategories"
           :key="category.id"
           type="button"
           :class="{ active: activeCategory === category.id }"

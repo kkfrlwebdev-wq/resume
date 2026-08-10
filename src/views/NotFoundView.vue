@@ -7,13 +7,13 @@ import BaseButton from '@/components/base/BaseButton.vue'
   <div class="not-found page-container">
     <Radar aria-hidden="true" />
     <span>404</span>
-    <h1>Цю сторінку не знайдено</h1>
-    <p>Схоже, координати змінилися або такого маршруту ніколи не існувало.</p>
+    <h1>{{ $t('notFound.title') }}</h1>
+    <p>{{ $t('notFound.description') }}</p>
     <BaseButton to="/">
       <template #icon>
         <ArrowLeft aria-hidden="true" />
       </template>
-      Повернутися на головну
+      {{ $t('notFound.back') }}
     </BaseButton>
   </div>
 </template>

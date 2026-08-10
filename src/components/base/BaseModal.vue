@@ -4,7 +4,7 @@ import { X } from '@lucide/vue'
 
 const props = defineProps({
   open: Boolean,
-  title: { type: String, default: 'Діалогове вікно' },
+  title: { type: String, default: '' },
 })
 
 const emit = defineEmits(['close'])
@@ -60,7 +60,7 @@ onBeforeUnmount(() => {
     <Transition name="modal">
       <div v-if="open" class="modal-layer" role="presentation" @mousedown.self="close">
         <section ref="dialog" class="modal" role="dialog" aria-modal="true" :aria-label="title">
-          <button class="modal__close" type="button" aria-label="Закрити" @click="close">
+          <button class="modal__close" type="button" :aria-label="$t('common.close')" @click="close">
             <X aria-hidden="true" />
           </button>
           <slot></slot>

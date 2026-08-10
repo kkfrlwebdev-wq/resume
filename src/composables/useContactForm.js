@@ -1,17 +1,19 @@
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { sendContactMessage } from '@/services/contactService'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function useContactForm() {
+  const { t } = useI18n()
   const form = reactive({ name: '', email: '', message: '', company: '' })
   const errors = reactive({ name: '', email: '', message: '' })
   const isSubmitting = ref(false)
 
   function validate() {
-    errors.name = form.name.trim().length >= 2 ? '' : 'Введіть щонайменше 2 символи'
-    errors.email = emailPattern.test(form.email.trim()) ? '' : 'Введіть коректну email-адресу'
-    errors.message = form.message.trim().length >= 10 ? '' : 'Повідомлення має містити щонайменше 10 символів'
+    errors.name = form.name.trim().length >= 2 ? '' : t('validation.name')
+    errors.email = emailPattern.test(form.email.trim()) ? '' : t('validation.email')
+    errors.message = form.message.trim().length >= 10 ? '' : t('validation.message')
     return !errors.name && !errors.email && !errors.message
   }
 

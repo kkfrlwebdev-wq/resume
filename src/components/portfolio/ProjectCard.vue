@@ -7,7 +7,7 @@ defineEmits(['select'])
 </script>
 
 <template>
-  <button class="project-card" type="button" :aria-label="`Детальніше про ${project.title}`" @click="$emit('select', project)">
+  <button class="project-card" type="button" :aria-label="$t('portfolio.details', { title: project.title })" @click="$emit('select', project)">
     <ProjectVisual :project="project" />
     <span class="project-card__copy">
       <span>

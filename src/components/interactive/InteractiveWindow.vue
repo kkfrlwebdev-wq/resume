@@ -83,7 +83,7 @@ onUnmounted(() => {
         <div class="interactive-window__controls">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-          <button ref="closeButton" type="button" aria-label="Закрити вікно" @click="emit('close')">
+          <button ref="closeButton" type="button" :aria-label="$t('common.closeWindow')" @click="emit('close')">
             <X aria-hidden="true" />
           </button>
         </div>

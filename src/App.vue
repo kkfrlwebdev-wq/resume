@@ -1,6 +1,7 @@
 <script setup>
 import { nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import AppShell from '@/components/layout/AppShell.vue'
 import ToastStack from '@/components/base/ToastStack.vue'
 import { useUiStore } from '@/stores/uiStore'
@@ -10,6 +11,7 @@ const router = useRouter()
 const route = useRoute()
 const ui = useUiStore()
 const achievements = useAchievementsStore()
+const { locale, t } = useI18n()
 let zeroGravityObserver
 let zeroGravityFrame
 const zeroGravityItems = new Map()
@@ -141,7 +143,7 @@ function handleShortcut(event) {
   if (event.ctrlKey && event.shiftKey && event.code === 'KeyD') {
     event.preventDefault()
     ui.toggleZeroGravity()
-    if (ui.zeroGravityMode && achievements.unlock('zero-gravity')) ui.notify('Досягнення відкрито: Нульова гравітація', 'success')
+    if (ui.zeroGravityMode && achievements.unlock('zero-gravity')) ui.notify(t('notifications.gravityAchievement'), 'success')
   }
 
   if (event.ctrlKey && event.shiftKey && event.code === 'KeyT') {
@@ -163,6 +165,11 @@ onUnmounted(() => {
 
 watch(() => ui.zeroGravityMode, syncZeroGravity)
 
+watch(locale, () => {
+  document.title = `${t(route.meta.titleKey)} — ${t('profile.name')}`
+  document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'))
+})
+
 watch(
   () => route.name,
   (name) => achievements.visit(name),
@@ -172,7 +179,7 @@ watch(
 
 <template>
   <div :class="['site-root', { 'zero-gravity-mode': ui.zeroGravityMode }]">
-    <a class="skip-link" href="#main-content">Перейти до вмісту</a>
+    <a class="skip-link" href="#main-content">{{ t('accessibility.skip') }}</a>
     <AppShell>
       <RouterView v-slot="{ Component, route: viewRoute }">
         <Transition name="page" mode="out-in">

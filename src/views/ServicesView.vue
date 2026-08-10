@@ -1,19 +1,29 @@
 <script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import SectionHeading from '@/components/base/SectionHeading.vue'
 import ServiceCard from '@/components/services/ServiceCard.vue'
 import { services } from '@/data/services'
+
+const { t, tm } = useI18n()
+const localizedServices = computed(() => services.map((service) => ({
+  ...service,
+  title: t(`services.items.${service.translationKey}.title`),
+  description: t(`services.items.${service.translationKey}.description`),
+  features: tm(`services.items.${service.translationKey}.features`),
+})))
 </script>
 
 <template>
   <div class="services-view page-container">
     <SectionHeading
-      eyebrow="Послуги"
-      title="Що я роблю?"
-      description="Створюю лендінги й корпоративні сайти на чистому коді, адаптую їх до всіх екранів і готую до подальшої підтримки або інтеграції з CMS."
+      :eyebrow="t('services.eyebrow')"
+      :title="t('services.title')"
+      :description="t('services.description')"
     />
 
-    <section class="services-grid" aria-label="Перелік послуг">
-      <ServiceCard v-for="service in services" :key="service.title" :service="service" />
+    <section class="services-grid" :aria-label="t('services.listLabel')">
+      <ServiceCard v-for="service in localizedServices" :key="service.translationKey" :service="service" />
     </section>
   </div>
 </template>
