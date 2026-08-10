@@ -46,7 +46,7 @@ import { profile } from '@/data/profile'
 
   &__photo {
     position: relative;
-  aspect-ratio: 4 / 3.15;
+    aspect-ratio: 1;
     overflow: hidden;
     border-bottom: 1px solid var(--color-border-bright);
     background: #07141c;
@@ -62,7 +62,7 @@ import { profile } from '@/data/profile'
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center 22%;
     }
   }
