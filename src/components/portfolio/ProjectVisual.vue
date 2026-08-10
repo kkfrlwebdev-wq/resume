@@ -3,12 +3,17 @@ defineProps({ project: { type: Object, required: true } })
 </script>
 
 <template>
-  <div :class="['project-visual', `project-visual--${project.visual}`]" :style="{ '--c1': project.palette[0], '--c2': project.palette[1], '--c3': project.palette[2] }" aria-hidden="true">
+  <div
+    :class="['project-visual', project.image ? 'project-visual--preview' : `project-visual--${project.visual}`]"
+    :style="project.palette ? { '--c1': project.palette[0], '--c2': project.palette[1], '--c3': project.palette[2] } : undefined"
+    aria-hidden="true"
+  >
     <div class="browser-bar">
       <i></i><i></i><i></i><span></span>
     </div>
     <div class="visual-content">
-      <template v-if="project.visual === 'mountain'">
+      <img v-if="project.image" class="project-preview" :src="project.image" alt="" loading="lazy" />
+      <template v-else-if="project.visual === 'mountain'">
         <div class="mountain-title">
           EXPLORE<br />BEYOND
         </div><div class="mountains"></div>
@@ -55,6 +60,20 @@ defineProps({ project: { type: Object, required: true } })
   .browser-bar i { width: 4px; height: 4px; border-radius: 50%; background: #8a9aa2; }
   .browser-bar span { width: 34%; height: 4px; margin-left: auto; border-radius: 4px; background: rgba(255,255,255,.12); }
   .visual-content { position: relative; height: calc(100% - 17px); overflow: hidden; border-radius: 4px; }
+}
+
+.project-visual--preview {
+  background: #071016;
+
+  .visual-content { background: #050b0f; }
+}
+
+.project-preview {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .mountain-title { position: absolute; z-index: 2; top: 18%; left: 7%; color: white; font-size: .88rem; font-weight: 900; line-height: 1.1; }

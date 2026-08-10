@@ -1,4 +1,4 @@
-# My Portfolio — Vue 3
+# Kolya Kolchenko — Frontend Portfolio
 
 Адаптивне SPA-портфоліо у темній cyan-естетиці. Проєкт створено на Vue 3 без TypeScript, із Composition API, Vite, Pinia та SCSS.
 
@@ -9,7 +9,7 @@
 - портфоліо з фільтрами й доступним модальним вікном;
 - контактна форма з валідацією, honeypot та API-ready сервісом;
 - інтерактивний desktop, термінал, досягнення, пасхалка й мінігра;
-- Matrix-режим через `Ctrl + Shift + D`;
+- режим невагомості через `Ctrl + Shift + D`;
 - підтримка `prefers-reduced-motion`, клавіатурної навігації та focus-visible;
 - локальні оптимізовані assets без зовнішніх CDN.
 
@@ -55,6 +55,7 @@ VITE_CONTACT_ENDPOINT=https://example.com/api/contact
 - проєкти: `src/data/projects.js`;
 - кольори й дизайн-токени: `src/assets/styles/abstracts/_variables.scss`;
 - резюме для друку/PDF: `public/resume.html`;
+- готовий PDF: `public/resume.pdf` (оновлення командою `npm run resume:pdf`);
 - портрет: `src/assets/images/developer-portrait.jpg`.
 
 Перед публікацією замініть демонстраційні ім’я, контакти, посилання соцмереж і описи робіт на реальні дані.

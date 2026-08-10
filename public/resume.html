@@ -3,37 +3,985 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Резюме — Іван Петренко</title>
+    <meta name="theme-color" content="#02070b" />
+    <meta
+      name="description"
+      content="Резюме frontend-розробника Миколи Кольченка — HTML, CSS, JavaScript, SCSS та адаптивні вебсайти."
+    />
+    <title>Резюме — Микола Кольченко</title>
     <style>
-      * { box-sizing: border-box; }
-      body { margin: 0; background: #eef1f3; color: #172127; font: 15px/1.55 Inter, system-ui, sans-serif; }
-      main { width: min(900px, calc(100% - 32px)); margin: 32px auto; padding: 56px; background: white; box-shadow: 0 12px 50px #20303a22; }
-      header { display: flex; justify-content: space-between; gap: 30px; padding-bottom: 28px; border-bottom: 3px solid #00aeb8; }
-      h1 { margin: 0; font-size: 40px; line-height: 1; }
-      header p { margin: 9px 0 0; color: #007f87; font-weight: 700; }
-      address { font-style: normal; color: #52636c; text-align: right; }
-      section { margin-top: 34px; }
-      h2 { margin: 0 0 13px; color: #007f87; font-size: 16px; letter-spacing: .1em; text-transform: uppercase; }
-      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-      ul { padding-left: 20px; }
-      button { position: fixed; right: 22px; bottom: 22px; padding: 11px 18px; border: 0; border-radius: 8px; background: #007f87; color: white; cursor: pointer; font-weight: 700; }
-      @media (max-width: 650px) { main { padding: 28px; } header, .grid { display: block; } address { margin-top: 18px; text-align: left; } }
-      @media print { body { background: white; } main { width: 100%; margin: 0; padding: 12mm; box-shadow: none; } button { display: none; } }
+      :root {
+        --ink: #10212a;
+        --ink-soft: #40545e;
+        --muted: #667b84;
+        --paper: #f5f8f9;
+        --surface: #ffffff;
+        --line: #d8e3e7;
+        --navy: #06131b;
+        --navy-soft: #0a202a;
+        --cyan: #00cbd5;
+        --cyan-dark: #008c96;
+        --yellow: #ffd000;
+        --green: #27a978;
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #02070b;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        background:
+          radial-gradient(circle at 78% 8%, rgba(0, 203, 213, 0.1), transparent 26rem),
+          #02070b;
+        color: var(--ink);
+        font: 14px/1.48 var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 3px;
+      }
+
+      .resume-toolbar {
+        position: fixed;
+        z-index: 10;
+        top: 18px;
+        right: 18px;
+        display: flex;
+        gap: 8px;
+        padding: 7px;
+        border: 1px solid rgba(156, 192, 205, 0.2);
+        border-radius: 12px;
+        background: rgba(6, 19, 27, 0.92);
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(16px);
+      }
+
+      .resume-toolbar a,
+      .resume-toolbar button {
+        min-height: 39px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 8px 13px;
+        border: 1px solid rgba(0, 203, 213, 0.35);
+        border-radius: 8px;
+        background: transparent;
+        color: #cfe0e5;
+        cursor: pointer;
+        font: 700 12px/1 var(--sans);
+      }
+
+      .resume-toolbar a:hover,
+      .resume-toolbar button:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
+
+      .resume-toolbar .primary {
+        border-color: transparent;
+        background: var(--cyan);
+        color: #001216;
+      }
+
+      .resume-toolbar .primary:hover {
+        color: #001216;
+        filter: brightness(1.08);
+      }
+
+      .resume-sheet {
+        width: min(210mm, calc(100% - 32px));
+        min-height: 297mm;
+        display: flex;
+        flex-direction: column;
+        margin: 32px auto;
+        overflow: hidden;
+        background: var(--paper);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+      }
+
+      .resume-header {
+        position: relative;
+        min-height: 58mm;
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(210px, 0.65fr);
+        gap: 12mm;
+        padding: 12mm 14mm 10mm;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 25%, rgba(0, 203, 213, 0.16), transparent 11rem),
+          linear-gradient(135deg, var(--navy), #02090e 72%);
+        color: #f7fbfc;
+      }
+
+      .resume-header::before {
+        position: absolute;
+        top: -75%;
+        right: -10%;
+        width: 92mm;
+        aspect-ratio: 1;
+        border: 1px solid rgba(0, 203, 213, 0.15);
+        border-radius: 47% 53% 44% 56%;
+        box-shadow:
+          0 0 0 7px rgba(0, 203, 213, 0.035),
+          0 0 0 15px rgba(0, 203, 213, 0.025),
+          0 0 0 24px rgba(0, 203, 213, 0.018);
+        content: "";
+        transform: rotate(-18deg);
+      }
+
+      .resume-header::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--cyan), rgba(0, 203, 213, 0.08) 72%);
+        content: "";
+      }
+
+      .identity,
+      .contact-card {
+        position: relative;
+        z-index: 1;
+      }
+
+      .portfolio-mark {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12mm;
+        color: #dce8eb;
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: 0.03em;
+      }
+
+      .code-logo {
+        color: var(--cyan);
+        font: 900 17px/1 var(--mono);
+        letter-spacing: -0.14em;
+      }
+
+      .identity h1 {
+        margin: 0;
+        font-size: 32px;
+        line-height: 1;
+        letter-spacing: -0.045em;
+      }
+
+      .identity h1 span {
+        color: var(--cyan);
+      }
+
+      .role {
+        margin: 8px 0 0;
+        color: var(--cyan);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .specialization {
+        max-width: 112mm;
+        margin: 9px 0 0;
+        color: #a8bbc2;
+        font-size: 11px;
+      }
+
+      .contact-card {
+        align-self: end;
+        padding: 5mm;
+        border: 1px solid rgba(0, 203, 213, 0.22);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 11px;
+        color: #69e8b8;
+        font-size: 9px;
+        font-weight: 700;
+      }
+
+      .status::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #50e3a4;
+        box-shadow: 0 0 10px rgba(80, 227, 164, 0.75);
+        content: "";
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 7px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .contact-list li,
+      .contact-list a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #c6d4d9;
+        font-size: 9.5px;
+      }
+
+      .contact-list a:hover {
+        color: var(--cyan);
+      }
+
+      .contact-icon {
+        width: 18px;
+        height: 18px;
+        display: grid;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 1px solid rgba(0, 203, 213, 0.24);
+        border-radius: 5px;
+        color: var(--cyan);
+        font: 700 9px/1 var(--mono);
+      }
+
+      .resume-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 8mm 14mm 9mm;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 9px;
+        color: var(--ink);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .section-title::before {
+        width: 16px;
+        height: 2px;
+        background: var(--cyan);
+        content: "";
+      }
+
+      .summary-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(255px, 0.6fr);
+        gap: 8mm;
+        align-items: end;
+        padding-bottom: 6mm;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .summary-row p {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 11px;
+      }
+
+      .summary-row strong {
+        color: var(--ink);
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+        margin: 0;
+      }
+
+      .metric {
+        min-height: 48px;
+        padding: 8px 9px;
+        border: 1px solid #cddde2;
+        border-radius: 8px;
+        background: #edf4f6;
+      }
+
+      .metric dt {
+        color: var(--cyan-dark);
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .metric dd {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 7px;
+        line-height: 1.2;
+      }
+
+      .resume-columns {
+        display: grid;
+        grid-template-columns: minmax(0, 1.42fr) minmax(220px, 0.58fr);
+        gap: 8mm;
+        padding-top: 6mm;
+      }
+
+      .main-column,
+      .side-column {
+        min-width: 0;
+      }
+
+      .resume-section + .resume-section {
+        margin-top: 6mm;
+      }
+
+      .experience-card {
+        position: relative;
+        padding: 0 0 0 19px;
+      }
+
+      .experience-card::before {
+        position: absolute;
+        top: 5px;
+        bottom: 2px;
+        left: 4px;
+        width: 1px;
+        background: #b9d3da;
+        content: "";
+      }
+
+      .experience-card::after {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 9px;
+        height: 9px;
+        border: 2px solid var(--paper);
+        border-radius: 50%;
+        background: var(--cyan);
+        box-shadow: 0 0 0 1px var(--cyan-dark);
+        content: "";
+      }
+
+      .experience-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .experience-heading h3 {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      .experience-heading span {
+        color: var(--cyan-dark);
+        font: 700 8px/1 var(--mono);
+        white-space: nowrap;
+      }
+
+      .experience-card > p {
+        margin: 4px 0 8px;
+        color: var(--muted);
+        font-size: 9px;
+      }
+
+      .bullet-list {
+        display: grid;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .bullet-list li {
+        position: relative;
+        padding-left: 12px;
+        color: var(--ink-soft);
+        font-size: 8.5px;
+      }
+
+      .bullet-list li::before {
+        position: absolute;
+        top: 0.58em;
+        left: 0;
+        width: 5px;
+        height: 1px;
+        background: var(--cyan-dark);
+        content: "";
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .project-card {
+        min-height: 74px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .project-card header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .project-card h3 {
+        margin: 0;
+        font-size: 10px;
+      }
+
+      .project-card header span {
+        color: var(--cyan-dark);
+        font-size: 6.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .project-card p {
+        margin: 4px 0 7px;
+        color: var(--muted);
+        font-size: 7.5px;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .tag {
+        padding: 2px 5px;
+        border: 1px solid #cce3e7;
+        border-radius: 99px;
+        background: #eff8f9;
+        color: #35616a;
+        font: 700 6px/1.3 var(--mono);
+      }
+
+      .side-panel {
+        padding: 11px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--surface);
+      }
+
+      .side-panel + .side-panel {
+        margin-top: 8px;
+      }
+
+      .side-panel h3 {
+        margin: 0 0 8px;
+        color: var(--cyan-dark);
+        font-size: 8px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .skill-group + .skill-group {
+        margin-top: 9px;
+      }
+
+      .skill-group strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 8px;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .skill-tags span {
+        padding: 3px 5px;
+        border-radius: 4px;
+        background: #edf4f6;
+        color: var(--ink-soft);
+        font-size: 6.5px;
+        font-weight: 700;
+      }
+
+      .numbered-list {
+        display: grid;
+        gap: 7px;
+        margin: 0;
+        padding: 0;
+        counter-reset: approach;
+        list-style: none;
+      }
+
+      .numbered-list li {
+        display: grid;
+        grid-template-columns: 19px 1fr;
+        gap: 7px;
+        align-items: start;
+        color: var(--ink-soft);
+        font-size: 7.5px;
+        counter-increment: approach;
+      }
+
+      .numbered-list li::before {
+        width: 19px;
+        height: 19px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #b9d9de;
+        border-radius: 5px;
+        color: var(--cyan-dark);
+        content: "0" counter(approach);
+        font: 800 6px/1 var(--mono);
+      }
+
+      .service-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .service-list li {
+        padding: 5px;
+        border-left: 2px solid var(--cyan);
+        background: #f0f6f7;
+        color: var(--ink-soft);
+        font-size: 6.8px;
+        font-weight: 700;
+      }
+
+      .availability-card {
+        padding: 10px 11px;
+        border: 1px solid rgba(39, 169, 120, 0.28);
+        border-radius: 9px;
+        background: #eef8f4;
+      }
+
+      .availability-card strong {
+        display: block;
+        color: #187251;
+        font-size: 8px;
+      }
+
+      .availability-card p {
+        margin: 4px 0 0;
+        color: #547269;
+        font-size: 7px;
+      }
+
+      .principles-section {
+        margin-top: 5mm;
+      }
+
+      .principles-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .principle {
+        min-height: 52px;
+        padding: 8px 9px;
+        border: 1px solid var(--line);
+        border-top: 2px solid var(--cyan);
+        border-radius: 0 0 7px 7px;
+        background: var(--surface);
+      }
+
+      .principle h3 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 7.5px;
+      }
+
+      .principle p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 6.5px;
+        line-height: 1.35;
+      }
+
+      .resume-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: auto;
+        padding-top: 4mm;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 7.5px;
+      }
+
+      .resume-footer strong {
+        color: var(--ink);
+      }
+
+      .footer-code {
+        color: var(--cyan-dark);
+        font: 700 7px/1 var(--mono);
+      }
+
+      @media screen and (max-width: 760px) {
+        .resume-toolbar {
+          top: auto;
+          right: 10px;
+          bottom: 10px;
+          left: 10px;
+          justify-content: center;
+        }
+
+        .resume-toolbar a,
+        .resume-toolbar button {
+          flex: 1;
+          padding-inline: 8px;
+          font-size: 10px;
+        }
+
+        .resume-sheet {
+          width: 100%;
+          min-height: 100vh;
+          margin: 0;
+        }
+
+        .resume-header,
+        .summary-row,
+        .resume-columns {
+          grid-template-columns: 1fr;
+        }
+
+        .resume-header {
+          gap: 28px;
+          padding: 34px 24px;
+        }
+
+        .portfolio-mark {
+          margin-bottom: 32px;
+        }
+
+        .contact-card {
+          width: min(100%, 360px);
+        }
+
+        .resume-body {
+          padding: 28px 24px 100px;
+        }
+
+        .summary-row,
+        .resume-columns {
+          gap: 28px;
+        }
+
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .principles-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .project-card,
+        .side-panel {
+          padding: 14px;
+        }
+
+        .project-card p,
+        .principle p,
+        .bullet-list li,
+        .numbered-list li,
+        .availability-card p,
+        .service-list li {
+          font-size: 11px;
+        }
+
+        .project-card h3,
+        .principle h3,
+        .experience-heading h3 {
+          font-size: 13px;
+        }
+
+        .side-panel h3,
+        .skill-group strong,
+        .availability-card strong {
+          font-size: 10px;
+        }
+
+        .skill-tags span,
+        .tag {
+          font-size: 9px;
+        }
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html,
+        body {
+          width: 210mm;
+          min-width: 210mm;
+          margin: 0;
+          background: #fff;
+        }
+
+        body,
+        .resume-sheet,
+        .resume-header,
+        .metric,
+        .project-card,
+        .side-panel,
+        .availability-card {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .resume-toolbar {
+          display: none !important;
+        }
+
+        .resume-sheet {
+          width: 210mm;
+          min-height: 297mm;
+          margin: 0;
+          box-shadow: none;
+        }
+
+        .resume-header {
+          break-inside: avoid;
+        }
+
+        .resume-section,
+        .principles-section,
+        .experience-card,
+        .project-card,
+        .side-panel,
+        .availability-card {
+          break-inside: avoid;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
     </style>
   </head>
   <body>
-    <main>
-      <header>
-        <div><h1>Іван Петренко</h1><p>Веброзробник</p></div>
-        <address>hello@myportfolio.com<br />+38 (099) 123 45 67<br />Київ, Україна</address>
+    <nav class="resume-toolbar" aria-label="Дії з резюме">
+      <a href="/">← До портфоліо</a>
+      <button type="button" onclick="window.print()">Друк / PDF</button>
+      <a class="primary" href="/resume.pdf" download>Завантажити PDF</a>
+    </nav>
+
+    <main class="resume-sheet">
+      <header class="resume-header">
+        <div class="identity">
+          <a class="portfolio-mark" href="/" aria-label="Микола Кольченко — головна">
+            <span class="code-logo" aria-hidden="true">&lt;/&gt;</span>
+            <span>KOLYA KOLCHENKO · RESUME</span>
+          </a>
+          <h1>Микола <span>Кольченко</span></h1>
+          <p class="role">Junior Frontend Developer</p>
+          <p class="specialization">
+            Створюю сучасні, адаптивні та інтуїтивні вебсайти на HTML, CSS, JavaScript і SCSS.
+          </p>
+        </div>
+
+        <aside class="contact-card" aria-label="Контактна інформація">
+          <div class="status">Доступний для фриланс-проєктів</div>
+          <ul class="contact-list">
+            <li>
+              <a href="mailto:kk.frl.webdev@gmail.com"><span class="contact-icon" aria-hidden="true">@</span>kk.frl.webdev@gmail.com</a>
+            </li>
+            <li>
+              <a href="tel:+380509256571"><span class="contact-icon" aria-hidden="true">#</span>+38 (050) 925 65 71</a>
+            </li>
+            <li><span class="contact-icon" aria-hidden="true">⌖</span>Україна</li>
+            <li><span class="contact-icon" aria-hidden="true">↗</span>afix-ua.github.io/portfolio</li>
+          </ul>
+        </aside>
       </header>
-      <section><h2>Профіль</h2><p>Vue-розробник із фокусом на доступних інтерфейсах, компонентній архітектурі та продуктивності. Створюю цифрові продукти від прототипу до production-релізу.</p></section>
-      <div class="grid">
-        <section><h2>Навички</h2><ul><li>Vue 3, Composition API, Pinia</li><li>JavaScript, HTML5, SCSS</li><li>Vite, REST API, Git</li><li>Адаптивність і доступність</li><li>Оптимізація Core Web Vitals</li></ul></section>
-        <section><h2>Досвід</h2><p><strong>Frontend Developer</strong><br />Розробка сайтів, SaaS-інтерфейсів і дизайн-систем. Співпраця з дизайнерами та бекенд-командами.</p><p><strong>20+ завершених проєктів</strong><br />Лендінги, магазини, дашборди та вебзастосунки.</p></section>
+
+      <div class="resume-body">
+        <section class="summary-row" aria-labelledby="profile-title">
+          <div>
+            <h2 id="profile-title" class="section-title">Профіль</h2>
+            <p>
+              Frontend-розробник із фокусом на <strong>HTML, CSS, JavaScript, SCSS та адаптивній верстці</strong>.
+              Створюю виразні й інтуїтивні вебсайти, якими легко користуватися на телефонах, ноутбуках і великих екранах.
+            </p>
+          </div>
+
+          <dl class="metrics" aria-label="Ключові показники">
+            <div class="metric"><dt>2+</dt><dd>роки практичного досвіду</dd></div>
+            <div class="metric"><dt>8</dt><dd>проєктів у портфоліо</dd></div>
+            <div class="metric"><dt>100%</dt><dd>адаптивна верстка</dd></div>
+          </dl>
+        </section>
+
+        <div class="resume-columns">
+          <div class="main-column">
+            <section class="resume-section" aria-labelledby="experience-title">
+              <h2 id="experience-title" class="section-title">Досвід</h2>
+              <article class="experience-card">
+                <div class="experience-heading">
+                  <h3>Frontend Developer · Проєктна практика</h3>
+                  <span>2+ РОКИ</span>
+                </div>
+                <p>Лендінги, корпоративні сайти та персональні портфоліо.</p>
+                <ul class="bullet-list">
+                  <li>Верстаю адаптивні інтерфейси за допомогою HTML5, SCSS, Flexbox і CSS Grid.</li>
+                  <li>Додаю інтерактивність і анімації на чистому JavaScript без зайвих залежностей.</li>
+                  <li>Перевіряю коректну роботу сайтів у сучасних браузерах і на різних екранах.</li>
+                  <li>Пишу чистий, зрозумілий і зручний для подальшої підтримки код.</li>
+                  <li>Вношу зміни під час створення та після здачі проєкту, готую верстку до CMS.</li>
+                </ul>
+              </article>
+            </section>
+
+            <section class="resume-section" aria-labelledby="projects-title">
+              <h2 id="projects-title" class="section-title">Вибрані проєкти</h2>
+              <div class="project-grid">
+                <article class="project-card">
+                  <header><h3>IZOMAKERS</h3><span>Комерційний сайт</span></header>
+                  <p>Сайт компанії системних рішень для ізоляції будівель.</p>
+                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
+                </article>
+                <article class="project-card">
+                  <header><h3>Boo</h3><span>Крипто-лендінг</span></header>
+                  <p>Яскравий промосайт токена з тематичною графікою.</p>
+                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
+                </article>
+                <article class="project-card">
+                  <header><h3>Meta V</h3><span>Metaverse</span></header>
+                  <p>Футуристичний лендінг платформи метавсесвіту.</p>
+                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">Responsive</span></div>
+                </article>
+                <article class="project-card">
+                  <header><h3>Sonic Logistics</h3><span>Корпоративний сайт</span></header>
+                  <p>Сайт логістичної компанії для клієнтів і партнерів.</p>
+                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
+                </article>
+              </div>
+            </section>
+
+            <section class="resume-section" aria-labelledby="services-title">
+              <h2 id="services-title" class="section-title">Що можу підсилити</h2>
+              <ul class="service-list">
+                <li>Розробка лендінгів</li>
+                <li>Адаптивна верстка</li>
+                <li>Корпоративні сайти</li>
+                <li>Кросбраузерність</li>
+                <li>Інтерактивні анімації</li>
+                <li>Підготовка до CMS</li>
+              </ul>
+            </section>
+          </div>
+
+          <aside class="side-column" aria-label="Додаткові компетенції">
+            <section class="side-panel">
+              <h3>Технологічний стек</h3>
+              <div class="skill-group">
+                <strong>Frontend</strong>
+                <div class="skill-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>SCSS</span><span>Sass</span></div>
+              </div>
+              <div class="skill-group">
+                <strong>UI та стилі</strong>
+                <div class="skill-tags"><span>Flexbox</span><span>CSS Grid</span><span>Responsive UI</span><span>Animations</span></div>
+              </div>
+              <div class="skill-group">
+                <strong>Інструменти</strong>
+                <div class="skill-tags"><span>Git</span><span>VS Code</span><span>DevTools</span><span>CMS-ready</span></div>
+              </div>
+              <div class="skill-group">
+                <strong>Якість</strong>
+                <div class="skill-tags"><span>Cross-browser</span><span>Clean code</span><span>Maintainability</span><span>Responsive</span></div>
+              </div>
+            </section>
+
+            <section class="side-panel">
+              <h3>Робочий підхід</h3>
+              <ol class="numbered-list">
+                <li>Уточнення задачі, аудиторії та критеріїв успіху.</li>
+                <li>Декомпозиція сторінок, станів і компонентів.</li>
+                <li>Mobile-first реалізація та інтеграція даних.</li>
+                <li>Перевірка сценаріїв, швидкості й доступності.</li>
+                <li>Документована передача та підтримка релізу.</li>
+              </ol>
+            </section>
+
+            <section class="availability-card">
+              <strong>Готовий до співпраці</strong>
+              <p>Нові сайти, розвиток чинних продуктів, UI-реалізація та frontend-підсилення команди.</p>
+            </section>
+          </aside>
+        </div>
+
+        <section class="principles-section" aria-labelledby="principles-title">
+          <h2 id="principles-title" class="section-title">Професійні принципи</h2>
+          <div class="principles-grid">
+            <article class="principle">
+              <h3>Масштабованість</h3>
+              <p>Компоненти й структура, які легко підтримувати та розвивати.</p>
+            </article>
+            <article class="principle">
+              <h3>Доступність</h3>
+              <p>Семантика, клавіатурні сценарії, фокус і достатній контраст.</p>
+            </article>
+            <article class="principle">
+              <h3>Продуктивність</h3>
+              <p>Легкі assets, lazy loading і перевірка ключових метрик.</p>
+            </article>
+            <article class="principle">
+              <h3>Комунікація</h3>
+              <p>Прозорі етапи, зрозумілі рішення та документована передача.</p>
+            </article>
+          </div>
+        </section>
+
+        <footer class="resume-footer">
+          <span><strong>Обговорімо ваш наступний сайт:</strong> kk.frl.webdev@gmail.com</span>
+          <span class="footer-code">clean code · clear interface · real impact</span>
+        </footer>
       </div>
-      <section><h2>Підхід</h2><p>Чітка комунікація, прозорі етапи, mobile-first реалізація, тестування ключових сценаріїв та документована передача проєкту.</p></section>
     </main>
-    <button type="button" onclick="window.print()">Зберегти як PDF</button>
   </body>
 </html>

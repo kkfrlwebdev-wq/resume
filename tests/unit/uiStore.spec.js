@@ -29,28 +29,28 @@ describe('uiStore', () => {
     vi.unstubAllGlobals()
   })
 
-  it('toggles matrix mode and persists both states in localStorage', () => {
+  it('toggles zero-gravity mode and persists both states in localStorage', () => {
     const store = useUiStore()
 
-    expect(store.matrixMode).toBe(false)
+    expect(store.zeroGravityMode).toBe(false)
 
-    store.toggleMatrix()
-    expect(store.matrixMode).toBe(true)
-    expect(storage.getItem('portfolio-matrix')).toBe('true')
+    store.toggleZeroGravity()
+    expect(store.zeroGravityMode).toBe(true)
+    expect(storage.getItem('portfolio-zero-gravity')).toBe('true')
     expect(store.toasts).toHaveLength(1)
     expect(store.toasts[0]).toMatchObject({ type: 'success' })
 
-    store.toggleMatrix()
-    expect(store.matrixMode).toBe(false)
-    expect(storage.getItem('portfolio-matrix')).toBe('false')
+    store.toggleZeroGravity()
+    expect(store.zeroGravityMode).toBe(false)
+    expect(storage.getItem('portfolio-zero-gravity')).toBe('false')
     expect(store.toasts).toHaveLength(2)
   })
 
-  it('restores persisted matrix mode when the store is created', () => {
-    storage.setItem('portfolio-matrix', 'true')
+  it('restores persisted zero-gravity mode when the store is created', () => {
+    storage.setItem('portfolio-zero-gravity', 'true')
     setActivePinia(createPinia())
 
-    expect(useUiStore().matrixMode).toBe(true)
+    expect(useUiStore().zeroGravityMode).toBe(true)
   })
 
   it('adds a notification and removes it after its timeout', () => {

@@ -107,9 +107,9 @@ onUnmounted(() => window.clearInterval(clockId))
 
       <footer class="start-menu__footer">
         <div class="profile-chip">
-          <span class="profile-chip__avatar" aria-hidden="true">ІП</span>
+          <span class="profile-chip__avatar" aria-hidden="true">МК</span>
           <span>
-            <strong>Іван Петренко</strong>
+            <strong>Микола Кольченко</strong>
             <small>Веброзробник</small>
           </span>
         </div>

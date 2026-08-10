@@ -2,13 +2,13 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useUiStore = defineStore('ui', () => {
-  const matrixMode = ref(localStorage.getItem('portfolio-matrix') === 'true')
+  const zeroGravityMode = ref(localStorage.getItem('portfolio-zero-gravity') === 'true')
   const toasts = ref([])
 
-  function toggleMatrix() {
-    matrixMode.value = !matrixMode.value
-    localStorage.setItem('portfolio-matrix', String(matrixMode.value))
-    notify(matrixMode.value ? 'Matrix-режим активовано' : 'Звичайний режим відновлено', 'success')
+  function toggleZeroGravity() {
+    zeroGravityMode.value = !zeroGravityMode.value
+    localStorage.setItem('portfolio-zero-gravity', String(zeroGravityMode.value))
+    notify(zeroGravityMode.value ? 'Режим невагомості активовано' : 'Режим невагомості вимкнено', 'success')
   }
 
   function notify(message, type = 'info') {
@@ -21,5 +21,5 @@ export const useUiStore = defineStore('ui', () => {
     toasts.value = toasts.value.filter((toast) => toast.id !== id)
   }
 
-  return { matrixMode, toasts, toggleMatrix, notify, removeToast }
+  return { zeroGravityMode, toasts, toggleZeroGravity, notify, removeToast }
 })

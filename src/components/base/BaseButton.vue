@@ -7,6 +7,8 @@ const props = defineProps({
   href: { type: String, default: null },
   variant: { type: String, default: 'primary' },
   download: { type: [String, Boolean], default: false },
+  target: { type: String, default: null },
+  rel: { type: String, default: null },
 })
 
 const tag = computed(() => (props.to ? RouterLink : props.href ? 'a' : 'button'))
@@ -17,7 +19,9 @@ const tag = computed(() => (props.to ? RouterLink : props.href ? 'a' : 'button')
     :is="tag"
     :to="to"
     :href="href"
-    :download="download"
+    :download="download === false ? null : download"
+    :target="target"
+    :rel="rel"
     :class="['base-button', `base-button--${variant}`]"
   >
     <slot name="icon"></slot>

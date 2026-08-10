@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Braces, Footprints, LockKeyhole, Search, Sparkles, TerminalSquare, Trophy } from '@lucide/vue'
+import { Footprints, LockKeyhole, Orbit, Search, Sparkles, TerminalSquare, Trophy } from '@lucide/vue'
 import InteractiveWindow from './InteractiveWindow.vue'
 import { useAchievementsStore } from '@/stores/achievementsStore'
 
@@ -24,10 +24,10 @@ const copy = {
     description: 'Відкрити інтерактивний термінал',
     icon: TerminalSquare,
   },
-  matrix: {
-    title: 'Матриця',
-    description: 'Активувати Matrix-режим',
-    icon: Braces,
+  'zero-gravity': {
+    title: 'Нульова гравітація',
+    description: 'Активувати режим невагомості',
+    icon: Orbit,
   },
   hunter: {
     title: 'Шукач',

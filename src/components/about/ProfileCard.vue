@@ -1,6 +1,6 @@
 <script setup>
-import { Mail, MapPin, UserRound } from '@lucide/vue'
-import portraitUrl from '@/assets/images/developer-portrait.jpg'
+import { Languages, Mail, MapPin, Phone, UserRound } from '@lucide/vue'
+import portraitUrl from '@/assets/images/kolya-kolchenko.webp'
 import { profile } from '@/data/profile'
 </script>
 
@@ -19,8 +19,16 @@ import { profile } from '@/data/profile'
         <dd><a :href="`mailto:${profile.email}`">{{ profile.email }}</a></dd>
       </div>
       <div>
+        <dt><Phone aria-hidden="true" /> Телефон</dt>
+        <dd><a :href="`tel:${profile.phone.replace(/[^+\d]/g, '')}`">{{ profile.phone }}</a></dd>
+      </div>
+      <div>
         <dt><MapPin aria-hidden="true" /> Місцезнаходження</dt>
         <dd>{{ profile.location }}</dd>
+      </div>
+      <div>
+        <dt><Languages aria-hidden="true" /> Мови</dt>
+        <dd>{{ profile.languages }}</dd>
       </div>
     </dl>
   </article>
@@ -28,6 +36,8 @@ import { profile } from '@/data/profile'
 
 <style lang="scss" scoped>
 .profile-card {
+  width: 100%;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid var(--color-border-bright);
   border-radius: var(--radius-lg);
@@ -48,7 +58,13 @@ import { profile } from '@/data/profile'
       content: '';
     }
 
-    img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 22%;
+    }
   }
 
   dl { display: grid; gap: 13px; padding: 22px; }

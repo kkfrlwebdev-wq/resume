@@ -1,15 +1,13 @@
 <script setup>
-import { GitBranch, Network, Palette } from '@lucide/vue'
 import { profile } from '@/data/profile'
-
-const iconMap = { GitHub: GitBranch, LinkedIn: Network, Behance: Palette }
+import SocialIcon from './SocialIcon.vue'
 </script>
 
 <template>
   <ul class="social-links" aria-label="Соціальні мережі">
     <li v-for="item in profile.social" :key="item.label">
       <a :href="item.href" target="_blank" rel="noreferrer" :aria-label="item.label">
-        <component :is="iconMap[item.label]" aria-hidden="true" />
+        <SocialIcon :name="item.label" aria-hidden="true" />
       </a>
     </li>
   </ul>

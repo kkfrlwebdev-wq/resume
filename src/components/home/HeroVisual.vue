@@ -1,11 +1,11 @@
 <script setup>
-import { Braces, Paintbrush, Rocket, Smartphone } from '@lucide/vue'
+import { Braces, CodeXml, Globe2, Smartphone } from '@lucide/vue'
 
 const capabilities = [
   { label: 'Розробка', icon: Braces },
-  { label: 'Дизайн', icon: Paintbrush, yellow: true },
+  { label: 'Кросбраузерність', icon: Globe2, yellow: true },
   { label: 'Адаптивність', icon: Smartphone },
-  { label: 'Продуктивність', icon: Rocket },
+  { label: 'Чистий код', icon: CodeXml },
 ]
 </script>
 
@@ -65,11 +65,7 @@ const capabilities = [
   width: min(340px, 75%);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: rgba(5, 14, 20, 0.88);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
-  backdrop-filter: blur(14px);
+  gap: 12px;
 }
 
 .capability {
@@ -79,12 +75,13 @@ const capabilities = [
   align-content: center;
   gap: 15px;
   padding: 16px;
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(5, 14, 20, 0.9);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(14px);
   text-align: center;
 
-  &:nth-child(2n) { border-right: 0; }
-  &:nth-child(n + 3) { border-bottom: 0; }
   svg { width: 33px; color: var(--color-primary); }
   svg.yellow { color: var(--color-secondary); }
   span { font-size: 0.77rem; font-weight: 700; }
@@ -96,10 +93,31 @@ const capabilities = [
   .hero-visual { min-height: 400px; }
 }
 
+@media (max-width: 820px) {
+  .hero-visual {
+    min-height: 420px;
+    margin-top: 12px;
+  }
+
+  .wave-orb { width: min(390px, 78vw); }
+
+  .capability-grid {
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: min(430px, 88%);
+    gap: 10px;
+    transform: translate(-50%, -50%);
+  }
+
+  .capability { min-height: 120px; }
+}
+
 @media (max-width: 620px) {
   .hero-visual { min-height: 365px; }
   .wave-orb { width: 310px; }
-  .capability-grid { right: 50%; bottom: 15px; width: min(320px, 94%); transform: translateX(50%); }
+  .capability-grid { width: min(340px, 94%); gap: 8px; }
   .capability { min-height: 105px; }
 }
 </style>

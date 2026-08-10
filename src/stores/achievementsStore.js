@@ -5,7 +5,7 @@ const defaultAchievements = [
   { id: 'first-step', title: 'Перший крок', description: 'Відвідати головну сторінку', icon: 'footprints' },
   { id: 'curious', title: 'Допитливий', description: 'Переглянути всі основні розділи', icon: 'sparkles' },
   { id: 'terminal', title: 'Термінатор', description: 'Відкрити термінал', icon: 'terminal' },
-  { id: 'matrix', title: 'Матриця', description: 'Активувати Matrix-режим', icon: 'braces' },
+  { id: 'zero-gravity', title: 'Нульова гравітація', description: 'Активувати режим невагомості', icon: 'orbit' },
   { id: 'hunter', title: 'Шукач', description: 'Знайти пасхалку', icon: 'search' },
 ]
 

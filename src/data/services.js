@@ -1,32 +1,32 @@
-import { Braces, Paintbrush, Smartphone, Rocket } from '@lucide/vue'
+import { Braces, Gauge, MonitorSmartphone, RefreshCw } from '@lucide/vue'
 
 export const services = [
   {
-    title: 'Веброзробка',
-    description: 'Створення швидких сайтів і вебзастосунків зі зрозумілою архітектурою та чистим кодом.',
+    title: 'Розробка сайтів',
+    description: 'Створення лендінгів і корпоративних сайтів на чистому, зрозумілому та зручному для підтримки коді.',
     icon: Braces,
     accent: 'cyan',
-    features: ['Vue 3 та Vite', 'Інтеграція API', 'Компонентна архітектура'],
+    features: ['HTML5 та CSS3', 'JavaScript', 'SCSS (Sass)'],
   },
   {
-    title: 'UI/UX дизайн',
-    description: 'Продумані інтерфейси, що допомагають користувачу швидко досягати мети.',
-    icon: Paintbrush,
+    title: 'Адаптивна верстка',
+    description: 'Інтерфейси, які коректно працюють на телефонах, планшетах, ноутбуках і великих екранах.',
+    icon: MonitorSmartphone,
     accent: 'yellow',
-    features: ['Прототипування', 'Дизайн-система', 'Доступність'],
+    features: ['Responsive layout', 'Mobile first', 'Кросбраузерність'],
   },
   {
-    title: 'Адаптивний дизайн',
-    description: 'Інтерфейси, які бездоганно працюють на телефонах, планшетах і великих екранах.',
-    icon: Smartphone,
+    title: 'Швидкість і якість',
+    description: 'Оптимізована верстка, плавні інтерактивні елементи та уважність до користувацького досвіду.',
+    icon: Gauge,
     accent: 'cyan',
-    features: ['Mobile first', 'Flexbox та Grid', 'Кросбраузерність'],
+    features: ['Оптимізація assets', 'Анімації', 'Чистий код'],
   },
   {
-    title: 'Оптимізація',
-    description: 'Покращення швидкості, Core Web Vitals, SEO та загального досвіду користувача.',
-    icon: Rocket,
+    title: 'Підтримка проєкту',
+    description: 'Внесення змін під час розробки та після здачі, а також підготовка верстки до інтеграції з CMS.',
+    icon: RefreshCw,
     accent: 'cyan',
-    features: ['Аудит Lighthouse', 'Lazy loading', 'Технічне SEO'],
+    features: ['Правки після релізу', 'CMS-ready', 'Git'],
   },
 ]

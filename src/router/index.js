@@ -54,7 +54,7 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
-  document.title = `${to.meta.title} — Іван Петренко`
+  document.title = `${to.meta.title} — Микола Кольченко`
   requestAnimationFrame(() => document.querySelector('#main-content')?.focus({ preventScroll: true }))
 })
 

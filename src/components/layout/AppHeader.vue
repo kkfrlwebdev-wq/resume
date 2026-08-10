@@ -20,9 +20,9 @@ function handleLogoClick() {
 
 <template>
   <header class="app-header">
-    <RouterLink class="brand" to="/" aria-label="My Portfolio — головна" @click="handleLogoClick">
+    <RouterLink class="brand" to="/" aria-label="Микола Кольченко — головна" @click="handleLogoClick">
       <CodeLogo />
-      <span>My Portfolio</span>
+      <span>Kolya Kolchenko</span>
     </RouterLink>
 
     <nav class="top-nav" aria-label="Головна навігація">

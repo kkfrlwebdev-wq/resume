@@ -21,8 +21,8 @@ defineEmits(['close'])
             {{ technology }}
           </li>
         </ul>
-        <BaseButton to="/contact">
-          Обговорити схожий проєкт
+        <BaseButton :href="project.href" target="_blank" rel="noreferrer">
+          Переглянути сайт
           <template #trailing>
             <ExternalLink aria-hidden="true" />
           </template>

@@ -9,7 +9,7 @@ import { services } from '@/data/services'
     <SectionHeading
       eyebrow="Послуги"
       title="Що я роблю?"
-      description="Допомагаю бізнесам і стартапам створювати ефективні цифрові продукти — від першого прототипу до швидкого production-релізу."
+      description="Створюю лендінги й корпоративні сайти на чистому коді, адаптую їх до всіх екранів і готую до подальшої підтримки або інтеграції з CMS."
     />
 
     <section class="services-grid" aria-label="Перелік послуг">

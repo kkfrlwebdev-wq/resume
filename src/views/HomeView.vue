@@ -39,7 +39,7 @@ import { profile } from '@/data/profile'
     </section>
 
     <aside class="shortcut-hint" aria-label="Підказка">
-      <span>Порада: активуйте Matrix-режим</span>
+      <span>Порада: активуйте режим невагомості</span>
       <kbd>Ctrl</kbd><b>+</b><kbd>Shift</kbd><b>+</b><kbd>D</kbd>
     </aside>
   </div>

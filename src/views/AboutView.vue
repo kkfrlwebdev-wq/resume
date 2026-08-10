@@ -16,8 +16,8 @@ import { profile } from '@/data/profile'
           {{ profile.about }}
         </p>
         <p>
-          Поєдную розробку, UI/UX мислення та увагу до деталей. Для кожного проєкту знаходжу баланс між
-          виразним дизайном, бізнес-цілями й простотою підтримки.
+          Працюю з HTML, CSS, JavaScript і SCSS. Забезпечую адаптивність, кросбраузерність та можливість
+          вносити зміни як під час створення, так і після здачі проєкту.
         </p>
 
         <StatisticsList />
@@ -97,6 +97,15 @@ import { profile } from '@/data/profile'
 
 @media (max-width: 820px) {
   .about-grid { grid-template-columns: 1fr; }
-  .profile-card { max-width: 520px; }
+  .profile-card {
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+  }
+  .profile-card :deep(.profile-card__photo) { aspect-ratio: 16 / 10; }
+}
+
+@media (max-width: 520px) {
+  .profile-card :deep(.profile-card__photo) { aspect-ratio: 4 / 3; }
 }
 </style>
