@@ -101,7 +101,6 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
     max-width: none;
     justify-self: stretch;
   }
-  .profile-card :deep(.profile-card__photo) { aspect-ratio: 16 / 10; }
 }
 
 @media (max-width: 520px) {
