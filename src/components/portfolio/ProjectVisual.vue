@@ -59,7 +59,12 @@ defineProps({ project: { type: Object, required: true } })
   .browser-bar { height: 17px; display: flex; align-items: center; gap: 4px; opacity: .8; }
   .browser-bar i { width: 4px; height: 4px; border-radius: 50%; background: #8a9aa2; }
   .browser-bar span { width: 34%; height: 4px; margin-left: auto; border-radius: 4px; background: rgba(255,255,255,.12); }
-  .visual-content { position: relative; height: calc(100% - 17px); overflow: hidden; border-radius: 4px; }
+  .visual-content {
+    position: relative;
+    height: calc(100% - 17px);
+    overflow: hidden;
+    border-radius: 10px;
+  }
 }
 
 .project-visual--preview {
@@ -72,6 +77,7 @@ defineProps({ project: { type: Object, required: true } })
   width: 100%;
   height: 100%;
   display: block;
+  border-radius: inherit;
   object-fit: cover;
   object-position: top center;
 }

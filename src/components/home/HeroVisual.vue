@@ -34,11 +34,13 @@ const capabilities = [
 
 .wave-orb {
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: min(410px, 85%);
   aspect-ratio: 1;
   border-radius: 50%;
   filter: drop-shadow(0 0 20px rgba(0, 231, 240, 0.18));
-  transform: rotate(-16deg);
+  transform: translate(-50%, -50%) rotate(-16deg);
 
   &::after {
     position: absolute;
@@ -60,12 +62,13 @@ const capabilities = [
 
 .capability-grid {
   position: absolute;
-  right: 0;
-  bottom: 38px;
+  top: 50%;
+  left: 50%;
   width: min(340px, 75%);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  transform: translate(-50%, -50%);
 }
 
 .capability {

@@ -46,7 +46,7 @@ import { profile } from '@/data/profile'
 
   &__photo {
     position: relative;
-    aspect-ratio: 4 / 3.4;
+  aspect-ratio: 4 / 3.15;
     overflow: hidden;
     border-bottom: 1px solid var(--color-border-bright);
     background: #07141c;

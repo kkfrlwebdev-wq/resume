@@ -173,13 +173,13 @@ npm run resume:pdf
 
 Контакти беруться з `src/data/profile.js`, а підписи, placeholder-и, валідація та сповіщення — із секцій `contact`, `validation` і `notifications` у словниках.
 
-Для реального надсилання скопіюйте `.env.example` у `.env` і задайте endpoint:
+Форма використовує Web3Forms. Для локального запуску скопіюйте `.env.example` у `.env` і задайте Access Key:
 
 ```env
-VITE_CONTACT_ENDPOINT=https://example.com/api/contact
+VITE_WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
 ```
 
-Без endpoint форма працює в демонстраційному режимі та не надсилає дані назовні.
+Запити надсилаються на `https://api.web3forms.com/submit`. Для GitHub Pages передайте `VITE_WEB3FORMS_ACCESS_KEY` у середовище production-збірки через GitHub Actions. Файл `.env` ігнорується Git та використовується лише локально. Без ключа форма повертає помилку і не показує фальшивий успішний результат.
 
 ## 10. Перевірка після змін
 

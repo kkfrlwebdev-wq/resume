@@ -32,23 +32,15 @@ npm run build
 
 ## Контактна форма
 
-Скопіюйте `.env.example` у `.env` та задайте endpoint:
+Форма надсилає повідомлення через [Web3Forms](https://web3forms.com/) і працює на статичному GitHub Pages без власного бекенду.
+
+Для локального запуску скопіюйте `.env.example` у `.env` та вкажіть отриманий Web3Forms Access Key:
 
 ```env
-VITE_CONTACT_ENDPOINT=https://example.com/api/contact
+VITE_WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
 ```
 
-Очікується `POST` із JSON:
-
-```json
-{
-  "name": "Ім’я",
-  "email": "name@example.com",
-  "message": "Текст повідомлення"
-}
-```
-
-Без endpoint форма працює в демонстраційному режимі: перевіряє дані та показує успішний локальний результат, не надсилаючи їх назовні.
+Для GitHub Pages додайте значення `VITE_WEB3FORMS_ACCESS_KEY` до середовища команди `npm run build` у GitHub Actions. Без ключа форма покаже помилку й не імітуватиме успішне надсилання.
 
 ## Персоналізація
 

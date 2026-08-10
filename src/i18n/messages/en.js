@@ -5,7 +5,7 @@ export default {
   nav: { home: 'Home', about: 'About', services: 'Services', portfolio: 'Portfolio', contact: 'Contact', main: 'Main navigation', mobile: 'Mobile navigation', sidebar: 'Sidebar navigation', space: 'Space', interactiveSpace: 'Interactive space', openGame: 'Open mini-game' },
   language: { label: 'Website language', uk: 'UA', en: 'EN' },
   profile: {
-    name: 'Kolya Kolchenko', role: 'Junior Frontend Developer', location: 'Ukraine', languages: 'Ukrainian, English', availability: 'Available for freelance projects',
+    name: 'Kolya Kolchenko', role: 'Frontend Developer', location: 'Ukraine', languages: 'Ukrainian, English', availability: 'Available for freelance projects',
     intro: 'I build modern, responsive and intuitive websites with HTML, CSS and JavaScript.',
     about: 'I am a frontend developer with experience building turnkey websites. My goal is to create expressive and intuitive websites that are easy to use. I am always ready for new challenges and help businesses bring their web projects to life.',
     aboutExtra: 'I work with HTML, CSS, JavaScript and SCSS. I ensure responsive layouts, cross-browser compatibility and support changes both during development and after delivery.',
