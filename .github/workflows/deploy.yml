@@ -40,6 +40,15 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Validate Web3Forms configuration
+        env:
+          VITE_WEB3FORMS_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_ACCESS_KEY }}
+        run: |
+          if [ -z "$VITE_WEB3FORMS_ACCESS_KEY" ]; then
+            echo "::error::Missing repository secret VITE_WEB3FORMS_ACCESS_KEY"
+            exit 1
+          fi
+
       - name: Build
         env:
           VITE_WEB3FORMS_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_ACCESS_KEY }}
