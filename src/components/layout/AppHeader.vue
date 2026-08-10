@@ -37,7 +37,7 @@ function handleLogoClick() {
     <div class="header-actions">
       <LanguageSwitcher />
       <RouterLink class="game-link" to="/desktop?app=game" :aria-label="$t('nav.openGame')">
-      <Gamepad2 />
+        <Gamepad2 />
       </RouterLink>
     </div>
   </header>
@@ -114,5 +114,11 @@ function handleLogoClick() {
 @media (max-width: 900px) {
   .app-header { grid-template-columns: 1fr auto; }
   .top-nav { display: none; }
+}
+
+@media (max-width: 480px) {
+  .app-header { gap: 10px; padding-inline: 14px; }
+  .brand { gap: 10px; font-size: 0.72rem; }
+  .header-actions { gap: 7px; }
 }
 </style>

@@ -33,15 +33,15 @@ async function startGame() {
 </script>
 
 <template>
-  <InteractiveWindow title="Космічний захисник" size="medium" @close="$emit('close')">
+  <InteractiveWindow :title="$t('game.title')" size="medium" @close="$emit('close')">
     <template #icon>
       <Gamepad2 aria-hidden="true" />
     </template>
 
     <div class="mini-game">
       <header class="game-stats">
-        <span><Target aria-hidden="true" /> Рахунок: <strong>{{ score }}</strong></span>
-        <span><Heart aria-hidden="true" /> Життя: <strong>{{ lives }}</strong></span>
+        <span><Target aria-hidden="true" /> {{ $t('game.score') }} <strong>{{ score }}</strong></span>
+        <span><Heart aria-hidden="true" /> {{ $t('game.lives') }} <strong>{{ lives }}</strong></span>
       </header>
 
       <div
@@ -49,7 +49,7 @@ async function startGame() {
         class="game-board"
         role="application"
         tabindex="0"
-        aria-label="Ігрове поле. Використовуйте стрілки вліво і вправо для руху та пробіл для пострілу."
+        :aria-label="$t('game.board')"
         aria-keyshortcuts="ArrowLeft ArrowRight Space"
         :style="{ '--game-columns': boardColumns, '--game-rows': boardRows }"
         @keydown="handleKeydown"
@@ -84,12 +84,12 @@ async function startGame() {
 
         <div v-if="!isRunning" class="game-board__overlay">
           <Gamepad2 aria-hidden="true" />
-          <strong v-if="state === 'won'">Місію виконано!</strong>
-          <strong v-else-if="state === 'lost'">Місію провалено</strong>
-          <strong v-else>Готові до запуску?</strong>
+          <strong v-if="state === 'won'">{{ $t('game.won') }}</strong>
+          <strong v-else-if="state === 'lost'">{{ $t('game.lost') }}</strong>
+          <strong v-else>{{ $t('game.ready') }}</strong>
           <button type="button" @click="startGame">
             <RotateCw v-if="state !== 'idle'" aria-hidden="true" />
-            {{ state === 'idle' ? 'Почати гру' : 'Грати ще раз' }}
+            {{ state === 'idle' ? $t('game.start') : $t('game.again') }}
           </button>
         </div>
       </div>
@@ -98,21 +98,21 @@ async function startGame() {
         {{ statusMessage }}
       </p>
 
-      <div class="touch-controls" aria-label="Сенсорне керування">
-        <button type="button" :disabled="!isRunning" aria-label="Рух ліворуч" @pointerdown.prevent="move(-1)">
+      <div class="touch-controls" :aria-label="$t('game.touch')">
+        <button type="button" :disabled="!isRunning" :aria-label="$t('game.left')" @pointerdown.prevent="move(-1)">
           <MoveLeft aria-hidden="true" />
         </button>
-        <button class="touch-controls__fire" type="button" :disabled="!isRunning" aria-label="Вогонь" @pointerdown.prevent="shoot">
+        <button class="touch-controls__fire" type="button" :disabled="!isRunning" :aria-label="$t('game.fire')" @pointerdown.prevent="shoot">
           <span aria-hidden="true"></span>
-          Вогонь
+          {{ $t('game.fire') }}
         </button>
-        <button type="button" :disabled="!isRunning" aria-label="Рух праворуч" @pointerdown.prevent="move(1)">
+        <button type="button" :disabled="!isRunning" :aria-label="$t('game.right')" @pointerdown.prevent="move(1)">
           <MoveRight aria-hidden="true" />
         </button>
       </div>
 
       <p class="game-help">
-        Клавіатура: <kbd>←</kbd> <kbd>→</kbd> для руху, <kbd>Space</kbd> для пострілу.
+        {{ $t('game.keyboard') }} <kbd>←</kbd> <kbd>→</kbd> {{ $t('game.movement') }} <kbd>Space</kbd> {{ $t('game.shot') }}
       </p>
     </div>
   </InteractiveWindow>

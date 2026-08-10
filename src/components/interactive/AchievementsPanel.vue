@@ -12,31 +12,26 @@ const { t } = useI18n()
 
 const copy = {
   'first-step': {
-    key: 'firstStep',
     icon: Footprints,
   },
   curious: {
-    key: 'curious',
     icon: Sparkles,
   },
   terminal: {
-    key: 'terminal',
     icon: TerminalSquare,
   },
   'zero-gravity': {
-    key: 'gravity',
     icon: Orbit,
   },
   hunter: {
-    key: 'hunter',
     icon: Search,
   },
 }
 
 const achievements = computed(() => store.achievements.map((item) => ({
   ...item,
-  title: t(`achievements.items.${copy[item.id]?.key}.0`),
-  description: t(`achievements.items.${copy[item.id]?.key}.1`),
+  title: t(`achievements.items.${item.translationKey}.0`),
+  description: t(`achievements.items.${item.translationKey}.1`),
   icon: copy[item.id]?.icon || Trophy,
 })))
 

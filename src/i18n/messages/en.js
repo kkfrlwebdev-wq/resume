@@ -51,5 +51,8 @@ export default {
     skills: ['Frontend: HTML5, CSS3, JavaScript, SCSS (Sass).', 'Layout: responsive design, cross-browser support, Flexbox and CSS Grid.', 'Workflow: Git, clean maintainable code and CMS-ready integration.'],
     projectLine: '{title} — {category}.', phone: 'Phone: {value}', location: 'Location: {value}', contactPage: 'Contact page: /contact', coffee: '|      |]  Coffee is ready. Time to build something great!', hunterUnlocked: '“Hunter” achievement unlocked', gravityUnlocked: '“Zero Gravity” achievement unlocked', gravityOn: 'Zero-gravity mode activated.', gravityOff: 'Zero-gravity mode disabled.', unknown: 'Command “{command}” was not found. Enter help for a hint.', restarted: 'Terminal restarted.',
   },
-  game: { title: 'Space Defender', score: 'Score:', lives: 'Lives:', board: 'Game board. Use left and right arrows to move and Space to shoot.', won: 'Mission complete!', lost: 'Mission failed', ready: 'Ready for launch?', start: 'Start game', again: 'Play again', touch: 'Touch controls', left: 'Move left', right: 'Move right', fire: 'Fire', keyboard: 'Keyboard:', movement: 'to move,', shot: 'to shoot.' },
+  game: {
+    title: 'Space Defender', score: 'Score:', lives: 'Lives:', board: 'Game board. Use left and right arrows to move and Space to shoot.', won: 'Mission complete!', lost: 'Mission failed', ready: 'Ready for launch?', start: 'Start game', again: 'Play again', touch: 'Touch controls', left: 'Move left', right: 'Move right', fire: 'Fire', keyboard: 'Keyboard:', movement: 'to move,', shot: 'to shoot.',
+    status: { idle: 'Press “Start game” and destroy all invaders.', running: 'Game in progress. Arrows move, Space shoots.', won: 'Victory! Score: {score}.', lost: 'Game over. Your score: {score}.', breach: 'The invaders broke through. Lives remaining: {lives}.' },
+  },
 }

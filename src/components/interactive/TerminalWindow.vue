@@ -1,5 +1,6 @@
 <script setup>
 import { nextTick, onMounted, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { RotateCcw, TerminalSquare } from '@lucide/vue'
 import InteractiveWindow from './InteractiveWindow.vue'
 import { useTerminal } from '@/composables/useTerminal'
@@ -10,6 +11,7 @@ defineEmits(['close'])
 
 const achievements = useAchievementsStore()
 const ui = useUiStore()
+const { t } = useI18n()
 const { commandNames, execute, hasHistory, history, input, reset } = useTerminal()
 const outputElement = ref(null)
 const inputElement = ref(null)
@@ -24,14 +26,14 @@ watch(
 
 onMounted(async () => {
   const unlocked = achievements.unlock('terminal')
-  if (unlocked) ui.notify('Досягнення «Термінатор» розблоковано', 'success')
+  if (unlocked) ui.notify(t('notifications.terminalAchievement'), 'success')
   await nextTick()
   inputElement.value?.focus()
 })
 </script>
 
 <template>
-  <InteractiveWindow title="Термінал — portfolio" size="large" @close="$emit('close')">
+  <InteractiveWindow :title="$t('terminal.title')" size="large" @close="$emit('close')">
     <template #icon>
       <TerminalSquare aria-hidden="true" />
     </template>
@@ -39,17 +41,17 @@ onMounted(async () => {
     <div class="terminal">
       <div class="terminal__toolbar">
         <span>portfolio-terminal · UTF-8</span>
-        <button type="button" title="Перезапустити термінал" aria-label="Перезапустити термінал" @click="reset">
+        <button type="button" :title="$t('terminal.restart')" :aria-label="$t('terminal.restart')" @click="reset">
           <RotateCcw aria-hidden="true" />
         </button>
       </div>
 
-      <div ref="outputElement" class="terminal__output" role="log" aria-live="polite" aria-label="Виведення термінала">
+      <div ref="outputElement" class="terminal__output" role="log" aria-live="polite" :aria-label="$t('terminal.output')">
         <template v-if="hasHistory">
           <p v-for="entry in history" :key="entry.id" :class="['terminal__line', `terminal__line--${entry.type}`]">
             <template v-if="entry.type === 'command'">
               <span class="terminal__prompt" aria-hidden="true">user@portfolio:~$</span>
-              <span class="sr-only">Виконана команда:</span>
+              <span class="sr-only">{{ $t('terminal.executed') }}</span>
               {{ entry.content }}
             </template>
             <template v-else>
@@ -58,14 +60,14 @@ onMounted(async () => {
           </p>
         </template>
         <p v-else class="terminal__line terminal__line--muted">
-          Екран очищено. Термінал готовий до роботи.
+          {{ $t('terminal.cleared') }}
         </p>
       </div>
 
       <form class="terminal__form" @submit.prevent="execute()">
         <label for="terminal-command">
           <span class="terminal__prompt" aria-hidden="true">user@portfolio:~$</span>
-          <span class="sr-only">Команда термінала</span>
+          <span class="sr-only">{{ $t('terminal.command') }}</span>
         </label>
         <input
           id="terminal-command"
@@ -76,13 +78,13 @@ onMounted(async () => {
           autocomplete="off"
           autocapitalize="off"
           spellcheck="false"
-          placeholder="введіть команду…"
+          :placeholder="$t('terminal.placeholder')"
         />
         <datalist id="terminal-commands">
           <option v-for="command in commandNames" :key="command" :value="command"></option>
         </datalist>
         <button type="submit">
-          Виконати
+          {{ $t('terminal.run') }}
         </button>
       </form>
     </div>

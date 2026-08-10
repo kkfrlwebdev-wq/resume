@@ -1,11 +1,11 @@
 import { reactive, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { i18n } from '@/i18n'
 import { sendContactMessage } from '@/services/contactService'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function useContactForm() {
-  const { t } = useI18n()
+  const { t } = i18n.global
   const form = reactive({ name: '', email: '', message: '', company: '' })
   const errors = reactive({ name: '', email: '', message: '' })
   const isSubmitting = ref(false)

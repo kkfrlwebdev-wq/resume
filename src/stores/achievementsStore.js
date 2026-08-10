@@ -2,11 +2,11 @@ import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
 const defaultAchievements = [
-  { id: 'first-step', title: 'Перший крок', description: 'Відвідати головну сторінку', icon: 'footprints' },
-  { id: 'curious', title: 'Допитливий', description: 'Переглянути всі основні розділи', icon: 'sparkles' },
-  { id: 'terminal', title: 'Термінатор', description: 'Відкрити термінал', icon: 'terminal' },
-  { id: 'zero-gravity', title: 'Нульова гравітація', description: 'Активувати режим невагомості', icon: 'orbit' },
-  { id: 'hunter', title: 'Шукач', description: 'Знайти пасхалку', icon: 'search' },
+  { id: 'first-step', translationKey: 'firstStep', icon: 'footprints' },
+  { id: 'curious', translationKey: 'curious', icon: 'sparkles' },
+  { id: 'terminal', translationKey: 'terminal', icon: 'terminal' },
+  { id: 'zero-gravity', translationKey: 'gravity', icon: 'orbit' },
+  { id: 'hunter', translationKey: 'hunter', icon: 'search' },
 ]
 
 export const useAchievementsStore = defineStore('achievements', () => {

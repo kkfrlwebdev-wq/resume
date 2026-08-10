@@ -1,183 +1,167 @@
 # Як змінювати дані портфоліо
 
-Цей документ описує, де зберігається контент сайту та як безпечно замінити його на дані іншого спеціаліста.
+Цей документ описує структуру контенту, перекладів і медіафайлів проєкту. Після змін обов’язково перевіряйте обидві мови — UA та EN.
 
-## 1. Основні дані профілю
+## 1. Локалізація (Vue I18n)
 
-Файл: `src/data/profile.js`
+У проєкті використовується `vue-i18n` у Composition API mode (`legacy: false`). Основні файли:
+
+- `src/i18n/index.js` — створення i18n, перелік підтримуваних мов і збереження вибору;
+- `src/i18n/messages/uk.js` — усі українські тексти;
+- `src/i18n/messages/en.js` — усі англійські тексти;
+- `src/components/layout/LanguageSwitcher.vue` — перемикач UA / EN;
+- `src/components/layout/AppHeader.vue` — місце перемикача в хедері.
+
+Вибрана мова зберігається в `localStorage` під ключем `portfolio-locale`, тому після перезавантаження сторінки вона не скидається. Одночасно оновлюються атрибут `<html lang>`, заголовок вкладки та meta description.
+
+### Як змінити переклад
+
+Знайдіть однаковий ключ у двох словниках і змініть значення:
 
 ```js
-export const profile = {
-  name: 'Микола Кольченко',
-  role: 'Junior Frontend-розробник',
-  email: 'name@example.com',
-  phone: '+38 (000) 000 00 00',
-  location: 'Україна',
-  languages: 'Українська, англійська',
-  availability: 'Доступний для фриланс-проєктів',
-  intro: 'Короткий текст для головної сторінки.',
-  about: 'Розгорнутий опис для сторінки «Про мене».',
-  stats: [],
-  social: [],
+// src/i18n/messages/uk.js
+about: {
+  title: 'Хто я?',
+}
+
+// src/i18n/messages/en.js
+about: {
+  title: 'Who am I?',
 }
 ```
 
-Ці поля автоматично використовуються на головній сторінці, у блоці «Про мене», контактах і частині команд інтерактивного термінала.
+У компонентах простий текст виводиться через `$t`:
 
-### Статистика
-
-Кожен елемент `stats` має значення та підпис:
-
-```js
-stats: [
-  { value: '3+', label: 'роки досвіду' },
-  { value: '12', label: 'готових проєктів' },
-  { value: '100%', label: 'адаптивність' },
-]
+```vue
+<h1>{{ $t('about.title') }}</h1>
 ```
 
-Рекомендовано залишати рівно три показники, оскільки блок розрахований на три колонки.
-
-### Соціальні мережі
+У `<script setup>` використовується `useI18n`:
 
 ```js
-social: [
-  { label: 'GitHub', href: 'https://github.com/username' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/username' },
-  { label: 'Instagram', href: 'https://instagram.com/username' },
-  { label: 'Telegram', href: 'https://t.me/username' },
-  { label: 'Discord', href: 'https://discord.gg/invite-code' },
-]
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const label = t('about.title')
 ```
 
-Назва `label` повинна точно збігатися з однією з підтримуваних назв: `GitHub`, `LinkedIn`, `Instagram`, `Telegram`, `Discord`. Іконки описані у `src/components/home/SocialIcon.vue`.
+Не додавайте видимий текст безпосередньо в `.vue` або `.js` файли. Створіть однаковий ключ у `uk.js` та `en.js`, інакше спрацює українська fallback-мова.
 
-## 2. Портрет
+### Де знаходиться перемикач мови
 
-Поточний файл: `src/assets/images/kolya-kolchenko.webp`
+Перемикач додано в `src/components/layout/AppHeader.vue` у контейнер `.header-actions`, безпосередньо перед кнопкою мінігри — це зона, позначена червоним прямокутником на макеті:
 
-Імпорт портрета розташований у `src/components/about/ProfileCard.vue`:
+```vue
+<div class="header-actions">
+  <LanguageSwitcher />
+  <RouterLink class="game-link" to="/desktop?app=game">
+    <!-- кнопка мінігри -->
+  </RouterLink>
+</div>
+```
+
+Щоб змінити вигляд кнопок UA / EN, редагуйте scoped-стилі в `LanguageSwitcher.vue`. Щоб перенести перемикач, перемістіть `<LanguageSwitcher />` у шаблоні `AppHeader.vue`.
+
+### Як додати третю мову
+
+1. Скопіюйте `src/i18n/messages/en.js`, наприклад у `pl.js`, і перекладіть усі значення без зміни ключів.
+2. Імпортуйте словник у `src/i18n/index.js`.
+3. Додайте код мови до `supportedLocales` і об’єкта `messages`.
+4. Додайте підпис, наприклад `language.pl`, в усі словники.
+5. Додайте код у масив мов у `LanguageSwitcher.vue`.
+
+## 2. Основні дані профілю
+
+Файл `src/data/profile.js` містить дані, які не потребують перекладу:
 
 ```js
-import portraitUrl from '@/assets/images/kolya-kolchenko.webp'
+export const profile = {
+  email: 'name@example.com',
+  phone: '+38 (000) 000 00 00',
+  stats: [
+    { value: '3+', labelKey: 'profile.stats.experience' },
+  ],
+  social: [
+    { label: 'GitHub', href: 'https://github.com/username' },
+  ],
+}
 ```
 
-Щоб замінити портрет:
+Ім’я, роль, місцезнаходження, мови, опис і доступність тепер змінюються у словниках `uk.js` та `en.js` у секції `profile`. Значення `labelKey` у статистиці повинно посилатися на наявний ключ перекладу.
+
+Підтримувані назви соцмереж: `GitHub`, `LinkedIn`, `Instagram`, `Telegram`, `Discord`. Відповідні іконки визначені в `src/components/home/SocialIcon.vue`.
+
+## 3. Портрет
+
+Поточний файл: `src/assets/images/kolya-kolchenko.webp`.
+
+Імпорт розміщений у `src/components/about/ProfileCard.vue`. Для заміни:
 
 1. Додайте нове зображення в `src/assets/images/`.
-2. Змініть шлях в імпорті `ProfileCard.vue`.
-3. За потреби відкоригуйте `object-position` у стилях цього компонента.
+2. Змініть шлях імпорту в `ProfileCard.vue`.
+3. За потреби відкоригуйте `object-position` у стилях компонента.
 
-Рекомендований формат — WebP або JPEG. Використовуйте портрет достатньої якості, але бажано розміром до 300–500 КБ.
+Рекомендований формат — WebP або JPEG, орієнтовний розмір файлу до 500 КБ. Компонент адаптивний, тому перевірте кадрування на desktop і mobile.
 
-## 3. Проєкти та категорії
+## 4. Проєкти та категорії
 
-Файл: `src/data/projects.js`
-
-Категорії фільтра описані в `projectCategories`:
-
-```js
-export const projectCategories = [
-  { id: 'all', label: 'Усі' },
-  { id: 'landing', label: 'Лендінги' },
-  { id: 'corporate', label: 'Корпоративні сайти' },
-]
-```
-
-`all` є службовою категорією. Значення `category` у кожному проєкті має збігатися з `id` однієї з інших категорій.
-
-Приклад проєкту:
+Технічні дані зберігаються у `src/data/projects.js`:
 
 ```js
 {
   id: 1,
-  title: 'Назва проєкту',
+  title: 'Project name',
+  translationKey: 'projectName',
   category: 'landing',
-  categoryLabel: 'Комерційний сайт',
-  description: 'Короткий опис виконаної роботи.',
   stack: ['HTML5', 'SCSS', 'JavaScript'],
   image: projectImage('project-name.webp'),
   href: 'https://example.com/',
 }
 ```
 
-Вимоги:
+Для кожного проєкту:
 
 - `id` має бути унікальним;
-- `href` повинен містити повну адресу з `https://` або `http://`;
-- `stack` показується у модальному вікні як список технологій;
-- `image` посилається на файл у `public/projects/`;
-- назва файла зображення повинна точно збігатися з аргументом `projectImage()`.
+- `translationKey` має відповідати ключу в `portfolio.projects` обох словників;
+- `category` має відповідати `id` категорії;
+- `href` має містити повну адресу з `https://` або `http://`;
+- файл `image` зберігається в `public/projects/`.
 
-Прев’ю краще готувати у горизонтальній пропорції приблизно 16:9. Зображення автоматично обрізається зверху через `object-fit: cover`.
+Локалізовані `category` і `description` додаються в `portfolio.projects.<translationKey>` у `uk.js` та `en.js`. Підписи фільтрів зберігаються в `portfolio.categories`.
 
-## 4. Послуги
+## 5. Послуги
 
-Файл: `src/data/services.js`
+Файл `src/data/services.js` містить лише технічну конфігурацію:
 
 ```js
 {
-  title: 'Розробка сайтів',
-  description: 'Опис послуги.',
+  translationKey: 'development',
   icon: Braces,
   accent: 'cyan',
-  features: ['HTML5', 'SCSS', 'JavaScript'],
 }
 ```
 
-- `icon` імпортується з `@lucide/vue` на початку файла;
-- `accent` підтримує значення `cyan` або `yellow`;
-- `features` — короткий список ключових складових послуги.
+Назва, опис і `features` зберігаються в `services.items.<translationKey>` обох словників. `icon` імпортується з `@lucide/vue`, а `accent` підтримує `cyan` або `yellow`.
 
-Сітка розрахована на чотири картки, але адаптивно підтримує й іншу кількість.
+## 6. Головна сторінка та компетенції
 
-## 5. Блок компетенцій на головній
+Тексти головної сторінки зберігаються в секції `home` словників. Масив карток компетенцій у `src/components/home/HeroVisual.vue` використовує `labelKey`; для нової картки створіть відповідний переклад у `home.capabilities`.
 
-Файл: `src/components/home/HeroVisual.vue`
+## 7. Навігація, метадані й інтерактивні модулі
 
-Масив `capabilities` керує чотирма картками поверх анімованої орбіти:
+- `src/data/navigation.js` — маршрути та їхні `labelKey`;
+- `src/router/index.js` — `titleKey` сторінок;
+- секції `desktop`, `terminal`, `achievements` і `game` у словниках — тексти інтерактивного простору;
+- `meta.description` — локалізований meta description;
+- `profile.name` — ім’я в заголовку вкладки.
 
-```js
-const capabilities = [
-  { label: 'Розробка', icon: Braces },
-  { label: 'Кросбраузерність', icon: Globe2, yellow: true },
-  { label: 'Адаптивність', icon: Smartphone },
-  { label: 'Чистий код', icon: CodeXml },
-]
-```
-
-Для збереження поточного макета рекомендовано залишати чотири елементи.
-
-## 6. Назва сайту та метадані
-
-Після зміни власника оновіть:
-
-- `index.html` — заголовок сторінки й опис для пошукових систем;
-- `src/router/index.js` — ім’я у динамічному заголовку вкладки;
-- `src/components/layout/AppHeader.vue` — назва бренду в хедері;
-- `src/components/interactive/DesktopPanel.vue` — ім’я та ініціали в інтерактивному просторі;
-- `package.json` і `package-lock.json` — технічна назва пакета.
-
-Технічна назва пакета має складатися з малих латинських літер, цифр і дефісів, наприклад `name-surname-portfolio`.
-
-## 7. Дані термінала
-
-Файл: `src/composables/useTerminal.js`
-
-Команди `about`, `projects` і `contact` уже використовують дані з `profile.js` та `projects.js`. Тексти команди `skills` потрібно змінювати вручну, якщо змінюється стек.
+Назва бренду `Kolya Kolchenko` у `AppHeader.vue` залишена латиницею для обох мов. Ініціали в інтерактивному просторі налаштовуються в `DesktopPanel.vue`.
 
 ## 8. Резюме та PDF
 
-HTML-версія резюме: `public/resume.html`
+HTML-версія резюме: `public/resume.html`. Це окрема статична сторінка, тому її текст не керується Vue I18n і редагується вручну.
 
-У цьому файлі вручну оновлюються:
-
-- ім’я, роль і короткий опис;
-- email, телефон, місцезнаходження та URL портфоліо;
-- статистика, досвід, проєкти й технології;
-- перелік послуг і професійні принципи.
-
-Після редагування HTML обов’язково перегенеруйте PDF:
+Після зміни HTML перегенеруйте PDF:
 
 ```bash
 npm run resume:pdf
@@ -187,15 +171,15 @@ npm run resume:pdf
 
 ## 9. Контактна форма
 
-Контакти на сторінці беруться з `src/data/profile.js`.
+Контакти беруться з `src/data/profile.js`, а підписи, placeholder-и, валідація та сповіщення — із секцій `contact`, `validation` і `notifications` у словниках.
 
-Для реального надсилання форми скопіюйте `.env.example` у `.env` і задайте endpoint:
+Для реального надсилання скопіюйте `.env.example` у `.env` і задайте endpoint:
 
 ```env
 VITE_CONTACT_ENDPOINT=https://example.com/api/contact
 ```
 
-Без endpoint форма працює у демонстраційному режимі та не надсилає дані назовні.
+Без endpoint форма працює в демонстраційному режимі та не надсилає дані назовні.
 
 ## 10. Перевірка після змін
 
@@ -206,27 +190,28 @@ npm test
 npm run build
 ```
 
-Також вручну перевірте:
+Вручну перевірте:
 
-1. Головну сторінку на desktop і mobile.
-2. Усі соціальні посилання.
-3. Фільтри та зовнішні посилання у портфоліо.
-4. Email і телефон на сторінках «Про мене» та «Контакти».
-5. HTML- і PDF-версії резюме.
-6. Заголовок вкладки та метаопис.
+1. Перемикання UA / EN на всіх маршрутах.
+2. Збереження вибраної мови після перезавантаження.
+3. Desktop і mobile хедер без переповнення.
+4. Картки послуг, проєкти, модальні вікна, форму, термінал, досягнення та мінігру.
+5. Заголовок вкладки, meta description і атрибут `<html lang>`.
+6. Посилання соцмереж, резюме та зовнішні посилання портфоліо.
 
 ## Коротка карта файлів
 
 | Що змінюється | Файл |
 | --- | --- |
-| Ім’я, контакти, опис, статистика, соцмережі | `src/data/profile.js` |
-| Проєкти, категорії, посилання | `src/data/projects.js` |
+| Українські тексти | `src/i18n/messages/uk.js` |
+| Англійські тексти | `src/i18n/messages/en.js` |
+| Конфігурація мов | `src/i18n/index.js` |
+| Перемикач UA / EN | `src/components/layout/LanguageSwitcher.vue` |
+| Позиція перемикача | `src/components/layout/AppHeader.vue` |
+| Email, телефон, статистика, соцмережі | `src/data/profile.js` |
+| Проєкти та посилання | `src/data/projects.js` |
 | Прев’ю проєктів | `public/projects/` |
-| Послуги | `src/data/services.js` |
+| Послуги | `src/data/services.js` і словники |
 | Портрет | `src/assets/images/` і `ProfileCard.vue` |
-| Компетенції на головній | `HeroVisual.vue` |
-| Бренд у хедері | `AppHeader.vue` |
-| Заголовки браузера | `index.html`, `src/router/index.js` |
-| Термінал | `src/composables/useTerminal.js` |
 | HTML-резюме | `public/resume.html` |
 | PDF-резюме | `public/resume.pdf` |

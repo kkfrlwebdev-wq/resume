@@ -61,6 +61,7 @@ import StatisticsList from '@/components/about/StatisticsList.vue'
 }
 
 .about-copy {
+  container: about-copy / inline-size;
   max-width: 650px;
 
   .eyebrow { color: var(--color-primary); font-weight: 800; }

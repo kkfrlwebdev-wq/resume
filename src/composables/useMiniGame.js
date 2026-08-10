@@ -1,4 +1,5 @@
 import { computed, onScopeDispose, ref } from 'vue'
+import { i18n } from '@/i18n'
 
 const BOARD_COLUMNS = 9
 const BOARD_ROWS = 10
@@ -20,13 +21,14 @@ function createEnemies() {
 }
 
 export function useMiniGame() {
+  const { t } = i18n.global
   const playerColumn = ref(4)
   const enemies = ref(createEnemies())
   const bullets = ref([])
   const score = ref(0)
   const lives = ref(INITIAL_LIVES)
   const state = ref('idle')
-  const statusMessage = ref('Натисніть «Почати гру» та знищте всіх прибульців.')
+  const statusMessage = ref(t('game.status.idle'))
 
   let loopId = null
   let enemyDirection = 1
@@ -54,7 +56,7 @@ export function useMiniGame() {
     score.value = 0
     lives.value = INITIAL_LIVES
     state.value = 'running'
-    statusMessage.value = 'Гра триває. Стрілки — рух, пробіл — постріл.'
+    statusMessage.value = t('game.status.running')
     resetRound()
     loopId = window.setInterval(step, 260)
   }
@@ -100,7 +102,7 @@ export function useMiniGame() {
 
     if (enemies.value.length === 0) {
       state.value = 'won'
-      statusMessage.value = `Перемога! Рахунок: ${score.value}.`
+      statusMessage.value = t('game.status.won', { score: score.value })
       stopLoop()
     }
   }
@@ -123,12 +125,12 @@ export function useMiniGame() {
 
       if (lives.value <= 0) {
         state.value = 'lost'
-        statusMessage.value = `Гру завершено. Ваш рахунок: ${score.value}.`
+        statusMessage.value = t('game.status.lost', { score: score.value })
         stopLoop()
         return
       }
 
-      statusMessage.value = `Прибульці прорвалися. Залишилось життів: ${lives.value}.`
+      statusMessage.value = t('game.status.breach', { lives: lives.value })
       resetRound()
     }
   }

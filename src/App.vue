@@ -165,10 +165,14 @@ onUnmounted(() => {
 
 watch(() => ui.zeroGravityMode, syncZeroGravity)
 
-watch(locale, () => {
-  document.title = `${t(route.meta.titleKey)} — ${t('profile.name')}`
-  document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'))
-})
+watch(
+  locale,
+  () => {
+    document.title = `${t(route.meta.titleKey)} — ${t('profile.name')}`
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'))
+  },
+  { immediate: true },
+)
 
 watch(
   () => route.name,
