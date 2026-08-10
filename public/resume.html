@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Резюме — Іван Петренко</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #eef1f3; color: #172127; font: 15px/1.55 Inter, system-ui, sans-serif; }
+      main { width: min(900px, calc(100% - 32px)); margin: 32px auto; padding: 56px; background: white; box-shadow: 0 12px 50px #20303a22; }
+      header { display: flex; justify-content: space-between; gap: 30px; padding-bottom: 28px; border-bottom: 3px solid #00aeb8; }
+      h1 { margin: 0; font-size: 40px; line-height: 1; }
+      header p { margin: 9px 0 0; color: #007f87; font-weight: 700; }
+      address { font-style: normal; color: #52636c; text-align: right; }
+      section { margin-top: 34px; }
+      h2 { margin: 0 0 13px; color: #007f87; font-size: 16px; letter-spacing: .1em; text-transform: uppercase; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+      ul { padding-left: 20px; }
+      button { position: fixed; right: 22px; bottom: 22px; padding: 11px 18px; border: 0; border-radius: 8px; background: #007f87; color: white; cursor: pointer; font-weight: 700; }
+      @media (max-width: 650px) { main { padding: 28px; } header, .grid { display: block; } address { margin-top: 18px; text-align: left; } }
+      @media print { body { background: white; } main { width: 100%; margin: 0; padding: 12mm; box-shadow: none; } button { display: none; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div><h1>Іван Петренко</h1><p>Веброзробник</p></div>
+        <address>hello@myportfolio.com<br />+38 (099) 123 45 67<br />Київ, Україна</address>
+      </header>
+      <section><h2>Профіль</h2><p>Vue-розробник із фокусом на доступних інтерфейсах, компонентній архітектурі та продуктивності. Створюю цифрові продукти від прототипу до production-релізу.</p></section>
+      <div class="grid">
+        <section><h2>Навички</h2><ul><li>Vue 3, Composition API, Pinia</li><li>JavaScript, HTML5, SCSS</li><li>Vite, REST API, Git</li><li>Адаптивність і доступність</li><li>Оптимізація Core Web Vitals</li></ul></section>
+        <section><h2>Досвід</h2><p><strong>Frontend Developer</strong><br />Розробка сайтів, SaaS-інтерфейсів і дизайн-систем. Співпраця з дизайнерами та бекенд-командами.</p><p><strong>20+ завершених проєктів</strong><br />Лендінги, магазини, дашборди та вебзастосунки.</p></section>
+      </div>
+      <section><h2>Підхід</h2><p>Чітка комунікація, прозорі етапи, mobile-first реалізація, тестування ключових сценаріїв та документована передача проєкту.</p></section>
+    </main>
+    <button type="button" onclick="window.print()">Зберегти як PDF</button>
+  </body>
+</html>

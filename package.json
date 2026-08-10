@@ -1,0 +1,42 @@
+{
+  "name": "ivan-petrenko-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Edge versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "iOS >= 15.6"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --max-warnings=0"
+  },
+  "dependencies": {
+    "@vueuse/core": "latest",
+    "@lucide/vue": "latest",
+    "pinia": "latest",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "@vitejs/plugin-vue": "latest",
+    "@vue/test-utils": "latest",
+    "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-plugin-vue": "latest",
+    "globals": "latest",
+    "jsdom": "^27.0.0",
+    "postcss": "latest",
+    "sass": "latest",
+    "vite": "latest",
+    "vitest": "latest"
+  }
+}
