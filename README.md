@@ -30,6 +30,14 @@ npm test
 npm run build
 ```
 
+## GitHub Pages
+
+Проєкт публікується за допомогою `.github/workflows/deploy.yml`. Після push у `main` GitHub Actions запускає lint і тести, створює `dist` та передає його в GitHub Pages.
+
+У налаштуваннях репозиторію виберіть `Settings → Pages → Source → GitHub Actions`. У `Settings → Secrets and variables → Actions` створіть Repository secret `VITE_WEB3FORMS_ACCESS_KEY` зі значенням ключа Web3Forms.
+
+Для репозиторію `resume` встановлено `base: '/resume/'`, тому стандартна адреса сайту — `https://kkfrlwebdev-wq.github.io/resume/`. Маршрути використовують hash-формат, наприклад `/resume/#/about`, щоб пряме відкриття внутрішніх сторінок не повертало GitHub Pages 404.
+
 ## Контактна форма
 
 Форма надсилає повідомлення через [Web3Forms](https://web3forms.com/) і працює на статичному GitHub Pages без власного бекенду.

@@ -3,6 +3,8 @@ import { ArrowRight, Download, LayoutGrid } from '@lucide/vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import HeroVisual from '@/components/home/HeroVisual.vue'
 import SocialLinks from '@/components/home/SocialLinks.vue'
+
+const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
 </script>
 
 <template>
@@ -23,7 +25,7 @@ import SocialLinks from '@/components/home/SocialLinks.vue'
               <ArrowRight aria-hidden="true" />
             </template>
           </BaseButton>
-          <BaseButton href="/resume.html" variant="outline">
+          <BaseButton :href="resumeUrl" variant="outline">
             <template #icon>
               <Download aria-hidden="true" />
             </template>

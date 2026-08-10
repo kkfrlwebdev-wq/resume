@@ -3,6 +3,8 @@ import { ArrowRight, Download } from '@lucide/vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import ProfileCard from '@/components/about/ProfileCard.vue'
 import StatisticsList from '@/components/about/StatisticsList.vue'
+
+const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
 </script>
 
 <template>
@@ -19,7 +21,7 @@ import StatisticsList from '@/components/about/StatisticsList.vue'
         <StatisticsList />
 
         <div class="about-actions">
-          <BaseButton href="/resume.html" variant="outline">
+          <BaseButton :href="resumeUrl" variant="outline">
             <template #icon>
               <Download aria-hidden="true" />
             </template>
