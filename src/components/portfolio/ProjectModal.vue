@@ -21,7 +21,7 @@ defineEmits(['close'])
             {{ technology }}
           </li>
         </ul>
-        <BaseButton :href="project.href" target="_blank" rel="noreferrer">
+        <BaseButton :href="project.href" target="_blank" rel="noopener noreferrer">
           {{ $t('portfolio.viewSite') }}
           <template #trailing>
             <ExternalLink aria-hidden="true" />

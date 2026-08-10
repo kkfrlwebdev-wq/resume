@@ -21,7 +21,7 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
         <StatisticsList />
 
         <div class="about-actions">
-          <BaseButton :href="resumeUrl" variant="outline">
+          <BaseButton :href="resumeUrl" target="_blank" rel="noopener noreferrer" variant="outline">
             <template #icon>
               <Download aria-hidden="true" />
             </template>
