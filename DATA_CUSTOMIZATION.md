@@ -161,6 +161,21 @@ export const profile = {
 
 HTML-версія резюме: `public/resume.html`. Це окрема статична сторінка, тому її текст не керується Vue I18n і редагується вручну.
 
+### Як змінити адресу портфоліо в резюме
+
+У файлі `public/resume.html` знайдіть поточну адресу, наприклад `afix-ua.github.io/portfolio`, і замініть її на актуальну. Щоб адреса була клікабельною, використовуйте повний URL у `href`:
+
+```html
+<li>
+  <span class="contact-icon" aria-hidden="true">↗</span>
+  <a href="https://username.github.io/repository/">
+    username.github.io/repository
+  </a>
+</li>
+```
+
+Редагувати `public/resume.pdf` вручну не потрібно. Спочатку змініть адресу в HTML, а потім перегенеруйте PDF наведеною нижче командою — нова адреса потрапить в обидві версії резюме.
+
 Після зміни HTML перегенеруйте PDF:
 
 ```bash
