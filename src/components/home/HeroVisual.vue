@@ -388,7 +388,7 @@ watch(
 .capability-grid {
   position: absolute;
   z-index: 4;
-  top: -7.5rem;
+  top: -4.5rem;
   right: 0;
   left: 0;
   display: grid;

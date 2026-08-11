@@ -22,7 +22,7 @@ defineEmits(['close'])
           </li>
         </ul>
         <BaseButton :href="project.href" target="_blank" rel="noopener noreferrer">
-          {{ $t('portfolio.viewSite') }}
+          {{ $t(project.linkLabelKey || 'portfolio.viewSite') }}
           <template #trailing>
             <ExternalLink aria-hidden="true" />
           </template>

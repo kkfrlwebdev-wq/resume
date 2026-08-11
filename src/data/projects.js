@@ -2,11 +2,22 @@ const projectImage = (fileName) => `${import.meta.env.BASE_URL}projects/${fileNa
 
 export const projectCategories = [
   { id: 'all', labelKey: 'portfolio.categories.all' },
+  { id: 'spa', labelKey: 'portfolio.categories.spa' },
   { id: 'landing', labelKey: 'portfolio.categories.landing' },
   { id: 'corporate', labelKey: 'portfolio.categories.corporate' },
 ]
 
 export const projects = [
+  {
+    id: 9,
+    translationKey: 'truckRouteManager',
+    title: 'Truck Route Manager',
+    category: 'spa',
+    stack: ['Vue 3', 'Pinia', 'Firebase', 'Vue Router', 'Vue I18n'],
+    image: projectImage('truck-route-manager.png'),
+    href: 'https://github.com/kkfrlwebdev-wq/Truck-Route-Manager',
+    linkLabelKey: 'portfolio.viewCode',
+  },
   {
     id: 1,
     translationKey: 'izomakers',
