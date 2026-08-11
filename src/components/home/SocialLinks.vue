@@ -25,12 +25,26 @@ import SocialIcon from './SocialIcon.vue'
     place-items: center;
     border: 1px solid var(--color-border);
     border-radius: 9px;
-    background: rgba(255,255,255,.025);
+    background: rgba(255, 255, 255, .025);
     color: #dce4e7;
     transition: var(--transition);
 
-    &:hover { border-color: var(--color-primary); color: var(--color-primary); transform: translateY(-2px); }
-    svg { width: 19px; }
+    &:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    svg {
+      width: 19px;
+    }
+  }
+
+  @media (max-width:818px) {
+
+    justify-content: center;
+    align-items: center;
+
   }
 }
 </style>
