@@ -6,12 +6,18 @@ export default {
   language: { label: 'Мова сайту', uk: 'UA', en: 'EN' },
   profile: {
     name: 'Микола Кольченко', role: 'Веб-розробник', location: 'Україна', languages: 'Українська, англійська', availability: 'Доступний для фриланс-проєктів',
-    intro: 'Створюю сучасні, адаптивні та інтуїтивні вебсайти на HTML, CSS і JavaScript.',
+    intro: 'Створюю сучасні, адаптивні та інтуїтивні вебсайти на JavaScript і Vue.js.',
     about: 'Я frontend-розробник із досвідом створення сайтів під ключ. Моя мета — створювати виразні та інтуїтивні вебсайти, якими легко користуватися. Завжди готовий до нових викликів і допомагаю бізнесам втілювати вебпроєкти в життя.',
-    aboutExtra: 'Працюю з HTML, CSS, JavaScript і SCSS. Забезпечую адаптивність, кросбраузерність та можливість вносити зміни як під час створення, так і після здачі проєкту.',
+    aboutExtra: 'Працюю з JavaScript, Vue.js, Node.js, MongoDB, SQL, HTML5, EJS, CSS3, SCSS і Less. Забезпечую адаптивність, кросбраузерність та можливість вносити зміни як під час створення, так і після здачі проєкту.',
     stats: { experience: 'роки досвіду', projects: 'проєктів у портфоліо', responsive: 'адаптивність' },
   },
-  home: { hello: 'Привіт, я', viewWork: 'Переглянути роботи', openResume: 'Відкрити резюме', hintLabel: 'Підказка', hint: 'Порада: активуйте режим невагомості', competencies: 'Ключові компетенції', capabilities: { development: 'Розробка', crossBrowser: 'Кросбраузерність', responsive: 'Адаптивність', cleanCode: 'Чистий код' } },
+  home: {
+    hello: 'Привіт, я', viewWork: 'Переглянути роботи', openResume: 'Відкрити резюме', hintLabel: 'Підказка', hint: 'Порада: активуйте режим невагомості', competencies: 'Ключові компетенції', technologies: 'Технології, якими я володію',
+    capabilities: { development: 'Розробка', crossBrowser: 'Кросбраузерність', responsive: 'Адаптивність', cleanCode: 'Чистий код' },
+    skillGroups: { javascript: 'JavaScript-екосистема', markup: 'Розмітка і шаблони', styles: 'Стилізація', workflow: 'Інструменти', databases: 'Бази даних' },
+    technologyHint: 'Підведіть курсор — картки відштовхнуться та залишаться там, де зупинились.',
+    selectTechnology: 'Виділити технологію {technology}', deselectTechnology: 'Зняти виділення з технології {technology}', selected: 'Вибрано',
+  },
   about: { eyebrow: 'Про мене', title: 'Хто я?', discuss: 'Обговорити проєкт', portraitAlt: 'Портрет: {name}' },
   services: {
     eyebrow: 'Послуги', title: 'Що я роблю?', description: 'Створюю лендінги й корпоративні сайти на чистому коді, адаптую їх до всіх екранів і готую до подальшої підтримки або інтеграції з CMS.', listLabel: 'Перелік послуг',
@@ -50,7 +56,7 @@ export default {
     welcome: 'Ласкаво просимо до термінала портфоліо.', prompt: 'Введіть help, щоб переглянути доступні команди.',
     help: ['help — список команд', 'about — коротко про мене', 'skills — технології та інструменти', 'projects — вибрані проєкти', 'contact — контактна інформація', 'coffee — невелика пасхалка', 'gravity — увімкнути або вимкнути режим невагомості', 'clear — очистити термінал'],
     about: ['Я — {name}, frontend-розробник із досвідом створення сайтів під ключ.', 'Створюю виразні, інтуїтивні та адаптивні вебсайти для бізнесу.'],
-    skills: ['Frontend: HTML5, CSS3, JavaScript, SCSS (Sass).', 'Верстка: адаптивність, кросбраузерність, Flexbox і CSS Grid.', 'Workflow: Git, чистий підтримуваний код та підготовка до інтеграції з CMS.'],
+    skills: ['JavaScript: JavaScript ES6+, Vue.js і Node.js.', 'Бази даних: MongoDB і SQL.', 'Розмітка та стилі: HTML5, EJS, CSS3, SCSS (Sass) і Less.', 'Workflow: Git, адаптивність, кросбраузерність і чистий підтримуваний код.'],
     projectLine: '{title} — {category}.', phone: 'Телефон: {value}', location: 'Місцезнаходження: {value}', contactPage: 'Сторінка контактів: /contact', coffee: '|      |]  Кава готова. Час створювати щось класне!', hunterUnlocked: 'Досягнення «Шукач» розблоковано', gravityUnlocked: 'Досягнення «Нульова гравітація» розблоковано', gravityOn: 'Режим невагомості активовано.', gravityOff: 'Режим невагомості вимкнено.', unknown: 'Команду «{command}» не знайдено. Введіть help для підказки.', restarted: 'Термінал перезапущено.',
   },
   game: {
