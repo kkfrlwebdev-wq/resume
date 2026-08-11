@@ -1,11 +1,22 @@
 import { mount } from '@vue/test-utils'
 import { createPinia } from 'pinia'
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import HeroVisual from '@/components/home/HeroVisual.vue'
 import { skills } from '@/data/skills'
 import { i18n } from '@/i18n'
 
 describe('HeroVisual', () => {
+  beforeEach(() => {
+    vi.stubGlobal('localStorage', {
+      getItem: vi.fn(() => null),
+      setItem: vi.fn(),
+    })
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
   it('renders every technology and lets a user select one card', async () => {
     const wrapper = mount(HeroVisual, {
       global: { plugins: [createPinia(), i18n] },

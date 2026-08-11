@@ -60,6 +60,6 @@ export const skills = [
   { id: 'uuid', name: 'uuid', shortName: 'uuid', group: 'packages', x: 71, landY: 92, delay: 1.96, duration: 1.38 },
   { id: 'vitest', name: 'Vitest', shortName: 'Test', group: 'testing', x: 32, landY: 138, delay: 2.08, duration: 1.34 },
   { id: 'npm', name: 'npm', shortName: 'npm', group: 'workflow', x: 44, landY: 140, delay: 2.2, duration: 1.4 },
-  { id: 'github-actions', name: 'GitHub Actions', shortName: 'Actions', group: 'workflow', x: 56, landY: 138, delay: 2.32, duration: 1.46 },
+  { id: 'github-actions', name: 'GitHub Actions', shortName: 'GHA', group: 'workflow', x: 56, landY: 138, delay: 2.32, duration: 1.46 },
   { id: 'nvm', name: 'NVM', shortName: 'NVM', group: 'workflow', x: 68, landY: 140, delay: 2.44, duration: 1.36 },
 ]

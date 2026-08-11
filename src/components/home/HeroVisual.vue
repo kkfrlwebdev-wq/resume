@@ -97,49 +97,57 @@ function applyPhysicsPosition(element, state) {
 }
 
 function resolveCollisions(states) {
-  for (let firstIndex = 0; firstIndex < states.length; firstIndex += 1) {
-    for (let secondIndex = firstIndex + 1; secondIndex < states.length; secondIndex += 1) {
-      const first = states[firstIndex]
-      const second = states[secondIndex]
-      const deltaX = second.x + second.size / 2 - (first.x + first.size / 2)
-      const deltaY = second.y + second.size / 2 - (first.y + first.size / 2)
-      const overlapX = (first.size + second.size) / 2 - Math.abs(deltaX)
-      const overlapY = (first.size + second.size) / 2 - Math.abs(deltaY)
+  let hadCollision = false
 
-      if (overlapX <= 0 || overlapY <= 0) continue
+  for (let iteration = 0; iteration < 5; iteration += 1) {
+    for (let firstIndex = 0; firstIndex < states.length; firstIndex += 1) {
+      for (let secondIndex = firstIndex + 1; secondIndex < states.length; secondIndex += 1) {
+        const first = states[firstIndex]
+        const second = states[secondIndex]
+        const deltaX = second.x + second.size / 2 - (first.x + first.size / 2)
+        const deltaY = second.y + second.size / 2 - (first.y + first.size / 2)
+        const collisionGap = Math.max(2, Math.min(first.size, second.size) * 0.08)
+        const overlapX = (first.size + second.size) / 2 + collisionGap - Math.abs(deltaX)
+        const overlapY = (first.size + second.size) / 2 + collisionGap - Math.abs(deltaY)
 
-      let normalX = 0
-      let normalY = 0
-      let overlap = overlapY
+        if (overlapX <= 0.05 || overlapY <= 0.05) continue
+        if (overlapX > 0.75 && overlapY > 0.75) hadCollision = true
 
-      if (overlapX < overlapY) {
-        normalX = deltaX < 0 ? -1 : 1
-        overlap = overlapX
-      } else {
-        normalY = deltaY < 0 ? -1 : 1
-      }
+        let normalX = 0
+        let normalY = 0
+        let overlap = overlapY
 
-      const correction = overlap * 0.51
-      first.x -= normalX * correction
-      first.y -= normalY * correction
-      second.x += normalX * correction
-      second.y += normalY * correction
+        if (overlapX < overlapY) {
+          normalX = deltaX < 0 ? -1 : 1
+          overlap = overlapX
+        } else {
+          normalY = deltaY < 0 ? -1 : 1
+        }
 
-      const relativeVelocity = (second.vx - first.vx) * normalX + (second.vy - first.vy) * normalY
-      if (relativeVelocity < 0) {
-        const impulse = -(1.22 * relativeVelocity) / 2
-        first.vx -= impulse * normalX
-        first.vy -= impulse * normalY
-        second.vx += impulse * normalX
-        second.vy += impulse * normalY
+        const correction = overlap * 0.52
+        first.x -= normalX * correction
+        first.y -= normalY * correction
+        second.x += normalX * correction
+        second.y += normalY * correction
 
-        const contactOffset = normalX ? deltaY : deltaX
-        const torque = impulse * (contactOffset / Math.max(first.size, second.size)) * 0.12
-        first.angularVelocity = Math.max(-2.2, Math.min(2.2, first.angularVelocity - torque))
-        second.angularVelocity = Math.max(-2.2, Math.min(2.2, second.angularVelocity + torque))
+        const relativeVelocity = (second.vx - first.vx) * normalX + (second.vy - first.vy) * normalY
+        if (relativeVelocity < 0) {
+          const impulse = -(1.22 * relativeVelocity) / 2
+          first.vx -= impulse * normalX
+          first.vy -= impulse * normalY
+          second.vx += impulse * normalX
+          second.vy += impulse * normalY
+
+          const contactOffset = normalX ? deltaY : deltaX
+          const torque = impulse * (contactOffset / Math.max(first.size, second.size)) * 0.12
+          first.angularVelocity = Math.max(-2.2, Math.min(2.2, first.angularVelocity - torque))
+          second.angularVelocity = Math.max(-2.2, Math.min(2.2, second.angularVelocity + torque))
+        }
       }
     }
   }
+
+  return hadCollision
 }
 
 function updatePhysics(timestamp = 0) {
@@ -148,6 +156,7 @@ function updatePhysics(timestamp = 0) {
   const zeroGravity = ui.zeroGravityMode
   const fieldWidth = technologyField.value?.clientWidth ?? 0
   const fieldHeight = technologyField.value?.clientHeight ?? 0
+  const maxAngle = fieldWidth <= 420 ? 8 : 16
   const states = [...physicsStates.values()]
   let stateIndex = 0
 
@@ -197,8 +206,8 @@ function updatePhysics(timestamp = 0) {
     state.angle += state.angularVelocity
     stateIndex += 1
 
-    if (state.angle < -16 || state.angle > 16) {
-      state.angle = Math.max(-16, Math.min(16, state.angle))
+    if (state.angle < -maxAngle || state.angle > maxAngle) {
+      state.angle = Math.max(-maxAngle, Math.min(maxAngle, state.angle))
       state.angularVelocity *= -0.28
     }
 
@@ -224,7 +233,7 @@ function updatePhysics(timestamp = 0) {
     }
   }
 
-  resolveCollisions(states)
+  if (resolveCollisions(states)) needsNextFrame = true
 
   for (const [skillId, state] of physicsStates) {
     const element = dropElements.get(skillId)
@@ -427,8 +436,7 @@ watch(
   }
 
   &:hover,
-  &:focus-within,
-  &.is-selected {
+  &:focus-within {
     z-index: 5;
   }
 }
@@ -448,25 +456,28 @@ watch(
   color: var(--color-text);
   cursor: pointer;
   backdrop-filter: blur(12px);
-  transition: border-color var(--transition), box-shadow var(--transition), scale var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
 
   &:hover,
   &:focus-visible,
   &[aria-pressed='true'] {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 1px rgba(0, 231, 240, 0.18), 0 0 28px rgba(0, 231, 240, 0.22);
-    translate: 0 -5px;
-    scale: 1.08;
   }
 
   &__mark {
+    max-width: 100%;
     color: var(--color-primary);
     font: 800 0.65rem/1 var(--font-mono);
+    overflow-wrap: anywhere;
   }
 
   &__name {
+    max-width: 100%;
     font-size: 0.43rem;
     font-weight: 750;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
   }
 
 }
