@@ -102,7 +102,7 @@ function applyPhysicsPosition(element, state) {
   element.style.setProperty('--physics-rotation', `${state.angle.toFixed(2)}deg`)
 }
 
-function resolveCollisions(states) {
+function resolveCollisions(states, zeroGravity) {
   let hadCollision = false
 
   for (let iteration = 0; iteration < 5; iteration += 1) {
@@ -112,7 +112,7 @@ function resolveCollisions(states) {
         const second = states[secondIndex]
         const deltaX = second.x + second.size / 2 - (first.x + first.size / 2)
         const deltaY = second.y + second.size / 2 - (first.y + first.size / 2)
-        const collisionGap = Math.max(2, Math.min(first.size, second.size) * 0.08)
+        const collisionGap = 0.5
         const overlapX = (first.size + second.size) / 2 + collisionGap - Math.abs(deltaX)
         const overlapY = (first.size + second.size) / 2 + collisionGap - Math.abs(deltaY)
 
@@ -138,7 +138,8 @@ function resolveCollisions(states) {
 
         const relativeVelocity = (second.vx - first.vx) * normalX + (second.vy - first.vy) * normalY
         if (relativeVelocity < 0) {
-          const impulse = -(1.22 * relativeVelocity) / 2
+          const restitution = zeroGravity ? 0.22 : 0
+          const impulse = -((1 + restitution) * relativeVelocity) / 2
           first.vx -= impulse * normalX
           first.vy -= impulse * normalY
           second.vx += impulse * normalX
@@ -232,14 +233,14 @@ function updatePhysics(timestamp = 0) {
       state.vy = Math.abs(state.vy) * 0.35
     } else if (state.y + state.size > fieldHeight) {
       state.y = Math.max(0, fieldHeight - state.size)
-      state.vy = Math.abs(state.vy) < 0.42 ? 0 : -Math.abs(state.vy) * 0.24
+      state.vy = zeroGravity && Math.abs(state.vy) >= 0.42 ? -Math.abs(state.vy) * 0.24 : 0
       state.angularVelocity += state.vx * 0.035
       state.vx *= 0.9
       state.angularVelocity *= 0.78
     }
   }
 
-  if (resolveCollisions(states)) needsNextFrame = true
+  if (resolveCollisions(states, zeroGravity)) needsNextFrame = true
 
   for (const [skillId, state] of physicsStates) {
     const element = dropElements.get(skillId)
@@ -252,12 +253,13 @@ function updatePhysics(timestamp = 0) {
     const isSupported = onFloor || states.some((other) => {
       if (other === state) return false
       const horizontalOverlap = Math.min(state.x + state.size, other.x + other.size) - Math.max(state.x, other.x)
-      const verticalGap = Math.abs(state.y + state.size - other.y)
-      return horizontalOverlap > 5 && verticalGap < 2
+      const verticalGap = other.y - (state.y + state.size)
+      const supportGap = 1.5
+      return horizontalOverlap > 5 && verticalGap >= -0.75 && verticalGap <= supportGap
     })
 
     if (!zeroGravity) {
-      if (isSupported && !pointer.active && Math.abs(state.vy) < 0.14) state.vy = 0
+      if (isSupported && Math.abs(state.vy) < 0.55) state.vy = 0
       if (isSupported && Math.abs(state.vx) < 0.025) state.vx = 0
       if (isSupported && Math.abs(state.angularVelocity) < 0.012) state.angularVelocity = 0
     }
@@ -504,10 +506,6 @@ watch(
     transform: translate3d(0, -38.75rem, 0);
   }
   8% { opacity: 1; }
-  68% { transform: translate3d(0, 0, 0); }
-  78% { transform: translate3d(0, -1.125rem, 0); }
-  86% { transform: translate3d(0, 0, 0); }
-  93% { transform: translate3d(0, -.3125rem, 0); }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
