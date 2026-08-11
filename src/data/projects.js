@@ -9,6 +9,15 @@ export const projectCategories = [
 
 export const projects = [
   {
+    id: 10,
+    translationKey: 'portfolioSite',
+    title: 'Portfolio — Vue 3 SPA',
+    category: 'spa',
+    stack: ['Vue 3', 'Pinia', 'Vite', 'Vue Router', 'Vue I18n', 'Vitest'],
+    image: projectImage('portfolio.png'),
+    href: 'https://kkfrlwebdev-wq.github.io/resume/',
+  },
+  {
     id: 9,
     translationKey: 'truckRouteManager',
     title: 'Truck Route Manager',

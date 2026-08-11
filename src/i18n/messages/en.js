@@ -31,6 +31,7 @@ export default {
     eyebrow: 'Portfolio', title: 'My work', description: 'A selection of commercial and conceptual projects focused on results, speed and clear interfaces.', filterLabel: 'Project filter', details: 'More about {title}', viewSite: 'View website', viewCode: 'View source code',
     categories: { all: 'All', spa: 'Vue SPA', landing: 'Landing pages', corporate: 'Corporate websites' },
     projects: {
+      portfolioSite: { category: 'Personal portfolio · Vue SPA', description: 'A bilingual Vue 3 portfolio with an interactive technology stack, zero-gravity mode, a responsive interface and a print-ready résumé.' },
       truckRouteManager: { category: 'Vue SPA · route management', description: 'An application for route sheets, authentication and user management built with Vue 3, Pinia and Firebase, featuring a bilingual interface.' },
       izomakers: { category: 'Commercial website', description: 'A company website for systematic insulation solutions for roofs, pools, terraces and underground structures.' },
       boo: { category: 'Crypto landing page', description: 'A vivid promotional website for the Boo token with themed graphics, tokenomics and calls to action.' },

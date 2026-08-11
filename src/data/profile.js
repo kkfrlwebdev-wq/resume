@@ -3,7 +3,7 @@ export const profile = {
   phone: "+38 (050) 925 65 71",
   stats: [
     { value: "2+", labelKey: "profile.stats.experience" },
-    { value: "9", labelKey: "profile.stats.projects" },
+    { value: "10", labelKey: "profile.stats.projects" },
     { value: "100%", labelKey: "profile.stats.responsive" },
   ],
   social: [
