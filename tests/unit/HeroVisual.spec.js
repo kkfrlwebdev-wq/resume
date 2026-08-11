@@ -18,6 +18,10 @@ describe('HeroVisual', () => {
     expect(wrapper.text()).toContain('Less')
     expect(wrapper.text()).toContain('MongoDB')
     expect(wrapper.text()).toContain('SQL')
+    expect(wrapper.text()).toContain('Pinia')
+    expect(wrapper.text()).toContain('Vue Router')
+    expect(wrapper.text()).toContain('Vitest')
+    expect(wrapper.text()).toContain('GitHub Actions')
 
     await wrapper.find('.tech-drop').trigger('animationend')
 

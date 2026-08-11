@@ -39,9 +39,7 @@ function landSkill(skillId) {
     y: element.offsetTop,
     vx: 0,
     vy: 0,
-    angle: settings.rotation,
-    angularVelocity: 0,
-    size: element.offsetWidth || 70,
+    size: element.offsetWidth || 49,
   }
 
   physicsStates.set(skillId, state)
@@ -76,7 +74,6 @@ function startPhysics() {
 function applyPhysicsPosition(element, state) {
   element.style.setProperty('--physics-x', `${state.x.toFixed(2)}px`)
   element.style.setProperty('--physics-y', `${state.y.toFixed(2)}px`)
-  element.style.setProperty('--physics-rotation', `${state.angle.toFixed(2)}deg`)
 }
 
 function resolveCollisions(states) {
@@ -115,8 +112,6 @@ function resolveCollisions(states) {
         first.vy -= impulse * normalY
         second.vx += impulse * normalX
         second.vy += impulse * normalY
-        first.angularVelocity -= impulse * 0.08
-        second.angularVelocity += impulse * 0.08
       }
     }
   }
@@ -147,7 +142,6 @@ function updatePhysics() {
         const force = (1 - distance / radius) * 1.15
         state.vx += (deltaX / distance) * force
         state.vy += (deltaY / distance) * force
-        state.angularVelocity += (deltaX / distance) * force * 0.12
         needsNextFrame = true
       }
     }
@@ -155,19 +149,15 @@ function updatePhysics() {
     state.vy += 0.2
     state.vx *= 0.985
     state.vy *= 0.995
-    state.angularVelocity *= 0.96
     state.x += state.vx
     state.y += state.vy
-    state.angle += state.angularVelocity
 
     if (state.x < 0) {
       state.x = 0
       state.vx = Math.abs(state.vx) * 0.42
-      state.angularVelocity *= -0.55
     } else if (state.x + state.size > fieldWidth) {
       state.x = Math.max(0, fieldWidth - state.size)
       state.vx = -Math.abs(state.vx) * 0.42
-      state.angularVelocity *= -0.55
     }
 
     if (state.y < 0) {
@@ -177,7 +167,6 @@ function updatePhysics() {
       state.y = Math.max(0, fieldHeight - state.size)
       state.vy = Math.abs(state.vy) < 0.42 ? 0 : -Math.abs(state.vy) * 0.24
       state.vx *= 0.9
-      state.angularVelocity *= 0.75
     }
   }
 
@@ -200,9 +189,8 @@ function updatePhysics() {
 
     if (isSupported && !pointer.active && Math.abs(state.vy) < 0.14) state.vy = 0
     if (isSupported && Math.abs(state.vx) < 0.025) state.vx = 0
-    if (isSupported && Math.abs(state.angularVelocity) < 0.015) state.angularVelocity = 0
 
-    if (Math.abs(state.vx) > 0.025 || Math.abs(state.vy) > 0.12 || Math.abs(state.angularVelocity) > 0.015) {
+    if (Math.abs(state.vx) > 0.025 || Math.abs(state.vy) > 0.12) {
       needsNextFrame = true
     }
 
@@ -259,7 +247,6 @@ onBeforeUnmount(() => {
           '--land-y': `${item.landY}px`,
           '--delay': `${item.delay}s`,
           '--duration': `${item.duration}s`,
-          '--rotation': `${item.rotation}deg`,
         }"
         @animationend.self="landSkill(item.id)"
       >
@@ -276,10 +263,6 @@ onBeforeUnmount(() => {
         </button>
       </div>
     </div>
-
-    <p class="technology-hint">
-      {{ $t('home.technologyHint') }}
-    </p>
   </div>
 </template>
 
@@ -371,7 +354,7 @@ onBeforeUnmount(() => {
     bottom: auto;
     left: 0;
     opacity: 1;
-    transform: translate3d(var(--physics-x, 0), var(--physics-y, 0), 0) rotate(var(--physics-rotation, var(--rotation)));
+    transform: translate3d(var(--physics-x, 0), var(--physics-y, 0), 0);
   }
 
   &:hover,
@@ -382,15 +365,15 @@ onBeforeUnmount(() => {
 }
 
 .tech-card {
-  width: 70px;
+  width: 49px;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
   align-content: center;
-  gap: 4px;
-  padding: 8px;
+  gap: 3px;
+  padding: 5px;
   border: 1px solid rgba(0, 231, 240, 0.3);
-  border-radius: 11px;
+  border-radius: 8px;
   background: rgba(5, 14, 20, 0.92);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
   color: var(--color-text);
@@ -403,23 +386,23 @@ onBeforeUnmount(() => {
   &[aria-pressed='true'] {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 1px rgba(0, 231, 240, 0.18), 0 0 28px rgba(0, 231, 240, 0.22);
-    translate: 0 -8px;
+    translate: 0 -5px;
     scale: 1.08;
   }
 
   &__mark {
     color: var(--color-primary);
-    font: 800 0.86rem/1 var(--font-mono);
+    font: 800 0.65rem/1 var(--font-mono);
   }
 
   &__name {
-    font-size: 0.57rem;
+    font-size: 0.43rem;
     font-weight: 750;
   }
 
   &__status {
     color: var(--color-secondary);
-    font-size: 0.5rem;
+    font-size: 0.4rem;
     font-weight: 750;
   }
 }
@@ -428,34 +411,24 @@ onBeforeUnmount(() => {
 .tech-drop--markup .tech-card__mark { color: #ff8b68; }
 .tech-drop--workflow .tech-card__mark { color: var(--color-success); }
 .tech-drop--database .tech-card__mark { color: #8aa8ff; }
-
-.technology-hint {
-  position: absolute;
-  z-index: 4;
-  right: 0;
-  bottom: 5px;
-  left: 0;
-  margin: 0;
-  color: var(--color-dimmed);
-  font-size: 0.64rem;
-  text-align: center;
-}
+.tech-drop--ecosystem .tech-card__mark { color: #8d7dff; }
+.tech-drop--testing .tech-card__mark { color: #ff6f91; }
 
 @keyframes orbit { to { transform: rotate(1turn); } }
 
 @keyframes technology-fall {
   0% {
     opacity: 0;
-    transform: translate3d(0, -620px, 0) rotate(calc(var(--rotation) * -3));
+    transform: translate3d(0, -620px, 0);
   }
   8% { opacity: 1; }
-  68% { transform: translate3d(0, 0, 0) rotate(var(--rotation)); }
-  78% { transform: translate3d(0, -24px, 0) rotate(calc(var(--rotation) * .45)); }
-  86% { transform: translate3d(0, 0, 0) rotate(var(--rotation)); }
-  93% { transform: translate3d(0, -7px, 0) rotate(calc(var(--rotation) * .8)); }
+  68% { transform: translate3d(0, 0, 0); }
+  78% { transform: translate3d(0, -18px, 0); }
+  86% { transform: translate3d(0, 0, 0); }
+  93% { transform: translate3d(0, -5px, 0); }
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) rotate(var(--rotation));
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -464,7 +437,7 @@ onBeforeUnmount(() => {
   .capability-grid { top: -72px; }
   .technology-field { top: 20px; }
   .capability { flex-direction: column; gap: 5px; }
-  .tech-card { width: 64px; }
+  .tech-card { width: 45px; }
 }
 
 @media (max-width: 820px) {
@@ -494,16 +467,7 @@ onBeforeUnmount(() => {
   .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .capability { min-height: 68px; flex-direction: row; }
   .technology-field { top: 154px; right: 8%; left: 3%; }
-  .tech-card { width: 58px; }
-  .tech-drop:nth-child(3n + 1) { left: 3%; }
-  .tech-drop:nth-child(3n + 2) { left: 38%; }
-  .tech-drop:nth-child(3n) { left: 73%; }
-  .tech-drop:nth-child(-n + 3) { bottom: 0; }
-  .tech-drop:nth-child(n + 4):nth-child(-n + 6) { bottom: 61px; }
-  .tech-drop:nth-child(n + 7):nth-child(-n + 9) { bottom: 122px; }
-  .tech-drop:nth-child(n + 10) { bottom: 183px; }
-  .tech-drop:nth-child(10) { left: 21%; }
-  .tech-drop:nth-child(11) { left: 56%; }
+  .tech-card { width: 41px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -521,6 +485,6 @@ onBeforeUnmount(() => {
     place-items: center;
     animation: none;
   }
-  .tech-card { width: min(70px, 100%); }
+  .tech-card { width: min(49px, 100%); }
 }
 </style>
