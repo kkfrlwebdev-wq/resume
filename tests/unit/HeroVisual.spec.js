@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { createPinia } from 'pinia'
 import { describe, expect, it } from 'vitest'
 import HeroVisual from '@/components/home/HeroVisual.vue'
 import { skills } from '@/data/skills'
@@ -7,7 +8,7 @@ import { i18n } from '@/i18n'
 describe('HeroVisual', () => {
   it('renders every technology and lets a user select one card', async () => {
     const wrapper = mount(HeroVisual, {
-      global: { plugins: [i18n] },
+      global: { plugins: [createPinia(), i18n] },
     })
 
     const cards = wrapper.findAll('.tech-card')
@@ -22,6 +23,8 @@ describe('HeroVisual', () => {
     expect(wrapper.text()).toContain('Vue Router')
     expect(wrapper.text()).toContain('Vitest')
     expect(wrapper.text()).toContain('GitHub Actions')
+    expect(wrapper.text()).toContain('NVM')
+    expect(wrapper.text()).toContain('uuid')
 
     await wrapper.find('.tech-drop').trigger('animationend')
 

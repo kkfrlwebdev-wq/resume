@@ -8,14 +8,14 @@ export default {
     name: 'Kolya Kolchenko', role: 'Frontend Developer', location: 'Ukraine', languages: 'Ukrainian, English', availability: 'Available for freelance projects',
     intro: 'I build modern, responsive and intuitive websites with JavaScript and Vue.js.',
     about: 'I am a frontend developer with experience building turnkey websites. My goal is to create expressive and intuitive websites that are easy to use. I am always ready for new challenges and help businesses bring their web projects to life.',
-    aboutExtra: 'I work with JavaScript, Vue.js, Node.js, MongoDB, SQL, HTML5, EJS, CSS3 and preprocessors. I use Vite, Pinia, Vue Router, Vue I18n, Vitest, npm and GitHub Actions.',
+    aboutExtra: 'I work with JavaScript, Vue.js, Node.js, MongoDB, SQL, HTML5, EJS, CSS3 and preprocessors. I use Vite, Pinia, Vue Router, Vue I18n, Vitest, npm, NVM, uuid and GitHub Actions.',
     stats: { experience: 'years of experience', projects: 'portfolio projects', responsive: 'responsive' },
   },
   home: {
     hello: 'Hi, I am', viewWork: 'View my work', openResume: 'Open résumé', hintLabel: 'Tip', hint: 'Tip: activate zero-gravity mode', competencies: 'Key competencies', technologies: 'Technologies I work with',
     capabilities: { development: 'Development', crossBrowser: 'Cross-browser', responsive: 'Responsive', cleanCode: 'Clean code' },
-    skillGroups: { javascript: 'JavaScript ecosystem', markup: 'Markup and templates', styles: 'Styling', workflow: 'Tools', databases: 'Databases', ecosystem: 'Vue ecosystem', testing: 'Testing' },
-    selectTechnology: 'Select {technology}', deselectTechnology: 'Deselect {technology}', selected: 'Selected',
+    skillGroups: { javascript: 'JavaScript ecosystem', markup: 'Markup and templates', styles: 'Styling', workflow: 'Tools', databases: 'Databases', ecosystem: 'Vue ecosystem', testing: 'Testing', packages: 'Packages' },
+    selectTechnology: 'Select {technology}', deselectTechnology: 'Deselect {technology}',
   },
   about: { eyebrow: 'About me', title: 'Who am I?', discuss: 'Discuss a project', portraitAlt: 'Portrait: {name}' },
   services: {
@@ -53,7 +53,7 @@ export default {
     welcome: 'Welcome to the portfolio terminal.', prompt: 'Enter help to view the available commands.',
     help: ['help — list commands', 'about — a short introduction', 'skills — technologies and tools', 'projects — selected projects', 'contact — contact information', 'coffee — a small Easter egg', 'gravity — toggle zero-gravity mode', 'clear — clear the terminal'],
     about: ['I am {name}, a frontend developer experienced in building turnkey websites.', 'I create expressive, intuitive and responsive websites for businesses.'],
-    skills: ['JavaScript: JavaScript ES6+, Vue.js and Node.js.', 'Vue ecosystem: Vite, Pinia, Vue Router and Vue I18n.', 'Databases: MongoDB and SQL.', 'Markup and styling: HTML5, EJS, CSS3, SCSS (Sass) and Less.', 'Workflow: Git, npm, Vitest and GitHub Actions.'],
+    skills: ['JavaScript: JavaScript ES6+, Vue.js and Node.js.', 'Vue ecosystem: Vite, Pinia, Vue Router and Vue I18n.', 'Databases: MongoDB and SQL.', 'Markup and styling: HTML5, EJS, CSS3, SCSS (Sass) and Less.', 'Workflow: Git, npm, NVM, uuid, Vitest and GitHub Actions.'],
     projectLine: '{title} — {category}.', phone: 'Phone: {value}', location: 'Location: {value}', contactPage: 'Contact page: /contact', coffee: '|      |]  Coffee is ready. Time to build something great!', hunterUnlocked: '“Hunter” achievement unlocked', gravityUnlocked: '“Zero Gravity” achievement unlocked', gravityOn: 'Zero-gravity mode activated.', gravityOff: 'Zero-gravity mode disabled.', unknown: 'Command “{command}” was not found. Enter help for a hint.', restarted: 'Terminal restarted.',
   },
   game: {

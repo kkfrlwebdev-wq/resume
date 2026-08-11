@@ -1,7 +1,8 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Braces, CodeXml, Globe2, Smartphone } from '@lucide/vue'
 import { skills } from '@/data/skills'
+import { useUiStore } from '@/stores/uiStore'
 
 const capabilities = [
   { labelKey: 'home.capabilities.development', icon: Braces },
@@ -10,13 +11,14 @@ const capabilities = [
   { labelKey: 'home.capabilities.cleanCode', icon: CodeXml },
 ]
 
+const ui = useUiStore()
 const selectedSkill = ref(null)
 const technologyField = ref(null)
 const landedSkills = ref([])
 const dropElements = new Map()
 const physicsStates = new Map()
 const skillSettings = new Map(skills.map((skill) => [skill.id, skill]))
-const pointer = { active: false, x: 0, y: 0 }
+const pointer = { active: false, x: 0, y: 0, vx: 0, vy: 0 }
 let animationFrame = 0
 let physicsEnabled = false
 
@@ -39,13 +41,24 @@ function landSkill(skillId) {
     y: element.offsetTop,
     vx: 0,
     vy: 0,
+    angle: 0,
+    angularVelocity: 0,
     size: element.offsetWidth || 49,
   }
 
   physicsStates.set(skillId, state)
+  if (ui.zeroGravityMode) launchInZeroGravity(skillId, state)
   applyPhysicsPosition(element, state)
   landedSkills.value = [...landedSkills.value, skillId]
   startPhysics()
+}
+
+function launchInZeroGravity(skillId, state) {
+  const index = skills.findIndex((skill) => skill.id === skillId)
+  const phase = Math.max(index, 0) * 1.73
+  state.vx += Math.cos(phase) * 0.48
+  state.vy -= 0.42 + (Math.max(index, 0) % 4) * 0.08
+  state.angularVelocity += Math.sin(phase) * 0.055
 }
 
 function handlePointerMove(event) {
@@ -54,14 +67,20 @@ function handlePointerMove(event) {
   const bounds = technologyField.value?.getBoundingClientRect()
   if (!bounds) return
 
+  const nextX = event.clientX - bounds.left
+  const nextY = event.clientY - bounds.top
+  pointer.vx = pointer.active ? nextX - pointer.x : 0
+  pointer.vy = pointer.active ? nextY - pointer.y : 0
   pointer.active = true
-  pointer.x = event.clientX - bounds.left
-  pointer.y = event.clientY - bounds.top
+  pointer.x = nextX
+  pointer.y = nextY
   startPhysics()
 }
 
 function handlePointerLeave() {
   pointer.active = false
+  pointer.vx = 0
+  pointer.vy = 0
   startPhysics()
 }
 
@@ -74,6 +93,7 @@ function startPhysics() {
 function applyPhysicsPosition(element, state) {
   element.style.setProperty('--physics-x', `${state.x.toFixed(2)}px`)
   element.style.setProperty('--physics-y', `${state.y.toFixed(2)}px`)
+  element.style.setProperty('--physics-rotation', `${state.angle.toFixed(2)}deg`)
 }
 
 function resolveCollisions(states) {
@@ -112,17 +132,24 @@ function resolveCollisions(states) {
         first.vy -= impulse * normalY
         second.vx += impulse * normalX
         second.vy += impulse * normalY
+
+        const contactOffset = normalX ? deltaY : deltaX
+        const torque = impulse * (contactOffset / Math.max(first.size, second.size)) * 0.12
+        first.angularVelocity = Math.max(-2.2, Math.min(2.2, first.angularVelocity - torque))
+        second.angularVelocity = Math.max(-2.2, Math.min(2.2, second.angularVelocity + torque))
       }
     }
   }
 }
 
-function updatePhysics() {
+function updatePhysics(timestamp = 0) {
   animationFrame = 0
   let needsNextFrame = false
+  const zeroGravity = ui.zeroGravityMode
   const fieldWidth = technologyField.value?.clientWidth ?? 0
   const fieldHeight = technologyField.value?.clientHeight ?? 0
   const states = [...physicsStates.values()]
+  let stateIndex = 0
 
   for (const [skillId, state] of physicsStates) {
     const element = dropElements.get(skillId)
@@ -142,22 +169,47 @@ function updatePhysics() {
         const force = (1 - distance / radius) * 1.15
         state.vx += (deltaX / distance) * force
         state.vy += (deltaY / distance) * force
+
+        const leverX = pointer.x - centerX
+        const leverY = pointer.y - centerY
+        const cursorTorque = (leverX * pointer.vy - leverY * pointer.vx) * force * 0.0009
+        state.angularVelocity = Math.max(-2.2, Math.min(2.2, state.angularVelocity + cursorTorque))
         needsNextFrame = true
       }
     }
 
-    state.vy += 0.2
-    state.vx *= 0.985
-    state.vy *= 0.995
+    if (zeroGravity) {
+      const driftPhase = timestamp * 0.00055 + stateIndex * 1.37
+      state.vx += Math.cos(driftPhase) * 0.004
+      state.vy += Math.sin(driftPhase * 0.83) * 0.004
+      state.vx *= 0.997
+      state.vy *= 0.997
+      state.angularVelocity *= 0.992
+    } else {
+      state.vy += 0.2
+      state.vx *= 0.985
+      state.vy *= 0.995
+      state.angularVelocity *= 0.94
+    }
+
     state.x += state.vx
     state.y += state.vy
+    state.angle += state.angularVelocity
+    stateIndex += 1
+
+    if (state.angle < -16 || state.angle > 16) {
+      state.angle = Math.max(-16, Math.min(16, state.angle))
+      state.angularVelocity *= -0.28
+    }
 
     if (state.x < 0) {
       state.x = 0
       state.vx = Math.abs(state.vx) * 0.42
+      state.angularVelocity += state.vy * 0.018
     } else if (state.x + state.size > fieldWidth) {
       state.x = Math.max(0, fieldWidth - state.size)
       state.vx = -Math.abs(state.vx) * 0.42
+      state.angularVelocity -= state.vy * 0.018
     }
 
     if (state.y < 0) {
@@ -166,7 +218,9 @@ function updatePhysics() {
     } else if (state.y + state.size > fieldHeight) {
       state.y = Math.max(0, fieldHeight - state.size)
       state.vy = Math.abs(state.vy) < 0.42 ? 0 : -Math.abs(state.vy) * 0.24
+      state.angularVelocity += state.vx * 0.035
       state.vx *= 0.9
+      state.angularVelocity *= 0.78
     }
   }
 
@@ -187,15 +241,21 @@ function updatePhysics() {
       return horizontalOverlap > 5 && verticalGap < 2
     })
 
-    if (isSupported && !pointer.active && Math.abs(state.vy) < 0.14) state.vy = 0
-    if (isSupported && Math.abs(state.vx) < 0.025) state.vx = 0
+    if (!zeroGravity) {
+      if (isSupported && !pointer.active && Math.abs(state.vy) < 0.14) state.vy = 0
+      if (isSupported && Math.abs(state.vx) < 0.025) state.vx = 0
+      if (isSupported && Math.abs(state.angularVelocity) < 0.012) state.angularVelocity = 0
+    }
 
-    if (Math.abs(state.vx) > 0.025 || Math.abs(state.vy) > 0.12) {
+    if (zeroGravity || Math.abs(state.vx) > 0.025 || Math.abs(state.vy) > 0.12 || Math.abs(state.angularVelocity) > 0.012) {
       needsNextFrame = true
     }
 
     applyPhysicsPosition(element, state)
   }
+
+  pointer.vx *= 0.55
+  pointer.vy *= 0.55
 
   if (needsNextFrame) animationFrame = globalThis.requestAnimationFrame(updatePhysics)
 }
@@ -212,6 +272,16 @@ onBeforeUnmount(() => {
   }
   globalThis.removeEventListener?.('resize', startPhysics)
 })
+
+watch(
+  () => ui.zeroGravityMode,
+  (enabled) => {
+    if (enabled) {
+      physicsStates.forEach((state, skillId) => launchInZeroGravity(skillId, state))
+    }
+    startPhysics()
+  },
+)
 </script>
 
 <template>
@@ -259,7 +329,6 @@ onBeforeUnmount(() => {
         >
           <span class="tech-card__mark" aria-hidden="true">{{ item.shortName }}</span>
           <span class="tech-card__name">{{ item.name }}</span>
-          <span v-if="selectedSkill === item.id" class="tech-card__status">{{ $t('home.selected') }}</span>
         </button>
       </div>
     </div>
@@ -354,7 +423,7 @@ onBeforeUnmount(() => {
     bottom: auto;
     left: 0;
     opacity: 1;
-    transform: translate3d(var(--physics-x, 0), var(--physics-y, 0), 0);
+    transform: translate3d(var(--physics-x, 0), var(--physics-y, 0), 0) rotate(var(--physics-rotation, 0deg));
   }
 
   &:hover,
@@ -400,11 +469,6 @@ onBeforeUnmount(() => {
     font-weight: 750;
   }
 
-  &__status {
-    color: var(--color-secondary);
-    font-size: 0.4rem;
-    font-weight: 750;
-  }
 }
 
 .tech-drop--javascript .tech-card__mark { color: var(--color-secondary); }
@@ -413,6 +477,7 @@ onBeforeUnmount(() => {
 .tech-drop--database .tech-card__mark { color: #8aa8ff; }
 .tech-drop--ecosystem .tech-card__mark { color: #8d7dff; }
 .tech-drop--testing .tech-card__mark { color: #ff6f91; }
+.tech-drop--packages .tech-card__mark { color: #ffb86b; }
 
 @keyframes orbit { to { transform: rotate(1turn); } }
 
