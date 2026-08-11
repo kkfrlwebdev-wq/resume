@@ -2,7 +2,7 @@
 
 Адаптивне SPA-портфоліо у темній cyan-естетиці. Проєкт створено на Vue 3 без TypeScript, із Composition API, Vite, Pinia та SCSS.
 
-Докладна інструкція з оновлення особистих даних, проєктів, зображень і резюме: [DATA_CUSTOMIZATION.md](DATA_CUSTOMIZATION.md).
+Докладна інструкція з оновлення особистих даних, проєктів, зображень і резюме: [DATA_CUSTOMIZATION.md](DATA_CUSTOMIZATION.md). Принципи організації коду описані в [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Можливості
 
@@ -66,12 +66,15 @@ VITE_WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
 
 ```text
 src/
+├── app/router/      # конфігурація Vue Router
 ├── assets/          # SCSS і зображення
 ├── components/      # base, layout та feature-компоненти
 ├── composables/     # повторно використовувана логіка
 ├── data/            # контент портфоліо
-├── router/          # маршрутизація
+├── i18n/            # локалізація
+├── layouts/         # спільні оболонки сторінок
+├── pages/           # route-level компоненти, як у Nuxt
+├── plugins/         # реєстрація Pinia, i18n та router
 ├── services/        # інтеграції API
-├── stores/          # Pinia stores
-└── views/           # сторінки маршрутизатора
+└── stores/          # Pinia stores
 ```

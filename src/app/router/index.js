@@ -1,47 +1,55 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { i18n } from '@/i18n'
 
-const routes = [
+const pageModules = import.meta.glob('../../pages/*.vue')
+
+function page(filename) {
+  const component = pageModules[`../../pages/${filename}`]
+  if (!component) throw new Error(`Page component not found: ${filename}`)
+  return component
+}
+
+export const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/HomeView.vue'),
+    component: page('index.vue'),
     meta: { titleKey: 'routes.home' },
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('@/views/AboutView.vue'),
+    component: page('about.vue'),
     meta: { titleKey: 'routes.about' },
   },
   {
     path: '/services',
     name: 'services',
-    component: () => import('@/views/ServicesView.vue'),
+    component: page('services.vue'),
     meta: { titleKey: 'routes.services' },
   },
   {
     path: '/portfolio',
     name: 'portfolio',
-    component: () => import('@/views/PortfolioView.vue'),
+    component: page('portfolio.vue'),
     meta: { titleKey: 'routes.portfolio' },
   },
   {
     path: '/contact',
     name: 'contact',
-    component: () => import('@/views/ContactView.vue'),
+    component: page('contact.vue'),
     meta: { titleKey: 'routes.contact' },
   },
   {
     path: '/desktop',
     name: 'desktop',
-    component: () => import('@/views/DesktopView.vue'),
+    component: page('desktop.vue'),
     meta: { titleKey: 'routes.desktop' },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: () => import('@/views/NotFoundView.vue'),
+    component: page('[...path].vue'),
     meta: { titleKey: 'routes.notFound' },
   },
 ]

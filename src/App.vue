@@ -2,7 +2,7 @@
 import { nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import AppShell from '@/components/layout/AppShell.vue'
+import DefaultLayout from '@/layouts/default.vue'
 import ToastStack from '@/components/base/ToastStack.vue'
 import { useUiStore } from '@/stores/uiStore'
 import { useAchievementsStore } from '@/stores/achievementsStore'
@@ -187,13 +187,13 @@ watch(
 <template>
   <div :class="['site-root', { 'zero-gravity-mode': ui.zeroGravityMode }]">
     <a class="skip-link" href="#main-content">{{ t('accessibility.skip') }}</a>
-    <AppShell>
+    <DefaultLayout>
       <RouterView v-slot="{ Component, route: viewRoute }">
         <Transition name="page" mode="out-in">
           <component :is="Component" :key="viewRoute.path" />
         </Transition>
       </RouterView>
-    </AppShell>
+    </DefaultLayout>
     <ToastStack />
   </div>
 </template>

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#02070b" />
     <meta
       name="description"
-      content="Резюме frontend-розробника Миколи Кольченка — JavaScript, Vue.js, Node.js, MongoDB, SQL, Vite, Pinia, NVM, uuid і Git."
+      content="Резюме Миколи Кольченка — Frontend Developer, Vue.js і JavaScript."
     />
     <title>Резюме — Микола Кольченко</title>
     <style>
@@ -338,6 +338,12 @@
         line-height: 1;
       }
 
+      .metric--languages dt {
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
       .metric dd {
         margin: 5px 0 0;
         color: var(--muted);
@@ -370,7 +376,7 @@
         position: absolute;
         top: 5px;
         bottom: 2px;
-        left: 4px;
+        left: 0;
         width: 1px;
         background: #b9d3da;
         content: "";
@@ -379,7 +385,7 @@
       .experience-card::after {
         position: absolute;
         top: 4px;
-        left: 0;
+        left: -4px;
         width: 9px;
         height: 9px;
         border: 2px solid var(--paper);
@@ -587,6 +593,7 @@
       }
 
       .availability-card {
+        margin-top: 8px;
         padding: 12px;
         border: 1px solid rgba(39, 169, 120, 0.28);
         border-radius: 9px;
@@ -819,9 +826,9 @@
             <span>KOLYA KOLCHENKO · RESUME</span>
           </a>
           <h1>Микола <span>Кольченко</span></h1>
-          <p class="role">Frontend Developer</p>
+          <p class="role">Frontend Developer · Vue.js · JavaScript</p>
           <p class="specialization">
-            Vue.js · JavaScript · Node.js · адаптивні вебінтерфейси
+            Адаптивні сайти · Vue 3 SPA · API · тестування · деплой
           </p>
         </div>
 
@@ -829,19 +836,19 @@
           <div class="status">Доступний для фриланс-проєктів</div>
           <ul class="contact-list">
             <li>
-              <a href="mailto:kk.frl.webdev@gmail.com"><span class="contact-icon" aria-hidden="true">@</span>kk.frl.webdev@gmail.com</a>
+              <a target="_blank" href="mailto:kk.frl.webdev@gmail.com"><span class="contact-icon" aria-hidden="true">@</span>kk.frl.webdev@gmail.com</a>
             </li>
             <li>
-              <a href="tel:+380509256571"><span class="contact-icon" aria-hidden="true">#</span>+38 (050) 925 65 71</a>
+              <a target="_blank" href="tel:+380509256571"><span class="contact-icon" aria-hidden="true">#</span>+38 (050) 925 65 71</a>
             </li>
             <li>
-              <a href="https://github.com/kkfrlwebdev-wq"><span class="contact-icon" aria-hidden="true">↗</span>github.com/kkfrlwebdev-wq</a>
+              <a target="_blank" href="https://github.com/kkfrlwebdev-wq"><span class="contact-icon" aria-hidden="true">↗</span>github.com/kkfrlwebdev-wq</a>
             </li>
             <li>
-              <a href="https://www.linkedin.com/in/kolya-kolchenko/"><span class="contact-icon" aria-hidden="true">in</span>linkedin.com/in/kolya-kolchenko</a>
+              <a target="_blank" href="https://www.linkedin.com/in/kolya-kolchenko/"><span class="contact-icon" aria-hidden="true">in</span>linkedin.com/in/kolya-kolchenko</a>
             </li>
             <li>
-              <a href="https://kkfrlwebdev-wq.github.io/resume/"><span class="contact-icon" aria-hidden="true">⌂</span>онлайн-портфоліо</a>
+              <a target="_blank" href="https://kkfrlwebdev-wq.github.io/resume/"><span class="contact-icon" aria-hidden="true">⌂</span>онлайн-портфоліо</a>
             </li>
           </ul>
         </aside>
@@ -850,63 +857,36 @@
       <div class="resume-body">
         <section class="summary-row" aria-labelledby="profile-title">
           <div>
-            <h2 id="profile-title" class="section-title">Профіль</h2>
+            <h2 id="profile-title" class="section-title">Profile</h2>
             <p>
-              Frontend-розробник із 2+ роками практики. Створюю та підтримую <strong>адаптивні сайти й Vue-застосунки</strong>:
-              від семантичної верстки до компонентів, інтеграції даних, тестів і деплою.
+              Frontend Developer із 2+ роками практики. Розробляю <strong>адаптивні сайти та Vue 3 SPA</strong>, працюю з компонентами, API, state management, локалізацією, тестуванням і деплоєм.
             </p>
           </div>
 
           <dl class="metrics" aria-label="Ключові показники">
             <div class="metric"><dt>2+</dt><dd>роки практичного досвіду</dd></div>
             <div class="metric"><dt>8</dt><dd>проєктів у портфоліо</dd></div>
-            <div class="metric"><dt>UA / EN</dt><dd>мови спілкування</dd></div>
+            <div class="metric metric--languages"><dt>UA · EN</dt><dd>Українська · English</dd></div>
           </dl>
         </section>
 
         <div class="resume-columns">
           <div class="main-column">
             <section class="resume-section" aria-labelledby="experience-title">
-              <h2 id="experience-title" class="section-title">Досвід</h2>
+              <h2 id="experience-title" class="section-title">Experience</h2>
               <article class="experience-card">
                 <div class="experience-heading">
-                  <h3>Frontend Developer · Проєктна практика</h3>
-                  <span>2+ РОКИ</span>
+                  <h3>Frontend Developer · Project Practice</h3>
+                  <span>2+ YEARS</span>
                 </div>
-                <p>Комерційні сайти, лендінги, SPA та персональні портфоліо.</p>
                 <ul class="bullet-list">
-                  <li>Vue 3 та JavaScript: компоненти, маршрутизація, керування станом і локалізація.</li>
-                  <li>HTML5, SCSS/Less: mobile-first верстка, кросбраузерність, семантика й доступність.</li>
-                  <li>Node.js, EJS, MongoDB і SQL: шаблони, робота з даними та інтеграція API.</li>
-                  <li>Git, Vite, Vitest і GitHub Actions: збірка, тестування та автоматизований деплой.</li>
+                  <li>Розробка комерційних сайтів, лендингів, SPA та портфоліо.</li>
+                  <li>Vue 3: компоненти, маршрутизація, state management, локалізація.</li>
+                  <li>Responsive / mobile-first верстка та cross-browser compatibility.</li>
+                  <li>Інтеграція API та робота з даними.</li>
+                  <li>Git, тестування та deployment.</li>
                 </ul>
               </article>
-            </section>
-
-            <section class="resume-section" aria-labelledby="projects-title">
-              <h2 id="projects-title" class="section-title">Вибрані проєкти</h2>
-              <div class="project-grid">
-                <article class="project-card">
-                  <header><h3>Portfolio</h3><span>Vue SPA</span></header>
-                  <p>Двомовне портфоліо з інтерактивним desktop, формою та фізикою UI.</p>
-                  <div class="tags"><span class="tag">Vue 3</span><span class="tag">Pinia</span><span class="tag">Vite</span></div>
-                </article>
-                <article class="project-card">
-                  <header><h3>IZOMAKERS</h3><span>Комерційний сайт</span></header>
-                  <p>Сайт компанії системних рішень для ізоляції будівель.</p>
-                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
-                </article>
-                <article class="project-card">
-                  <header><h3>Sonic Logistics</h3><span>Корпоративний сайт</span></header>
-                  <p>Сайт логістичної компанії для клієнтів і партнерів.</p>
-                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
-                </article>
-                <article class="project-card">
-                  <header><h3>Boo</h3><span>Крипто-лендінг</span></header>
-                  <p>Промосайт токена з тематичною графікою та адаптивним UI.</p>
-                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
-                </article>
-              </div>
             </section>
 
             <section class="resume-section" aria-labelledby="services-title">
@@ -918,42 +898,60 @@
                 <li>Підтримка й деплой</li>
               </ul>
             </section>
+
+            <section class="resume-section" aria-labelledby="projects-title">
+              <h2 id="projects-title" class="section-title">Selected Projects</h2>
+              <div class="project-grid">
+                <article class="project-card">
+                  <header><h3><a href="https://kkfrlwebdev-wq.github.io/resume/">Portfolio — Vue 3 SPA</a></h3><span>Vue SPA</span></header>
+                  <p>Двомовне SPA з інтерактивним UI, формами та адаптивним дизайном.</p>
+                  <div class="tags"><span class="tag">Vue 3</span><span class="tag">Pinia</span><span class="tag">Vite</span></div>
+                </article>
+                <article class="project-card">
+                  <header><h3><a href="http://izomakers.com/">IZOMAKERS</a></h3><span>Commercial Website</span></header>
+                  <p>Адаптивний сайт компанії з responsive UI.</p>
+                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
+                </article>
+                <article class="project-card">
+                  <header><h3><a href="https://afix-ua.github.io/Sonic-Logistics/">Sonic Logistics</a></h3><span>Corporate Website</span></header>
+                  <p>Корпоративний сайт логістичної компанії для клієнтів і партнерів.</p>
+                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
+                </article>
+                <article class="project-card">
+                  <header><h3><a href="https://afix-ua.github.io/boo/">Boo</a></h3><span>Crypto Landing Page</span></header>
+                  <p>Адаптивний промосайт із тематичною графікою.</p>
+                  <div class="tags"><span class="tag">HTML5</span><span class="tag">SCSS</span><span class="tag">JavaScript</span></div>
+                </article>
+              </div>
+            </section>
+
           </div>
 
           <aside class="side-column" aria-label="Додаткові компетенції">
             <section class="side-panel">
-              <h3>Технологічний стек</h3>
+              <h3>Tech Stack</h3>
               <div class="skill-group">
-                <strong>Основне</strong>
-                <div class="skill-tags"><span>JavaScript ES6+</span><span>Vue.js</span><span>Node.js</span><span>HTML5</span><span>CSS3</span></div>
+                <strong>Frontend</strong>
+                <div class="skill-tags"><span>JavaScript ES6+</span><span>Vue 3</span><span>HTML5</span><span>CSS3</span><span>SCSS</span><span>Less</span></div>
               </div>
               <div class="skill-group">
-                <strong>Vue та пакети</strong>
-                <div class="skill-tags"><span>Pinia</span><span>Vue Router</span><span>Vue I18n</span><span>EJS</span><span>uuid</span></div>
+                <strong>Vue</strong>
+                <div class="skill-tags"><span>Pinia</span><span>Vue Router</span><span>Vue I18n</span></div>
               </div>
               <div class="skill-group">
-                <strong>Дані та стилі</strong>
-                <div class="skill-tags"><span>MongoDB</span><span>SQL</span><span>SCSS</span><span>Less</span></div>
+                <strong>Backend</strong>
+                <div class="skill-tags"><span>Node.js</span><span>EJS</span><span>MongoDB</span><span>SQL</span></div>
               </div>
               <div class="skill-group">
-                <strong>Збірка і тестування</strong>
-                <div class="skill-tags"><span>Vite</span><span>npm</span><span>NVM</span><span>uuid</span><span>Vitest</span><span>GitHub Actions</span><span>Git</span></div>
+                <strong>Tools</strong>
+                <div class="skill-tags"><span>Vite</span><span>npm</span><span>Git</span><span>GitHub Actions</span><span>Vitest</span></div>
               </div>
-            </section>
-
-            <section class="side-panel">
-              <h3>Практика</h3>
-              <ul class="bullet-list">
-                <li>Responsive / Mobile-first</li>
-                <li>Cross-browser testing</li>
-                <li>Семантика й доступність</li>
-                <li>Чистий підтримуваний код</li>
-              </ul>
             </section>
 
             <section class="availability-card">
-              <strong>Готовий до співпраці</strong>
-              <p>Фриланс-проєкти та frontend-співпраця · Українська / English.</p>
+              <strong>Additional</strong>
+              <p>8 projects in portfolio · Ukrainian / English</p>
+              <p>Available for freelance and frontend opportunities.</p>
             </section>
           </aside>
         </div>

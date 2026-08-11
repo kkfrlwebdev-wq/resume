@@ -1,6 +1,6 @@
 <script setup>
-import AppHeader from './AppHeader.vue'
-import MobileNavigation from './MobileNavigation.vue'
+import AppHeader from '@/components/layout/AppHeader.vue'
+import MobileNavigation from '@/components/layout/MobileNavigation.vue'
 </script>
 
 <template>
