@@ -103,34 +103,34 @@ onUnmounted(() => {
   inset: 0;
   display: grid;
   place-items: center;
-  padding: clamp(12px, 3vw, 34px);
+  padding: clamp(.75rem, 3vw, 2.125rem);
   background: rgba(0, 5, 12, 0.58);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(.5rem);
 }
 
 .interactive-window {
-  width: min(100%, 920px);
+  width: min(100%, 57.5rem);
   max-height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(172, 209, 236, 0.26);
-  border-radius: 14px;
+  border: .0625rem solid rgba(172, 209, 236, 0.26);
+  border-radius: .875rem;
   background: rgba(6, 14, 22, 0.96);
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(0, 231, 240, 0.04);
+  box-shadow: 0 1.75rem 5.625rem rgba(0, 0, 0, 0.58), 0 0 0 .0625rem rgba(0, 231, 240, 0.04);
 
-  &--medium { max-width: 760px; }
-  &--large { max-width: 980px; }
+  &--medium { max-width: 47.5rem; }
+  &--large { max-width: 61.25rem; }
 }
 
 .interactive-window__bar {
-  min-height: 46px;
+  min-height: 2.875rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding-left: 15px;
-  border-bottom: 1px solid rgba(172, 209, 236, 0.14);
+  gap: 1rem;
+  padding-left: .9375rem;
+  border-bottom: .0625rem solid rgba(172, 209, 236, 0.14);
   background: linear-gradient(180deg, rgba(28, 42, 54, 0.92), rgba(13, 24, 34, 0.92));
   user-select: none;
 }
@@ -139,10 +139,10 @@ onUnmounted(() => {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: .5625rem;
 
   :deep(svg) {
-    width: 17px;
+    width: 1.0625rem;
     color: var(--color-primary);
   }
 
@@ -162,7 +162,7 @@ onUnmounted(() => {
 
   > span,
   > button {
-    width: 46px;
+    width: 2.875rem;
     display: grid;
     place-items: center;
     border: 0;
@@ -170,15 +170,15 @@ onUnmounted(() => {
   }
 
   > span::before {
-    width: 10px;
-    height: 1px;
+    width: .625rem;
+    height: .0625rem;
     content: '';
     background: var(--color-muted);
   }
 
   > span:nth-child(2)::before {
-    height: 9px;
-    border: 1px solid var(--color-muted);
+    height: .5625rem;
+    border: .0625rem solid var(--color-muted);
     background: transparent;
   }
 
@@ -188,7 +188,7 @@ onUnmounted(() => {
 
     &:hover { background: #c42b3b; }
 
-    svg { width: 17px; }
+    svg { width: 1.0625rem; }
   }
 }
 
@@ -198,7 +198,7 @@ onUnmounted(() => {
   overflow: auto;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 40em) {
   .window-overlay { padding: 0; }
 
   .interactive-window {

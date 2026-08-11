@@ -49,8 +49,8 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
 <style lang="scss" scoped>
 .home-view {
   position: relative;
-  min-height: calc(100vh - var(--header-height) - 30px);
-  min-height: calc(100dvh - var(--header-height) - 30px);
+  min-height: calc(100vh - var(--header-height) - 1.875rem);
+  min-height: calc(100dvh - var(--header-height) - 1.875rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,9 +58,9 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1.1fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(28.75rem, 1.1fr);
   align-items: center;
-  gap: clamp(30px, 5vw, 80px);
+  gap: clamp(1.875rem, 5vw, 5rem);
 
   > * {
     min-width: 0;
@@ -70,16 +70,16 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
   &__eyebrow { color: var(--color-primary); font-weight: 800; }
 
   h1 {
-    max-width: 650px;
-    margin-top: 8px;
+    max-width: 40.625rem;
+    margin-top: .5rem;
     font-size: clamp(3rem, 6.5vw, 6.2rem);
     line-height: 0.96;
     letter-spacing: -0.06em;
   }
 
   p {
-    max-width: 470px;
-    margin-top: 24px;
+    max-width: 29.375rem;
+    margin-top: 1.5rem;
     color: var(--color-muted);
     font-size: clamp(1rem, 1.5vw, 1.13rem);
   }
@@ -87,27 +87,27 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
   &__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin: 30px 0 clamp(40px, 7vw, 86px);
+    gap: .75rem;
+    margin: 1.875rem 0 clamp(2.5rem, 7vw, 5.375rem);
   }
 }
 
 .shortcut-hint {
   position: absolute;
-  right: 26px;
-  bottom: 16px;
+  right: 1.625rem;
+  bottom: 1rem;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: .375rem;
   color: var(--color-muted);
   font-size: 0.72rem;
 
-  span { margin-right: 6px; }
+  span { margin-right: .375rem; }
   kbd {
-    min-width: 24px;
-    padding: 2px 5px;
-    border: 1px solid rgba(255, 208, 0, 0.45);
-    border-radius: 4px;
+    min-width: 1.5rem;
+    padding: .125rem .3125rem;
+    border: .0625rem solid rgba(255, 208, 0, 0.45);
+    border-radius: .25rem;
     background: rgba(255, 208, 0, 0.07);
     color: var(--color-secondary);
     font-family: var(--font-mono);
@@ -116,17 +116,17 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
   b { font-weight: 400; }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 65.625em) {
   .hero { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 820px) {
-  .home-view { padding-top: 54px; }
+@media (max-width: 51.25em) {
+  .home-view { padding-top: 3.375rem; }
   .hero { grid-template-columns: minmax(0, 1fr); }
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
-    margin-bottom: 36px;
+    margin-bottom: 2.25rem;
   }
   .hero__actions :deep(.base-button) { width: 100%; }
   .shortcut-hint { display: none; }

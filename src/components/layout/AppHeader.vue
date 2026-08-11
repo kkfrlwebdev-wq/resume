@@ -51,15 +51,15 @@ function handleLogoClick() {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 24px;
-  padding: 0 clamp(18px, 3vw, 34px);
-  border-bottom: 1px solid rgba(148, 183, 199, 0.12);
+  gap: 1.5rem;
+  padding: 0 clamp(1.125rem, 3vw, 2.125rem);
+  border-bottom: .0625rem solid rgba(148, 183, 199, 0.12);
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 17px;
+  gap: 1.0625rem;
   width: max-content;
   font-size: 0.83rem;
   font-weight: 800;
@@ -68,21 +68,21 @@ function handleLogoClick() {
 .top-nav {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 2.3vw, 34px);
+  gap: clamp(.75rem, 2.3vw, 2.125rem);
 
   a {
     position: relative;
-    padding: 9px 8px;
+    padding: .5625rem .5rem;
     color: #b8c2c7;
     font-size: 0.8rem;
     transition: color var(--transition);
 
     &::after {
       position: absolute;
-      right: 8px;
-      bottom: 2px;
-      left: 8px;
-      height: 1px;
+      right: .5rem;
+      bottom: .125rem;
+      left: .5rem;
+      height: .0625rem;
       background: var(--color-primary);
       content: '';
       transform: scaleX(0);
@@ -97,28 +97,28 @@ function handleLogoClick() {
 
 .game-link {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 2.375rem;
+  height: 2.375rem;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: .0625rem solid rgba(255, 255, 255, 0.05);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.025);
   color: var(--color-primary);
 
-  svg { width: 18px; }
+  svg { width: 1.125rem; }
   &:hover { border-color: var(--color-border-bright); }
 }
 
-.header-actions { justify-self: end; display: flex; align-items: center; gap: 14px; }
+.header-actions { justify-self: end; display: flex; align-items: center; gap: .875rem; }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
   .app-header { grid-template-columns: 1fr auto; }
   .top-nav { display: none; }
 }
 
-@media (max-width: 480px) {
-  .app-header { gap: 10px; padding-inline: 14px; }
-  .brand { gap: 10px; font-size: 0.72rem; }
-  .header-actions { gap: 7px; }
+@media (max-width: 30em) {
+  .app-header { gap: .625rem; padding-inline: .875rem; }
+  .brand { gap: .625rem; font-size: 0.72rem; }
+  .header-actions { gap: .4375rem; }
 }
 </style>

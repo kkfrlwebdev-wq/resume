@@ -30,7 +30,7 @@ const localizedServices = computed(() => services.map((service) => ({
 
 <style lang="scss" scoped>
 .services-view {
-  min-height: calc(100dvh - var(--header-height) - 30px);
+  min-height: calc(100dvh - var(--header-height) - 1.875rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,9 +39,9 @@ const localizedServices = computed(() => services.map((service) => ({
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(14px, 2vw, 24px);
+  gap: clamp(.875rem, 2vw, 1.5rem);
 }
 
-@media (max-width: 1100px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 580px) { .services-grid { grid-template-columns: 1fr; } }
+@media (max-width: 68.75em) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 36.25em) { .services-grid { grid-template-columns: 1fr; } }
 </style>

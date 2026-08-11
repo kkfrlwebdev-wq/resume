@@ -32,30 +32,30 @@ const tag = computed(() => (props.to ? RouterLink : props.href ? 'a' : 'button')
 
 <style lang="scss" scoped>
 .base-button {
-  min-height: 46px;
+  min-height: 2.875rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 11px 18px;
-  border: 1px solid transparent;
-  border-radius: 9px;
+  gap: .625rem;
+  padding: .6875rem 1.125rem;
+  border: .0625rem solid transparent;
+  border-radius: .5625rem;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 750;
   line-height: 1;
   transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
 
-  :deep(svg) { width: 18px; height: 18px; }
+  :deep(svg) { width: 1.125rem; height: 1.125rem; }
 
-  &:hover { transform: translateY(-2px); }
+  &:hover { transform: translateY(-.125rem); }
 
   &--primary {
     background: linear-gradient(135deg, #00d8e1, #00b8c5);
     color: #001013;
-    box-shadow: 0 8px 26px rgba(0, 215, 225, 0.16);
+    box-shadow: 0 .5rem 1.625rem rgba(0, 215, 225, 0.16);
 
-    &:hover { box-shadow: 0 10px 34px rgba(0, 215, 225, 0.3); }
+    &:hover { box-shadow: 0 .625rem 2.125rem rgba(0, 215, 225, 0.3); }
   }
 
   &--outline {

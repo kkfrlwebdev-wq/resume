@@ -12,7 +12,7 @@
   font-weight: 800;
   letter-spacing: -0.18em;
 
-  b { font-weight: 800; transform: translateY(-1px); }
+  b { font-weight: 800; transform: translateY(-.0625rem); }
   i { font-style: normal; }
 }
 </style>

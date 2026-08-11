@@ -77,7 +77,7 @@ function closeApp() {
 
   :deep(.interactive-window) {
     opacity: 0;
-    transform: translateY(14px) scale(0.97);
+    transform: translateY(.875rem) scale(0.97);
   }
 }
 </style>

@@ -1,5 +1,5 @@
 body {
-  min-width: 320px;
+  min-width: 20rem;
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
@@ -8,7 +8,7 @@ body {
     var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,8 +19,8 @@ a,
 input,
 textarea {
   &:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
+    outline: .125rem solid var(--color-primary);
+    outline-offset: .1875rem;
   }
 }
 
@@ -34,8 +34,8 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: .625rem;
+  height: .625rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -43,8 +43,8 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  border: 3px solid var(--color-bg);
-  border-radius: 999px;
+  border: .1875rem solid var(--color-bg);
+  border-radius: 62.4375rem;
   background: #1a343f;
 }
 
@@ -54,18 +54,18 @@ button {
 }
 
 .page-container {
-  width: min(100%, 1260px);
+  width: min(100%, 78.75rem);
   margin-inline: auto;
-  padding: clamp(36px, 6vw, 88px) clamp(20px, 4vw, 68px);
+  padding: clamp(2.25rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 4.25rem);
 }
 
 .page-heading {
-  max-width: 680px;
-  margin-bottom: clamp(32px, 5vw, 56px);
+  max-width: 42.5rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
 
   &__eyebrow {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: .5rem;
     color: var(--color-primary);
     font-size: 0.88rem;
     font-weight: 700;
@@ -79,18 +79,18 @@ button {
   }
 
   p {
-    max-width: 600px;
-    margin-top: 18px;
+    max-width: 37.5rem;
+    margin-top: 1.125rem;
     color: var(--color-muted);
   }
 }
 
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: .0625rem;
+  height: .0625rem;
   padding: 0;
-  margin: -1px;
+  margin: -.0625rem;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
@@ -100,9 +100,9 @@ button {
 .skip-link {
   position: fixed;
   z-index: 1000;
-  top: 12px;
-  left: 12px;
-  padding: 10px 16px;
+  top: .75rem;
+  left: .75rem;
+  padding: .625rem 1rem;
   border-radius: var(--radius-sm);
   background: var(--color-primary);
   color: #001014;
@@ -121,12 +121,12 @@ button {
 
 .page-enter-from {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(.5rem);
 }
 
 .page-leave-to {
   opacity: 0;
-  transform: translateY(-5px);
+  transform: translateY(-.3125rem);
 }
 
 .zero-gravity-mode {

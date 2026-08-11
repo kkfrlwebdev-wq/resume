@@ -21,6 +21,7 @@ const skillSettings = new Map(skills.map((skill) => [skill.id, skill]))
 const pointer = { active: false, x: 0, y: 0, vx: 0, vy: 0 }
 let animationFrame = 0
 let physicsEnabled = false
+let rootUnitSize
 
 function toggleSkill(skillId) {
   selectedSkill.value = selectedSkill.value === skillId ? null : skillId
@@ -90,9 +91,14 @@ function startPhysics() {
   }
 }
 
+function toRootUnit(value) {
+  rootUnitSize ??= Number.parseFloat(globalThis.getComputedStyle?.(document.documentElement).fontSize) || 16
+  return `${value / rootUnitSize}rem`
+}
+
 function applyPhysicsPosition(element, state) {
-  element.style.setProperty('--physics-x', `${state.x.toFixed(2)}px`)
-  element.style.setProperty('--physics-y', `${state.y.toFixed(2)}px`)
+  element.style.setProperty('--physics-x', toRootUnit(state.x))
+  element.style.setProperty('--physics-y', toRootUnit(state.y))
   element.style.setProperty('--physics-rotation', `${state.angle.toFixed(2)}deg`)
 }
 
@@ -323,7 +329,7 @@ watch(
         ]"
         :style="{
           '--x': `${item.x}%`,
-          '--land-y': `${item.landY}px`,
+          '--land-y': toRootUnit(item.landY),
           '--delay': `${item.delay}s`,
           '--duration': `${item.duration}s`,
         }"
@@ -347,7 +353,7 @@ watch(
 <style lang="scss" scoped>
 .hero-visual {
   position: relative;
-  min-height: 540px;
+  min-height: 33.75rem;
   overflow: visible;
 }
 
@@ -355,10 +361,10 @@ watch(
   position: absolute;
   top: 61%;
   left: 50%;
-  width: min(410px, 85%);
+  width: min(25.625rem, 85%);
   aspect-ratio: 1;
   border-radius: 50%;
-  filter: drop-shadow(0 0 20px rgba(0, 231, 240, 0.18));
+  filter: drop-shadow(0 0 1.25rem rgba(0, 231, 240, 0.18));
   transform: translate(-50%, -50%) rotate(-16deg);
 
   &::after {
@@ -366,14 +372,14 @@ watch(
     inset: 24%;
     border-radius: 50%;
     background: rgba(0, 231, 240, 0.06);
-    box-shadow: 0 0 60px rgba(0, 231, 240, 0.16);
+    box-shadow: 0 0 3.75rem rgba(0, 231, 240, 0.16);
     content: '';
   }
 
   i {
     position: absolute;
     inset: calc(var(--index) * 2.5%);
-    border: 1px solid rgba(0, 231, 240, calc(.15 + var(--index) * .025));
+    border: .0625rem solid rgba(0, 231, 240, calc(.15 + var(--index) * .025));
     border-radius: 48% 52% 60% 40% / 42% 48% 52% 58%;
     animation: orbit calc(12s + var(--index) * 1s) linear infinite;
   }
@@ -382,29 +388,29 @@ watch(
 .capability-grid {
   position: absolute;
   z-index: 4;
-  top: -120px;
+  top: -7.5rem;
   right: 0;
   left: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: .625rem;
 }
 
 .capability {
-  min-height: 74px;
+  min-height: 4.625rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  padding: 10px;
-  border: 1px solid var(--color-border);
+  gap: .5625rem;
+  padding: .625rem;
+  border: .0625rem solid var(--color-border);
   border-radius: var(--radius-md);
   background: rgba(5, 14, 20, 0.9);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.34);
-  backdrop-filter: blur(14px);
+  box-shadow: 0 1rem 2.8125rem rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(.875rem);
   text-align: center;
 
-  svg { width: 21px; flex: 0 0 auto; color: var(--color-primary); }
+  svg { width: 1.3125rem; flex: 0 0 auto; color: var(--color-primary); }
   svg.yellow { color: var(--color-secondary); }
   span { font-size: 0.68rem; font-weight: 750; }
 }
@@ -412,9 +418,9 @@ watch(
 .technology-field {
   position: absolute;
   z-index: 2;
-  top: -16px;
+  top: -1rem;
   right: 5%;
-  bottom: 38px;
+  bottom: 2.375rem;
   left: 5%;
 }
 
@@ -442,27 +448,27 @@ watch(
 }
 
 .tech-card {
-  width: 49px;
+  width: 3.0625rem;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
   align-content: center;
-  gap: 3px;
-  padding: 5px;
-  border: 1px solid rgba(0, 231, 240, 0.3);
-  border-radius: 8px;
+  gap: .1875rem;
+  padding: .3125rem;
+  border: .0625rem solid rgba(0, 231, 240, 0.3);
+  border-radius: .5rem;
   background: rgba(5, 14, 20, 0.92);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
+  box-shadow: 0 .75rem 1.875rem rgba(0, 0, 0, 0.34);
   color: var(--color-text);
   cursor: pointer;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(.75rem);
   transition: border-color var(--transition), box-shadow var(--transition);
 
   &:hover,
   &:focus-visible,
   &[aria-pressed='true'] {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 1px rgba(0, 231, 240, 0.18), 0 0 28px rgba(0, 231, 240, 0.22);
+    box-shadow: 0 0 0 .0625rem rgba(0, 231, 240, 0.18), 0 0 1.75rem rgba(0, 231, 240, 0.22);
   }
 
   &__mark {
@@ -495,65 +501,65 @@ watch(
 @keyframes technology-fall {
   0% {
     opacity: 0;
-    transform: translate3d(0, -620px, 0);
+    transform: translate3d(0, -38.75rem, 0);
   }
   8% { opacity: 1; }
   68% { transform: translate3d(0, 0, 0); }
-  78% { transform: translate3d(0, -18px, 0); }
+  78% { transform: translate3d(0, -1.125rem, 0); }
   86% { transform: translate3d(0, 0, 0); }
-  93% { transform: translate3d(0, -5px, 0); }
+  93% { transform: translate3d(0, -.3125rem, 0); }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
 
-@media (max-width: 1000px) {
-  .hero-visual { min-height: 510px; }
-  .capability-grid { top: -72px; }
-  .technology-field { top: 20px; }
-  .capability { flex-direction: column; gap: 5px; }
-  .tech-card { width: 45px; }
+@media (max-width: 62.5em) {
+  .hero-visual { min-height: 31.875rem; }
+  .capability-grid { top: -4.5rem; }
+  .technology-field { top: 1.25rem; }
+  .capability { flex-direction: column; gap: .3125rem; }
+  .tech-card { width: 2.8125rem; }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 51.25em) {
   .hero-visual {
-    min-height: 510px;
-    margin-top: 12px;
+    min-height: 31.875rem;
+    margin-top: .75rem;
     overflow: hidden;
   }
 
-  .wave-orb { top: 62%; width: min(390px, 78vw); }
+  .wave-orb { top: 62%; width: min(24.375rem, 78vw); }
 
   .capability-grid {
     top: 0;
     right: 0;
     left: 0;
     width: auto;
-    gap: 10px;
+    gap: .625rem;
   }
 
-  .capability { min-height: 76px; }
-  .technology-field { top: 94px; }
+  .capability { min-height: 4.75rem; }
+  .technology-field { top: 5.875rem; }
 }
 
-@media (max-width: 620px) {
-  .hero-visual { min-height: 550px; }
-  .wave-orb { top: 67%; width: 310px; }
-  .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .capability { min-height: 68px; flex-direction: row; }
-  .technology-field { top: 154px; right: 8%; left: 3%; }
-  .tech-card { width: 41px; }
+@media (max-width: 38.75em) {
+  .hero-visual { min-height: 34.375rem; }
+  .wave-orb { top: 67%; width: 19.375rem; }
+  .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+  .capability { min-height: 4.25rem; flex-direction: row; }
+  .technology-field { top: 9.625rem; right: 8%; left: 3%; }
+  .tech-card { width: 2.5625rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-visual { min-height: 520px; }
+  .hero-visual { min-height: 32.5rem; }
   .technology-field {
-    top: 112px;
+    top: 7rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-content: center;
-    gap: 10px;
+    gap: .625rem;
   }
   .tech-drop {
     position: static;
@@ -561,6 +567,6 @@ watch(
     place-items: center;
     animation: none;
   }
-  .tech-card { width: min(49px, 100%); }
+  .tech-card { width: min(3.0625rem, 100%); }
 }
 </style>

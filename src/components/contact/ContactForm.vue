@@ -60,29 +60,29 @@ async function handleSubmit() {
 .contact-form {
   position: relative;
   min-width: 0;
-  padding: clamp(24px, 4vw, 38px);
-  border: 1px solid var(--color-border);
+  padding: clamp(1.5rem, 4vw, 2.375rem);
+  border: .0625rem solid var(--color-border);
   border-radius: var(--radius-lg);
   background: linear-gradient(145deg, rgba(10,21,28,.96), rgba(5,13,18,.88));
-  box-shadow: 0 24px 80px rgba(0,0,0,.25);
+  box-shadow: 0 1.5rem 5rem rgba(0,0,0,.25);
 
   h2 { font-size: 1.35rem; }
-  > p { margin: 4px 0 25px; color: var(--color-muted); font-size: .8rem; }
-  > button { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; border: 0; border-radius: 8px; background: linear-gradient(135deg, #00dfe8, #00b4c0); color: #001114; cursor: pointer; font-size: .83rem; font-weight: 850; transition: var(--transition); }
-  > button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,231,240,.2); }
+  > p { margin: .25rem 0 1.5625rem; color: var(--color-muted); font-size: .8rem; }
+  > button { width: 100%; min-height: 3rem; display: flex; align-items: center; justify-content: center; gap: .625rem; margin-top: .25rem; border: 0; border-radius: .5rem; background: linear-gradient(135deg, #00dfe8, #00b4c0); color: #001114; cursor: pointer; font-size: .83rem; font-weight: 850; transition: var(--transition); }
+  > button:hover:not(:disabled) { transform: translateY(-.125rem); box-shadow: 0 .625rem 1.75rem rgba(0,231,240,.2); }
   > button:disabled { opacity: .6; cursor: wait; }
-  > button svg { width: 17px; }
+  > button svg { width: 1.0625rem; }
 }
 
-.form-field { position: relative; display: grid; gap: 7px; margin-bottom: 17px; }
+.form-field { position: relative; display: grid; gap: .4375rem; margin-bottom: 1.0625rem; }
 .form-field label { color: #c7d2d6; font-size: .73rem; font-weight: 700; }
-.form-field input, .form-field textarea { width: 100%; min-width: 0; border: 1px solid var(--color-border); border-radius: 8px; background: rgba(255,255,255,.025); color: var(--color-text); transition: var(--transition); }
-.form-field input { min-height: 46px; padding: 0 14px; }
-.form-field textarea { min-height: 136px; padding: 12px 14px; resize: vertical; }
+.form-field input, .form-field textarea { width: 100%; min-width: 0; border: .0625rem solid var(--color-border); border-radius: .5rem; background: rgba(255,255,255,.025); color: var(--color-text); transition: var(--transition); }
+.form-field input { min-height: 2.875rem; padding: 0 .875rem; }
+.form-field textarea { min-height: 8.5rem; padding: .75rem .875rem; resize: vertical; }
 .form-field input::placeholder, .form-field textarea::placeholder { color: #63737b; }
 .form-field input:hover, .form-field textarea:hover { border-color: rgba(255,255,255,.24); }
-.form-field input:focus, .form-field textarea:focus { border-color: var(--color-primary); outline: 0; box-shadow: 0 0 0 3px rgba(0,231,240,.08); }
+.form-field input:focus, .form-field textarea:focus { border-color: var(--color-primary); outline: 0; box-shadow: 0 0 0 .1875rem rgba(0,231,240,.08); }
 .form-field input[aria-invalid='true'], .form-field textarea[aria-invalid='true'] { border-color: var(--color-danger); }
 .form-field small { color: var(--color-danger); font-size: .66rem; }
-.honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.honeypot { position: absolute; width: .0625rem; height: .0625rem; overflow: hidden; clip-path: inset(50%); }
 </style>

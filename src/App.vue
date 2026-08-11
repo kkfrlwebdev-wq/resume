@@ -14,6 +14,7 @@ const achievements = useAchievementsStore()
 const { locale, t } = useI18n()
 let zeroGravityObserver
 let zeroGravityFrame
+let rootUnitSize
 const zeroGravityItems = new Map()
 
 const zeroGravitySelector = [
@@ -49,6 +50,15 @@ function randomBetween(min, max) {
   return min + Math.random() * (max - min)
 }
 
+function toRootUnit(value) {
+  rootUnitSize ??= Number.parseFloat(globalThis.getComputedStyle?.(document.documentElement).fontSize) || 16
+  return `${value / rootUnitSize}rem`
+}
+
+function positionToRootUnits(position) {
+  return `${toRootUnit(position.x)} ${toRootUnit(position.y)}`
+}
+
 function randomPosition() {
   return {
     x: randomBetween(-46, 46),
@@ -66,8 +76,8 @@ function animateZeroGravityItem(element, from) {
   const to = randomPosition()
   const animation = element.animate(
     [
-      { translate: `${from.x}px ${from.y}px`, rotate: `${from.rotation}deg` },
-      { translate: `${to.x}px ${to.y}px`, rotate: `${to.rotation}deg` },
+      { translate: positionToRootUnits(from), rotate: `${from.rotation}deg` },
+      { translate: positionToRootUnits(to), rotate: `${to.rotation}deg` },
     ],
     {
       duration: randomBetween(5600, 10400),
@@ -83,7 +93,7 @@ function animateZeroGravityItem(element, from) {
       return
     }
 
-    element.style.translate = `${to.x}px ${to.y}px`
+    element.style.translate = positionToRootUnits(to)
     element.style.rotate = `${to.rotation}deg`
     animation.cancel()
     animateZeroGravityItem(element, to)
@@ -95,7 +105,7 @@ function prepareZeroGravityItem(element) {
 
   const initialPosition = randomPosition()
   element.setAttribute('data-zero-gravity-item', '')
-  element.style.translate = `${initialPosition.x}px ${initialPosition.y}px`
+  element.style.translate = positionToRootUnits(initialPosition)
   element.style.rotate = `${initialPosition.rotation}deg`
   animateZeroGravityItem(element, initialPosition)
 }

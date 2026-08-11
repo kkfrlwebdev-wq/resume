@@ -19,23 +19,23 @@ defineProps({ service: { type: Object, required: true } })
 
 <style lang="scss" scoped>
 .service-card {
-  min-height: 320px;
+  min-height: 20rem;
   display: flex;
   flex-direction: column;
-  padding: clamp(24px, 3vw, 32px);
+  padding: clamp(1.5rem, 3vw, 2rem);
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: .0625rem solid var(--color-border);
   border-radius: var(--radius-md);
   background: linear-gradient(145deg, rgba(10, 21, 28, .92), rgba(4, 11, 16, .82));
   transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 
-  &:hover { transform: translateY(-5px); border-color: var(--color-border-bright); box-shadow: var(--shadow-glow); }
-  &__icon { width: 39px; height: 39px; margin-bottom: 28px; color: var(--color-primary); }
+  &:hover { transform: translateY(-.3125rem); border-color: var(--color-border-bright); box-shadow: var(--shadow-glow); }
+  &__icon { width: 2.4375rem; height: 2.4375rem; margin-bottom: 1.75rem; color: var(--color-primary); }
   &__icon.yellow { color: var(--color-secondary); }
   h2 { font-size: 1.12rem; }
-  p { margin-top: 13px; color: var(--color-muted); font-size: .88rem; }
-  ul { display: grid; gap: 7px; margin-top: auto; padding-top: 25px; }
-  li { display: flex; align-items: center; gap: 8px; color: #bdc8cd; font-size: .75rem; }
-  li svg { width: 14px; color: var(--color-primary); }
+  p { margin-top: .8125rem; color: var(--color-muted); font-size: .88rem; }
+  ul { display: grid; gap: .4375rem; margin-top: auto; padding-top: 1.5625rem; }
+  li { display: flex; align-items: center; gap: .5rem; color: #bdc8cd; font-size: .75rem; }
+  li svg { width: .875rem; color: var(--color-primary); }
 }
 </style>

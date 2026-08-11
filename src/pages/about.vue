@@ -48,7 +48,7 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
 <style lang="scss" scoped>
 .about-view {
   position: relative;
-  min-height: calc(100dvh - var(--header-height) - 30px);
+  min-height: calc(100dvh - var(--header-height) - 1.875rem);
   display: grid;
   align-items: center;
 }
@@ -57,23 +57,23 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(310px, 430px);
+  grid-template-columns: minmax(0, 1fr) minmax(19.375rem, 26.875rem);
   align-items: center;
-  gap: clamp(42px, 8vw, 120px);
+  gap: clamp(2.625rem, 8vw, 7.5rem);
 }
 
 .about-copy {
   container: about-copy / inline-size;
-  max-width: 650px;
+  max-width: 40.625rem;
 
   .eyebrow { color: var(--color-primary); font-weight: 800; }
-  h1 { margin-top: 4px; font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1; letter-spacing: -.05em; }
-  > p { max-width: 590px; margin-top: 18px; color: var(--color-muted); }
+  h1 { margin-top: .25rem; font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1; letter-spacing: -.05em; }
+  > p { max-width: 36.875rem; margin-top: 1.125rem; color: var(--color-muted); }
   .lead { color: #c7d1d5; font-size: 1.08rem; }
-  :deep(.statistics-list) { margin-top: 34px; }
+  :deep(.statistics-list) { margin-top: 2.125rem; }
 }
 
-.about-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.about-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
 
 .wave-lines {
   position: absolute;
@@ -88,13 +88,13 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
   i {
     position: absolute;
     inset: calc(var(--line) * 4%);
-    border-top: 1px solid rgba(0, 231, 240, calc(.1 + var(--line) * .035));
+    border-top: .0625rem solid rgba(0, 231, 240, calc(.1 + var(--line) * .035));
     border-radius: 50%;
     transform: rotate(calc(-13deg + var(--line) * 2deg));
   }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 51.25em) {
   .about-grid { grid-template-columns: 1fr; }
   .profile-card {
     width: 100%;
@@ -103,7 +103,7 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 32.5em) {
   .profile-card :deep(.profile-card__photo) { aspect-ratio: 4 / 3; }
 }
 </style>

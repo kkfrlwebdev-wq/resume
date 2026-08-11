@@ -77,35 +77,35 @@ onBeforeUnmount(() => {
   inset: 0;
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding: 1.25rem;
   background: rgba(0, 4, 7, 0.74);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(.75rem);
 }
 
 .modal {
   position: relative;
-  width: min(720px, 100%);
-  max-height: min(760px, calc(100dvh - 40px));
+  width: min(45rem, 100%);
+  max-height: min(47.5rem, calc(100dvh - 2.5rem));
   overflow: auto;
-  border: 1px solid var(--color-border-bright);
+  border: .0625rem solid var(--color-border-bright);
   border-radius: var(--radius-lg);
   background: #071118;
-  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.7), var(--shadow-glow);
+  box-shadow: 0 1.75rem 6.25rem rgba(0, 0, 0, 0.7), var(--shadow-glow);
 
   &__close {
     position: absolute;
     z-index: 2;
-    top: 14px;
-    right: 14px;
+    top: .875rem;
+    right: .875rem;
     display: grid;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     place-items: center;
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border: .0625rem solid var(--color-border);
+    border-radius: .625rem;
     background: rgba(3, 10, 15, 0.82);
     cursor: pointer;
-    svg { width: 18px; }
+    svg { width: 1.125rem; }
   }
 }
 
@@ -114,5 +114,5 @@ onBeforeUnmount(() => {
 .modal-enter-from,
 .modal-leave-to { opacity: 0; }
 .modal-enter-from .modal,
-.modal-leave-to .modal { transform: translateY(12px) scale(.98); }
+.modal-leave-to .modal { transform: translateY(.75rem) scale(.98); }
 </style>

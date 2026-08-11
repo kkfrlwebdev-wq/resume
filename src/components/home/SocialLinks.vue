@@ -16,15 +16,15 @@ import SocialIcon from './SocialIcon.vue'
 <style lang="scss" scoped>
 .social-links {
   display: flex;
-  gap: 12px;
+  gap: .75rem;
 
   a {
     display: grid;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     place-items: center;
-    border: 1px solid var(--color-border);
-    border-radius: 9px;
+    border: .0625rem solid var(--color-border);
+    border-radius: .5625rem;
     background: rgba(255, 255, 255, .025);
     color: #dce4e7;
     transition: var(--transition);
@@ -32,15 +32,15 @@ import SocialIcon from './SocialIcon.vue'
     &:hover {
       border-color: var(--color-primary);
       color: var(--color-primary);
-      transform: translateY(-2px);
+      transform: translateY(-.125rem);
     }
 
     svg {
-      width: 19px;
+      width: 1.1875rem;
     }
   }
 
-  @media (max-width:818px) {
+  @media (max-width:51.125em) {
 
     justify-content: center;
     align-items: center;

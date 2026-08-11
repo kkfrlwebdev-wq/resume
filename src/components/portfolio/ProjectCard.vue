@@ -24,20 +24,20 @@ defineEmits(['select'])
   width: 100%;
   padding: 0;
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: .0625rem solid var(--color-border);
   border-radius: var(--radius-md);
   background: rgba(7, 16, 22, .86);
   text-align: left;
   cursor: pointer;
   transition: var(--transition);
 
-  &:hover { transform: translateY(-5px); border-color: var(--color-border-bright); box-shadow: var(--shadow-glow); }
-  &:hover .project-card__copy > svg { color: var(--color-primary); transform: translate(2px,-2px); }
+  &:hover { transform: translateY(-.3125rem); border-color: var(--color-border-bright); box-shadow: var(--shadow-glow); }
+  &:hover .project-card__copy > svg { color: var(--color-primary); transform: translate(.125rem,-.125rem); }
 
-  &__copy { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px; }
+  &__copy { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.125rem; }
   &__copy > span { display: grid; }
   strong { font-size: .95rem; }
-  small { margin-top: 3px; color: var(--color-muted); font-size: .72rem; }
-  svg { width: 19px; color: var(--color-muted); transition: var(--transition); }
+  small { margin-top: .1875rem; color: var(--color-muted); font-size: .72rem; }
+  svg { width: 1.1875rem; color: var(--color-muted); transition: var(--transition); }
 }
 </style>

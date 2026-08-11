@@ -40,19 +40,19 @@ const details = computed(() => [
 <style lang="scss" scoped>
 .contact-info {
   > span { color: var(--color-primary); font-size: .86rem; font-weight: 800; }
-  h1 { margin-top: 5px; font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1; letter-spacing: -.055em; }
-  > p { max-width: 440px; margin-top: 18px; color: var(--color-muted); }
-  dl { display: grid; gap: 21px; margin-top: 34px; }
-  dl > div { display: grid; grid-template-columns: 36px 1fr; gap: 13px; align-items: center; }
-  dt { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(0,231,240,.25); border-radius: 8px; color: var(--color-primary); }
-  dt svg { width: 17px; }
+  h1 { margin-top: .3125rem; font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1; letter-spacing: -.055em; }
+  > p { max-width: 27.5rem; margin-top: 1.125rem; color: var(--color-muted); }
+  dl { display: grid; gap: 1.3125rem; margin-top: 2.125rem; }
+  dl > div { display: grid; grid-template-columns: 2.25rem 1fr; gap: .8125rem; align-items: center; }
+  dt { display: grid; width: 2.125rem; height: 2.125rem; place-items: center; border: .0625rem solid rgba(0,231,240,.25); border-radius: .5rem; color: var(--color-primary); }
+  dt svg { width: 1.0625rem; }
   dd { display: grid; margin: 0; }
   dd small { color: var(--color-dimmed); font-size: .67rem; }
   dd a, dd span { color: #d8e0e3; font-size: .83rem; }
   dd a:hover { color: var(--color-primary); }
 }
 
-.availability { width: max-content; max-width: 100%; display: flex; align-items: center; gap: 8px; margin-top: 22px; padding: 7px 11px; border: 1px solid rgba(80,227,164,.25); border-radius: 999px; color: var(--color-success); font-size: .7rem; }
-.availability svg { width: 13px; animation: pulse 2s ease infinite; }
+.availability { width: max-content; max-width: 100%; display: flex; align-items: center; gap: .5rem; margin-top: 1.375rem; padding: .4375rem .6875rem; border: .0625rem solid rgba(80,227,164,.25); border-radius: 62.4375rem; color: var(--color-success); font-size: .7rem; }
+.availability svg { width: .8125rem; animation: pulse 2s ease infinite; }
 @keyframes pulse { 50% { opacity: .35; } }
 </style>

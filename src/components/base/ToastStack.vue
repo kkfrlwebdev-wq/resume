@@ -24,46 +24,46 @@ const ui = useUiStore()
 .toast-stack {
   position: fixed;
   z-index: 300;
-  right: 20px;
-  bottom: 22px;
+  right: 1.25rem;
+  bottom: 1.375rem;
   display: grid;
-  gap: 10px;
-  width: min(370px, calc(100vw - 40px));
+  gap: .625rem;
+  width: min(23.125rem, calc(100vw - 2.5rem));
 }
 
 .toast {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 12px;
-  padding: 14px 14px 14px 16px;
-  border: 1px solid var(--color-border-bright);
-  border-radius: 12px;
+  gap: .75rem;
+  padding: .875rem .875rem .875rem 1rem;
+  border: .0625rem solid var(--color-border-bright);
+  border-radius: .75rem;
   background: rgba(5, 17, 23, 0.96);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 1.125rem 3.75rem rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(.75rem);
 
-  > svg { width: 19px; color: var(--color-primary); }
+  > svg { width: 1.1875rem; color: var(--color-primary); }
   span { font-size: 0.9rem; }
 
   button {
     display: grid;
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     place-items: center;
     border: 0;
-    border-radius: 7px;
+    border-radius: .4375rem;
     background: transparent;
     color: var(--color-muted);
     cursor: pointer;
 
     &:hover { background: rgba(255,255,255,.06); color: #fff; }
-    svg { width: 16px; }
+    svg { width: 1rem; }
   }
 }
 
 .toast-enter-active,
 .toast-leave-active { transition: 200ms ease; }
 .toast-enter-from,
-.toast-leave-to { opacity: 0; transform: translateX(20px); }
+.toast-leave-to { opacity: 0; transform: translateX(1.25rem); }
 </style>

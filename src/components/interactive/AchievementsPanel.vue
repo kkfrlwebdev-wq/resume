@@ -93,8 +93,8 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
 
 <style lang="scss" scoped>
 .achievements-panel {
-  min-height: 430px;
-  padding: clamp(22px, 4vw, 36px);
+  min-height: 26.875rem;
+  padding: clamp(1.375rem, 4vw, 2.25rem);
   background:
     radial-gradient(circle at 88% 8%, rgba(255, 208, 0, 0.08), transparent 15rem),
     linear-gradient(145deg, rgba(8, 18, 25, 0.98), rgba(4, 11, 16, 0.98));
@@ -104,7 +104,7 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 1.25rem;
 
   > div {
     display: flex;
@@ -121,10 +121,10 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
 }
 
 .progress-track {
-  height: 7px;
-  margin: 15px 0 27px;
+  height: .4375rem;
+  margin: .9375rem 0 1.6875rem;
   overflow: hidden;
-  border-radius: 99px;
+  border-radius: 6.1875rem;
   background: rgba(255, 255, 255, 0.07);
 
   span {
@@ -132,14 +132,14 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
     display: block;
     border-radius: inherit;
     background: linear-gradient(90deg, #e6a800, #ffe45b);
-    box-shadow: 0 0 15px rgba(255, 208, 0, 0.35);
+    box-shadow: 0 0 .9375rem rgba(255, 208, 0, 0.35);
     transition: width 400ms ease;
   }
 }
 
 .achievement-list {
   display: grid;
-  gap: 10px;
+  gap: .625rem;
   padding: 0;
   list-style: none;
 }
@@ -148,11 +148,11 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 14px;
-  min-height: 70px;
-  padding: 12px 14px;
-  border: 1px solid rgba(255, 208, 0, 0.21);
-  border-radius: 11px;
+  gap: .875rem;
+  min-height: 4.375rem;
+  padding: .75rem .875rem;
+  border: .0625rem solid rgba(255, 208, 0, 0.21);
+  border-radius: .6875rem;
   background: linear-gradient(90deg, rgba(255, 208, 0, 0.08), rgba(255, 255, 255, 0.018));
 
   &--locked {
@@ -163,16 +163,16 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
 }
 
 .achievement__icon {
-  width: 42px;
-  height: 42px;
+  width: 2.625rem;
+  height: 2.625rem;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 208, 0, 0.3);
+  border: .0625rem solid rgba(255, 208, 0, 0.3);
   border-radius: 50%;
   background: rgba(255, 208, 0, 0.08);
   color: var(--color-secondary);
 
-  svg { width: 20px; }
+  svg { width: 1.25rem; }
 }
 
 .achievement__copy {
@@ -193,13 +193,13 @@ const progress = computed(() => Math.round((unlockedCount.value / Math.max(achie
 .achievement--locked .achievement__status { color: var(--color-muted); }
 
 .achievements-panel__hint {
-  margin: 24px 0 0;
+  margin: 1.5rem 0 0;
   color: var(--color-muted);
   font-size: 0.75rem;
   text-align: center;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 35em) {
   .achievement { grid-template-columns: auto minmax(0, 1fr); }
   .achievement__status { grid-column: 2; }
 }

@@ -18,12 +18,12 @@ defineProps({
 
 <style lang="scss" scoped>
 .section-heading {
-  max-width: 640px;
-  margin-bottom: clamp(30px, 4.5vw, 52px);
+  max-width: 40rem;
+  margin-bottom: clamp(1.875rem, 4.5vw, 3.25rem);
 
   > span {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: .5rem;
     color: var(--color-primary);
     font-size: 0.88rem;
     font-weight: 800;
@@ -36,8 +36,8 @@ defineProps({
   }
 
   p {
-    max-width: 560px;
-    margin-top: 16px;
+    max-width: 35rem;
+    margin-top: 1rem;
     color: var(--color-muted);
   }
 }

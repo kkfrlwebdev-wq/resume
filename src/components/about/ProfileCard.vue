@@ -39,16 +39,16 @@ import { profile } from '@/data/profile'
   width: 100%;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid var(--color-border-bright);
+  border: .0625rem solid var(--color-border-bright);
   border-radius: var(--radius-lg);
   background: rgba(8, 18, 25, 0.92);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35), var(--shadow-glow);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.35), var(--shadow-glow);
 
   &__photo {
     position: relative;
     aspect-ratio: 1;
     overflow: hidden;
-    border-bottom: 1px solid var(--color-border-bright);
+    border-bottom: .0625rem solid var(--color-border-bright);
     background: #07141c;
 
     &::after {
@@ -67,15 +67,15 @@ import { profile } from '@/data/profile'
     }
   }
 
-  dl { display: grid; gap: 13px; padding: 22px; }
-  dl div { display: grid; grid-template-columns: minmax(120px, 0.8fr) 1.2fr; gap: 14px; align-items: start; }
-  dt { display: flex; align-items: center; gap: 7px; color: var(--color-primary); font-size: .77rem; font-weight: 750; }
-  dt svg { width: 14px; }
+  dl { display: grid; gap: .8125rem; padding: 1.375rem; }
+  dl div { display: grid; grid-template-columns: minmax(7.5rem, 0.8fr) 1.2fr; gap: .875rem; align-items: start; }
+  dt { display: flex; align-items: center; gap: .4375rem; color: var(--color-primary); font-size: .77rem; font-weight: 750; }
+  dt svg { width: .875rem; }
   dd { margin: 0; overflow-wrap: anywhere; color: var(--color-text); font-size: .8rem; }
   dd a:hover { color: var(--color-primary); }
 }
 
-@media (max-width: 500px) {
-  .profile-card dl div { grid-template-columns: 1fr; gap: 3px; }
+@media (max-width: 31.25em) {
+  .profile-card dl div { grid-template-columns: 1fr; gap: .1875rem; }
 }
 </style>

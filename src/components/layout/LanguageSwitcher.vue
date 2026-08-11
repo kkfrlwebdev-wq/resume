@@ -24,17 +24,17 @@ const { locale, t } = useI18n()
 .language-switcher {
   justify-self: end;
   display: inline-flex;
-  padding: 3px;
-  border: 1px solid var(--color-border);
-  border-radius: 9px;
+  padding: .1875rem;
+  border: .0625rem solid var(--color-border);
+  border-radius: .5625rem;
   background: rgba(255, 255, 255, 0.025);
 
   button {
-    min-width: 38px;
-    min-height: 30px;
-    padding: 4px 8px;
+    min-width: 2.375rem;
+    min-height: 1.875rem;
+    padding: .25rem .5rem;
     border: 0;
-    border-radius: 6px;
+    border-radius: .375rem;
     background: transparent;
     color: var(--color-muted);
     cursor: pointer;

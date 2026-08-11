@@ -16,18 +16,18 @@ import MobileNavigation from '@/components/layout/MobileNavigation.vue'
 
 <style lang="scss" scoped>
 .app-frame {
-  width: min(calc(100% - 30px), var(--container));
-  min-height: calc(100vh - 30px);
-  min-height: calc(100dvh - 30px);
+  width: min(calc(100% - 1.875rem), var(--container));
+  min-height: calc(100vh - 1.875rem);
+  min-height: calc(100dvh - 1.875rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: var(--header-height) minmax(0, 1fr);
-  margin: 15px auto;
+  margin: .9375rem auto;
   overflow: clip;
-  border: 1px solid var(--color-border);
-  border-radius: 15px;
+  border: .0625rem solid var(--color-border);
+  border-radius: .9375rem;
   background: rgba(2, 8, 12, 0.86);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.25);
 }
 
 :deep(.app-header) { grid-column: 1 / -1; }
@@ -50,12 +50,12 @@ main {
   inset: 0;
   opacity: 0.22;
   pointer-events: none;
-  background-image: radial-gradient(rgba(0, 231, 240, 0.19) 0.7px, transparent 0.8px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(rgba(0, 231, 240, 0.19) .04375rem, transparent .05rem);
+  background-size: 1.75rem 1.75rem;
   mask-image: radial-gradient(circle at 70% 30%, #000, transparent 48%);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
   .app-frame {
     width: 100%;
     max-width: 100vw;
@@ -70,7 +70,7 @@ main {
   main {
     width: 100%;
     max-width: 100vw;
-    padding-bottom: 82px;
+    padding-bottom: 5.125rem;
   }
 }
 </style>
