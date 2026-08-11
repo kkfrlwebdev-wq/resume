@@ -64,7 +64,7 @@ export function useTerminal() {
         ])
         break
       case 'coffee': {
-        print('success', ['( (', ' ) )', '........', t('terminal.coffee'), '\\      /', ' `----\''])
+        print('success', ['   ( (', '    ) )', '  ........', '  |      |]', '  \\      /', '   `----\'', t('terminal.coffee')])
         const unlocked = achievements.unlock('hunter')
         if (unlocked) ui.notify(t('terminal.hunterUnlocked'), 'success')
         break

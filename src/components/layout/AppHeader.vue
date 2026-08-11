@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { Gamepad2 } from '@lucide/vue'
+import { LayoutGrid } from '@lucide/vue'
 import { useI18n } from 'vue-i18n'
 import CodeLogo from './CodeLogo.vue'
 import { navigation } from '@/data/navigation'
@@ -36,8 +36,8 @@ function handleLogoClick() {
 
     <div class="header-actions">
       <LanguageSwitcher />
-      <RouterLink class="game-link" to="/desktop?app=game" :aria-label="$t('nav.openGame')">
-        <Gamepad2 />
+      <RouterLink class="space-link" to="/desktop" :aria-label="$t('nav.interactiveSpace')">
+        <LayoutGrid />
       </RouterLink>
     </div>
   </header>
@@ -95,7 +95,7 @@ function handleLogoClick() {
   }
 }
 
-.game-link {
+.space-link {
   display: grid;
   width: 2.375rem;
   height: 2.375rem;

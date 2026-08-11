@@ -393,6 +393,7 @@ onUnmounted(() => window.clearInterval(clockId))
 .windows-button {
   grid-template-columns: repeat(2, .5rem);
   grid-template-rows: repeat(2, .5rem);
+  place-content: center;
   gap: .125rem;
 
   span { width: .5rem; height: .5rem; background: #56bfff; }
